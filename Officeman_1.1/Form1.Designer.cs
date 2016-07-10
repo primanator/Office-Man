@@ -1,4 +1,6 @@
-﻿namespace OfficeMan_1._1
+﻿using System.Drawing;
+using System.Drawing.Text;
+namespace OfficeMan_1._1
 {
     partial class Form1
     {
@@ -33,9 +35,13 @@
             // 
             // PointsLabel
             // 
+            PrivateFontCollection newFont = new PrivateFontCollection();
+            newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
+            FontFamily chava = new FontFamily("Chava", newFont);
+            this.PointsLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+
             this.PointsLabel.AutoSize = true;
             this.PointsLabel.BackColor = System.Drawing.Color.Transparent;
-            this.PointsLabel.Font = new System.Drawing.Font("Bauhaus 93", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PointsLabel.Location = new System.Drawing.Point(352, 9);
             this.PointsLabel.MinimumSize = new System.Drawing.Size(120, 20);
             this.PointsLabel.Name = "PointsLabel";
