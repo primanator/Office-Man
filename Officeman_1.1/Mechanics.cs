@@ -63,46 +63,41 @@ namespace OfficeMan_1._1
             set { CharacterState[state] = value; }
         }
 
-        public void PegionFly(ref int X)
+        public void PegionFly(ref Rectangle PegionPlace)
         {
-            X -= 20;
+            PegionPlace.X -= 20;
+            PegionPlace.Y -= 20;
         }
 
-        public void PegionsFly(ref int X, ref int Y)
+        public void TurnLeft(ref Rectangle CharacterPlace)
         {
-            X -= 20;
-            Y -= 10;
-        }
-
-        public void TurnLeft(ref int manX)
-        {
-            if (manX > 25)
-                manX -= 20;
+            if (CharacterPlace.X > 25)
+                CharacterPlace.X -= 20;
             if (this[character.falling] & direction == 'r')
                 if (this[character.falling])
                     Sources.RotateCharacterPictures();
             direction = 'l';
         }
 
-        public void TurnRight(ref int manX)
+        public void TurnRight(ref Rectangle CharacterPlace)
         {
-            if (manX < 390)
-                manX += 20;
+            if (CharacterPlace.X < 390)
+                CharacterPlace.X += 20;
             if (this[character.falling] & direction == 'l')
                 if (this[character.falling])
                     Sources.RotateCharacterPictures();
             direction = 'r';
         }
-        public void TurnUp(ref int manY)
+        public void TurnUp(ref Rectangle CharacterPlace)
         {
-            if (manY > 30)
-                manY -= 20;
+            if (CharacterPlace.Y > 30)
+                CharacterPlace.Y -= 20;
         }
 
-        public void TurnDown(ref int manY)
+        public void TurnDown(ref Rectangle CharacterPlace)
         {
-            if (manY < 390)
-                manY += 20;
+            if (CharacterPlace.Y < 390)
+                CharacterPlace.Y += 20;
         }
     }
 }

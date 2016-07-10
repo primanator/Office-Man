@@ -24,6 +24,7 @@ namespace Officeman_1._1
         Image[] man_jump = new Image[man_jump_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
+        Image points100;
 
         public Sources()
         {
@@ -31,22 +32,27 @@ namespace Officeman_1._1
             building_fall = Image.FromFile("..\\..\\images\\building_flight1.png");
             sky_clouds = Image.FromFile("..\\..\\images\\sky_clouds.png");
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds.png");
-            man_stand[0] = Image.FromFile("..\\..\\images\\stand1.png");
-            man_stand[1] = Image.FromFile("..\\..\\images\\stand2.png");
-            man_stand[2] = Image.FromFile("..\\..\\images\\stand3.png");
-            man_stand[3] = Image.FromFile("..\\..\\images\\stand4.png");
-            man_fall[0] = Image.FromFile("..\\..\\images\\fall1.png");
-            man_fall[1] = Image.FromFile("..\\..\\images\\fall2.png");
-            man_fall[2] = Image.FromFile("..\\..\\images\\fall3.png");
-            man_jump[0] = Image.FromFile("..\\..\\images\\jump1.png");
-            man_jump[1] = Image.FromFile("..\\..\\images\\jump2.png");
-            man_jump[2] = Image.FromFile("..\\..\\images\\jump3.png");
-            man_jump[3] = Image.FromFile("..\\..\\images\\jump4.png");
-            man_jump[4] = Image.FromFile("..\\..\\images\\jump5.png");
+            man_stand[0] = Image.FromFile("..\\..\\images\\stand11.png");
+            man_stand[1] = Image.FromFile("..\\..\\images\\stand22.png");
+            man_stand[2] = Image.FromFile("..\\..\\images\\stand33.png");
+            man_stand[3] = Image.FromFile("..\\..\\images\\stand44.png");
+            man_fall[0] = Image.FromFile("..\\..\\images\\fall11.png");
+            man_fall[1] = Image.FromFile("..\\..\\images\\fall22.png");
+            man_fall[2] = Image.FromFile("..\\..\\images\\fall33.png");
+            man_jump[0] = Image.FromFile("..\\..\\images\\jump11.png");
+            man_jump[1] = Image.FromFile("..\\..\\images\\jump22.png");
+            man_jump[2] = Image.FromFile("..\\..\\images\\jump33.png");
+            man_jump[3] = Image.FromFile("..\\..\\images\\jump44.png");
+            man_jump[4] = Image.FromFile("..\\..\\images\\jump55.png");
             pegion_fly[0] = Image.FromFile("..\\..\\images\\pegion1.png");
             pegion_fly[1] = Image.FromFile("..\\..\\images\\pegion2.png");
             pegion_fly[2] = Image.FromFile("..\\..\\images\\pegion3.png");
             pegion_fly[3] = Image.FromFile("..\\..\\images\\pegion4.png");
+            points100 = Image.FromFile("..\\..\\images\\points100.png");
+        }
+        public Image Get100Points()
+        {
+            return points100;
         }
 
         public static void RotateCharacterPictures()
@@ -102,42 +108,42 @@ namespace Officeman_1._1
             return building_fall;
         }
 
-        public Image JumpPic(ref int index, out int manX, out int manY, Mechanics mech)
+        public Image JumpPic(ref int index, ref Rectangle CharacterPlace, Mechanics mech)
         {
             switch (index)
             {
                 case 0:
                     {
-                        manX = 124;
-                        manY = 3;
+                        CharacterPlace.X = 136;
+                        CharacterPlace.Y = 17;
                         index = 1;
                         break;
                     }
                 case 1:
                     {
-                        manX = 124;
-                        manY = 3;
+                        CharacterPlace.X = 140;
+                        CharacterPlace.Y = 14;
                         index = 2;
                         break;
                     }
                 case 2:
                     {
-                        manX = 124;
-                        manY = 3;
+                        CharacterPlace.X = 150;
+                        CharacterPlace.Y = 14;
                         index = 3;
                         break;
                     }
                 case 3:
                     {
-                        manX = 145;
-                        manY = -3;
+                        CharacterPlace.X = 170;
+                        CharacterPlace.Y = 40;
                         index = 4;
                         break;
                     }
                 case 4:
                     {
-                        manX = 160;
-                        manY = 40;
+                        CharacterPlace.X = 175;
+                        CharacterPlace.Y = 50;
                         index = 0;
                         mech[Mechanics.character.jumping] = false;
                         mech[Mechanics.character.falling] = true;
@@ -145,8 +151,8 @@ namespace Officeman_1._1
                     }
                 default:
                     {
-                        manX = 124;
-                        manY = 3;
+                        CharacterPlace.X = 122;
+                        CharacterPlace.Y = 15;
                         index = 0;
                         break;
                     }

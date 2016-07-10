@@ -18,20 +18,19 @@ namespace OfficeMan_1._1
         Sources source = new Sources();
         Mechanics mech = new Mechanics();
         Timer timerGame = new Timer();
+        Rectangle CharacterPlace = new Rectangle(160, 40, 23, 36);
+        Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
         int stand_pic = 0;
         int jump_anim_pic = -1;
         int pegion_pic = 0;
         int fall_pic = 0;
         int buldingY1 = 0;
         int buldingY2 = 500;
-        int manX = 160;
-        int manY = 40;
         int sky_fontX = 0;
         int sky_fontY = 0;
         int sky_trans_fontX = 0;
         int sky_trans_fontY = 0;
-        int pegion_coord = 450;
-        int[,] pegion_flock = new int[5,2];
+        Rectangle[] PegionFlock_Place = new Rectangle[5];
         
         public Form1()
         {
@@ -41,9 +40,9 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
 
             InitializeComponent();
             timerGame.Tick += delegate
@@ -55,7 +54,8 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.bird])
                 {
-                    pegion_coord = 450;  
+                    PegionPlace.X = 450;
+                    PegionPlace.Y = 450;   
                     Random pegion_probability = new Random();
                     int s = pegion_probability.Next(2);
                     if (s == 1)
@@ -63,25 +63,15 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
-                pegion_flock[0, 0] = 450;
-                pegion_flock[0, 1] = 280;
-
-                pegion_flock[1, 0] = 470;
-                pegion_flock[1, 1] = 250;
-
-                pegion_flock[2, 0] = 485;
-                pegion_flock[2, 1] = 315;
-
-                pegion_flock[3, 0] = 530;
-                pegion_flock[3, 1] = 265;
-
-                pegion_flock[4, 0] = 560;
-                pegion_flock[4, 1] = 330;
-
-                Random pegion_probability = new Random();
-                int s = pegion_probability.Next(2);
-                if (s == 1)
-                    mech[Mechanics.game.birds] = true;
+                    PegionFlock_Place[0] = new Rectangle(250, 280, 13, 7);
+                    PegionFlock_Place[1] = new Rectangle(470, 250, 13, 7);
+                    PegionFlock_Place[2] = new Rectangle(485, 315, 13, 7);
+                    PegionFlock_Place[3] = new Rectangle(530, 265, 13, 7);
+                    PegionFlock_Place[4] = new Rectangle(560, 330, 13, 7);
+                    Random pegion_probability = new Random();
+                    int s = pegion_probability.Next(2);
+                    if (s == 1)
+                        mech[Mechanics.game.birds] = true;
                 }
                 Invalidate();
             };
@@ -97,9 +87,9 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref sky_trans_fontX), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
                 e.Graphics.DrawImage(source.DrawBuilding(), 0, buldingY1, 165, MaxFormHeight);
                 if (mech[Mechanics.character.stand])
-                    e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), 124, 3, 72, 72);
+                    e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), 122, 14);
                 if (mech[Mechanics.character.jumping])
-                    e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, out manX, out manY, mech), manX, manY, 72, 72);
+                    e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace, mech), CharacterPlace.X, CharacterPlace.Y);
             }
             if (mech[Mechanics.character.falling])
             {
@@ -107,7 +97,7 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY1), 0, buldingY1, 165, MaxFormHeight);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY2), 0, buldingY2, 165, MaxFormHeight);
-                e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), manX, manY, 72, 72);
+                e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
                 if (buldingY1 <= -MaxFormHeight)
                 {
                     buldingY1 = -5;
@@ -115,17 +105,35 @@ namespace OfficeMan_1._1
                 }
             }
             DrawAllBirds(e);
+            CheckIntersection(e);
             e.Dispose();
+        }
+
+        private void CheckIntersection(PaintEventArgs e)
+        {
+            if (Rectangle.Intersect(CharacterPlace, PegionPlace) != Rectangle.Empty)
+            {
+                e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y + 20);
+                FormElement.Add100Points(PointsLabel);
+                return;
+            }
+            for (int i = 0; i < 5; i++)
+                if (Rectangle.Intersect(CharacterPlace, PegionFlock_Place[i]) != Rectangle.Empty)
+                {
+                    e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y + 20);
+                    FormElement.Add100Points(PointsLabel);
+                    return;
+                }
         }
 
         private void DrawAllBirds(PaintEventArgs e)
         {
             if (mech[Mechanics.game.bird])
             {
-                if (pegion_coord >= 0)
+                if (PegionPlace.X >= 0)
                 {
-                    e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), pegion_coord, pegion_coord);
-                    mech.PegionFly(ref pegion_coord);
+                    e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionPlace.X, PegionPlace.Y);
+                    mech.PegionFly(ref PegionPlace);
                 }
                 else
                     mech[Mechanics.game.bird] = false;
@@ -135,10 +143,10 @@ namespace OfficeMan_1._1
                 int gone = 0;
                 for (int i = 0; i < 5; i++)
                 {
-                    if (pegion_flock[i, 0] >= 0)
+                    if (PegionFlock_Place[i].X >= 0)
                     {
-                        e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), pegion_flock[i, 0], pegion_flock[i, 1]);
-                        mech.PegionsFly(ref pegion_flock[i, 0], ref pegion_flock[i, 1]);
+                        e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionFlock_Place[i].X, PegionFlock_Place[i].Y);
+                        mech.PegionFly(ref PegionFlock_Place[i]);
                     }
                     else
                         gone++;
@@ -169,22 +177,22 @@ namespace OfficeMan_1._1
             if (e.KeyCode == Keys.A)
             {
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])
-                    mech.TurnLeft(ref manX);
+                    mech.TurnLeft(ref CharacterPlace);
             }
             if (e.KeyCode == Keys.D)
             {
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])
-                    mech.TurnRight(ref manX);
+                    mech.TurnRight(ref CharacterPlace);
             }
             if (e.KeyCode == Keys.W)
             {
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])                
-                    mech.TurnUp(ref manY);
+                    mech.TurnUp(ref CharacterPlace);
             }
             if (e.KeyCode == Keys.S)
             {
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])                
-                    mech.TurnDown(ref manY);
+                    mech.TurnDown(ref CharacterPlace);
             }
         }
     }
