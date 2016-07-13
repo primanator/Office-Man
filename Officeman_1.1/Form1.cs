@@ -40,9 +40,9 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
 
             InitializeComponent();
             timerGame.Tick += delegate
@@ -63,7 +63,7 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
-                    PegionFlock_Place[0] = new Rectangle(250, 280, 13, 7);
+                    PegionFlock_Place[0] = new Rectangle(600, 280, 13, 7);
                     PegionFlock_Place[1] = new Rectangle(470, 250, 13, 7);
                     PegionFlock_Place[2] = new Rectangle(485, 315, 13, 7);
                     PegionFlock_Place[3] = new Rectangle(530, 265, 13, 7);
@@ -75,12 +75,13 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 150;
+            timerGame.Interval = 200;
             timerGame.Start();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            
             if (!mech[Mechanics.character.falling])
             {
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref sky_fontX), sky_fontX, sky_fontY);
@@ -106,6 +107,7 @@ namespace OfficeMan_1._1
             }
             DrawAllBirds(e);
             CheckIntersection(e);
+            Draw100pointsAnimation(e);
             e.Dispose();
         }
 
@@ -113,17 +115,39 @@ namespace OfficeMan_1._1
         {
             if (Rectangle.Intersect(CharacterPlace, PegionPlace) != Rectangle.Empty)
             {
-                e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y + 20);
+
+                mech[Mechanics.game.points100] = true;              
                 FormElement.Add100Points(PointsLabel);
                 return;
             }
             for (int i = 0; i < 5; i++)
                 if (Rectangle.Intersect(CharacterPlace, PegionFlock_Place[i]) != Rectangle.Empty)
                 {
-                    e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y + 20);
+                    mech[Mechanics.game.points100] = true;                                                     
                     FormElement.Add100Points(PointsLabel);
                     return;
                 }
+        }
+
+        private void Draw100pointsAnimation(PaintEventArgs e)
+        {
+            if (mech[Mechanics.game.points100])
+            {
+                e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y - 30);
+                mech[Mechanics.game.points100] = false;
+                mech[Mechanics.game.points100ht] = true;
+            }
+            if (mech[Mechanics.game.points100ht])
+            {
+                e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterPlace.X, CharacterPlace.Y - 40);
+                mech[Mechanics.game.points100ht] = false; ;
+                mech[Mechanics.game.points100t] = true;
+            }
+            if (mech[Mechanics.game.points100t])
+            {
+                e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterPlace.X, CharacterPlace.Y - 50);
+                mech[Mechanics.game.points100t] = false;
+            }
         }
 
         private void DrawAllBirds(PaintEventArgs e)

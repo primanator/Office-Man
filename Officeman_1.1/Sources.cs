@@ -24,7 +24,7 @@ namespace Officeman_1._1
         Image[] man_jump = new Image[man_jump_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
-        Image points100;
+        Image points100, points100ht, points100t;
 
         public Sources()
         {
@@ -49,10 +49,23 @@ namespace Officeman_1._1
             pegion_fly[2] = Image.FromFile("..\\..\\images\\pegion3.png");
             pegion_fly[3] = Image.FromFile("..\\..\\images\\pegion4.png");
             points100 = Image.FromFile("..\\..\\images\\points100.png");
+            points100ht = Image.FromFile("..\\..\\images\\points100ht.png");
+            points100t = Image.FromFile("..\\..\\images\\points100t.png");
+
         }
         public Image Get100Points()
         {
             return points100;
+        }
+
+        public Image Get100PointsHalfTransparent()
+        {
+            return points100ht;
+        }
+
+        public Image Get100PointsTransparent()
+        {
+            return points100t;
         }
 
         public static void RotateCharacterPictures()
