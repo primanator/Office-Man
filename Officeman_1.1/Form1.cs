@@ -108,6 +108,8 @@ namespace OfficeMan_1._1
             DrawAllBirds(e);
             CheckIntersection(e);
             Draw100pointsAnimation(e);
+            if (mech[Mechanics.game.pause])
+                DrawMenu(e);
             e.Dispose();
         }
 
@@ -180,13 +182,18 @@ namespace OfficeMan_1._1
             }
         }
 
+        private void DrawMenu(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(source.GetMenuFont(), 150, 100);
+            timerGame.Stop();
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
                 if (!mech[Mechanics.game.pause])
                 {
-                    timerGame.Stop();
                     mech[Mechanics.game.pause] = true;
                     return;
                 }

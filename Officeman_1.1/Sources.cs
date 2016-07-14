@@ -24,7 +24,7 @@ namespace Officeman_1._1
         Image[] man_jump = new Image[man_jump_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
-        Image points100, points100ht, points100t;
+        Image points100, points100ht, points100t, menufont;
 
         public Sources()
         {
@@ -51,8 +51,13 @@ namespace Officeman_1._1
             points100 = Image.FromFile("..\\..\\images\\points100.png");
             points100ht = Image.FromFile("..\\..\\images\\points100ht.png");
             points100t = Image.FromFile("..\\..\\images\\points100t.png");
-
+            menufont = Image.FromFile("..\\..\\images\\menufont.png");
         }
+        public Image GetMenuFont()
+        {
+            return menufont;
+        }
+
         public Image Get100Points()
         {
             return points100;
