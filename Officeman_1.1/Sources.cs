@@ -20,11 +20,14 @@ namespace Officeman_1._1
         static int man_fall_size = 3;
         static int pegion_fly_size = 4;
         static int man_jump_size = 6;
+        static int pausemenu_size = 4;
         static Image[] man_stand = new Image[man_stand_size];
         Image[] man_jump = new Image[man_jump_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
         Image points100, points100ht, points100t, menufont;
+        Image[] pausemenu_reg = new Image[pausemenu_size];
+        Image[] pausemenu_focus = new Image[pausemenu_size];
 
         public Sources()
         {
@@ -52,6 +55,14 @@ namespace Officeman_1._1
             points100ht = Image.FromFile("..\\..\\images\\points100ht.png");
             points100t = Image.FromFile("..\\..\\images\\points100t.png");
             menufont = Image.FromFile("..\\..\\images\\menufont.png");
+            pausemenu_reg[0] = Image.FromFile("..\\..\\images\\pausemenu_continue.png");
+            pausemenu_focus[0] = Image.FromFile("..\\..\\images\\pausemenu_continue_focus.png");
+            pausemenu_reg[1] = Image.FromFile("..\\..\\images\\pausemenu_faq.png");
+            pausemenu_focus[1] = Image.FromFile("..\\..\\images\\pausemenu_faq_focus.png");
+            pausemenu_reg[2] = Image.FromFile("..\\..\\images\\pausemenu_leaderboard.png");
+            pausemenu_focus[2] = Image.FromFile("..\\..\\images\\pausemenu_leaderboard_focus.png");
+            pausemenu_reg[3] = Image.FromFile("..\\..\\images\\pausemenu_exit.png");
+            pausemenu_focus[3] = Image.FromFile("..\\..\\images\\pausemenu_exit_focus.png");
         }
         public Image GetMenuFont()
         {
@@ -73,22 +84,22 @@ namespace Officeman_1._1
             return points100t;
         }
 
+        public Image PauseMenu_Regular(int index)
+        {
+            return pausemenu_reg[index];
+        }
+
+        public Image PauseMenu_Focus(int index)
+        {
+            return pausemenu_focus[index];
+        }
+
         public static void RotateCharacterPictures()
         {
-            for (int i = 0; i < Sources.ManFallSizeProp; i++)
+            for (int i = 0; i < man_fall_size; i++)
                 man_fall[i].RotateFlip(RotateFlipType.Rotate180FlipY);
-            for (int i = 0; i < Sources.ManStandSizeProp; i++)
+            for (int i = 0; i < man_stand_size; i++)
                 man_stand[i].RotateFlip(RotateFlipType.Rotate180FlipY);
-        }
-
-        public static int ManStandSizeProp
-        {
-            get { return man_stand_size; }
-        }
-
-        public static int ManFallSizeProp
-        {
-            get { return man_fall_size; }
         }
 
         public Image Clouds_When_Stand(ref int sky_fontX)

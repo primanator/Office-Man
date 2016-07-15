@@ -26,5 +26,21 @@ namespace Officeman_1._1
             value += 100;
             PointLabel.Text = value.ToString();
         }
+
+        public static void ShowPauseMenuItems(Label PauseMenu_ContinueLabel, Label PauseMenu_FAQLabel, Label PauseMenu_LeaderboardLabel, Label PauseMenu_ExitLabel)
+        {
+            PauseMenu_ContinueLabel.Visible = true;
+            PauseMenu_FAQLabel.Visible = true;
+            PauseMenu_LeaderboardLabel.Visible = true;
+            PauseMenu_ExitLabel.Visible = true;
+        }
+
+        public static void HidePauseMenuItems(Label PauseMenu_ContinueLabel, Label PauseMenu_FAQLabel, Label PauseMenu_LeaderboardLabel, Label PauseMenu_ExitLabel)
+        {
+            PauseMenu_ContinueLabel.Visible = false;
+            PauseMenu_FAQLabel.Visible = false;
+            PauseMenu_LeaderboardLabel.Visible = false;
+            PauseMenu_ExitLabel.Visible = false;
+        }
     }
 }

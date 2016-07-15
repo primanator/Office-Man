@@ -43,6 +43,9 @@ D:\Git_Projects\Office_Man\Officeman_1.1\obj\Debug\Officeman_1.1.csproj.Generate
 D:\Git_Projects\Office_Man\Officeman_1.1\obj\Debug\Officeman_1.1.exe
 D:\Git_Projects\Office_Man\Officeman_1.1\obj\Debug\Officeman_1.1.pdb
 D:\Git_Projects\Office_Man\Officeman_1.1\obj\Debug\Officeman_1.1.csprojResolveAssemblyReference.cache
+C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\bin\Debug\Officeman_1.1.exe.config
+C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\obj\Debug\Officeman_1.1.exe
+C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\obj\Debug\Officeman_1.1.pdb
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\OfficeMan_1._1.Form1.resources
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\Officeman_1._1.Properties.Resources.resources
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\Officeman_1.1.csproj.GenerateResource.Cache
@@ -52,6 +55,3 @@ D:\Git_Projects\Office-Man\Officeman_1.1\bin\Debug\Officeman_1.1.pdb
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\Officeman_1.1.csprojResolveAssemblyReference.cache
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\Officeman_1.1.exe
 D:\Git_Projects\Office-Man\Officeman_1.1\obj\Debug\Officeman_1.1.pdb
-C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\bin\Debug\Officeman_1.1.exe.config
-C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\obj\Debug\Officeman_1.1.exe
-C:\Users\Aleksey\Desktop\Office-Man-37086cf6c5f2a79c815295bd69d6651f5d8db7f8\Officeman_1.1\obj\Debug\Officeman_1.1.pdb

@@ -75,7 +75,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 1000;
+            timerGame.Interval = 150;
             timerGame.Start();
         }
 
@@ -109,7 +109,9 @@ namespace OfficeMan_1._1
             CheckIntersection(e, ref points100_anim);
             Draw100pointsAnimation(e, ref points100_anim);
             if (mech[Mechanics.game.pause])
-                DrawMenu(e);
+                DrawPauseMenu(e);
+            else
+                HidePauseMenu();
             e.Dispose();
         }
 
@@ -199,10 +201,16 @@ namespace OfficeMan_1._1
             }
         }
 
-        private void DrawMenu(PaintEventArgs e)
+        private void DrawPauseMenu(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(source.GetMenuFont(), 150, 100);
+            e.Graphics.DrawImage(source.GetMenuFont(), 140, 100);
+            FormElement.ShowPauseMenuItems(PauseMenu_ContinueLabel, PauseMenu_FAQLabel, PauseMenu_LeaderboardLabel, PauseMenu_ExitLabel);
             timerGame.Stop();
+        }
+
+        private void HidePauseMenu()
+        {
+            FormElement.HidePauseMenuItems(PauseMenu_ContinueLabel, PauseMenu_FAQLabel, PauseMenu_LeaderboardLabel, PauseMenu_ExitLabel);           
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -242,6 +250,52 @@ namespace OfficeMan_1._1
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])                
                     mech.TurnDown(ref CharacterPlace);
             }
+        }
+
+        private void PauseMenu_ContinueLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            KeyEventArgs k = new KeyEventArgs(Keys.Escape);
+            Form1_KeyDown(sender, k);
+        }
+
+        private void PauseMenu_ContinueLabel_MouseHover(object sender, EventArgs e)
+        {
+            PauseMenu_ContinueLabel.Image = source.PauseMenu_Focus(0);
+        }
+
+        private void PauseMenu_ContinueLabel_MouseLeave(object sender, EventArgs e)
+        {
+            PauseMenu_ContinueLabel.Image = source.PauseMenu_Regular(0);
+        }
+
+        private void PauseMenu_ExitLabel_MouseHover(object sender, EventArgs e)
+        {
+            PauseMenu_ExitLabel.Image = source.PauseMenu_Focus(3);
+        }
+
+        private void PauseMenu_ExitLabel_MouseLeave(object sender, EventArgs e)
+        {
+            PauseMenu_ExitLabel.Image = source.PauseMenu_Regular(3);
+        }
+
+        private void PauseMenu_FAQLabel_MouseHover(object sender, EventArgs e)
+        {
+            PauseMenu_FAQLabel.Image = source.PauseMenu_Focus(1);
+        }
+
+        private void PauseMenu_FAQLabel_MouseLeave(object sender, EventArgs e)
+        {
+            PauseMenu_FAQLabel.Image = source.PauseMenu_Regular(1);
+        }
+
+        private void PauseMenu_LeaderboardLabel_MouseHover(object sender, EventArgs e)
+        {
+            PauseMenu_LeaderboardLabel.Image = source.PauseMenu_Focus(2);
+        }
+
+        private void PauseMenu_LeaderboardLabel_MouseLeave(object sender, EventArgs e)
+        {
+            PauseMenu_LeaderboardLabel.Image = source.PauseMenu_Regular(2);
         }
     }
 }
