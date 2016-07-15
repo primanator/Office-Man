@@ -15,7 +15,7 @@ namespace OfficeMan_1._1
     class Mechanics
     {
         public enum character { stand, jumping, falling };
-        public enum game { bird, birds, pause, points100, points100ht, points100t };
+        public enum game { bird, birds, pause, intersection };
         Hashtable CharacterState = new Hashtable();
         Hashtable GameState = new Hashtable();
         char direction;
@@ -28,9 +28,7 @@ namespace OfficeMan_1._1
             GameState.Add(game.bird, false);
             GameState.Add(game.birds, false);
             GameState.Add(game.pause, false);
-            GameState.Add(game.points100, false);
-            GameState.Add(game.points100ht, false);
-            GameState.Add(game.points100t, false);
+            GameState.Add(game.intersection, false);
             direction = 'r';
         }
 

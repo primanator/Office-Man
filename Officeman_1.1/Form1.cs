@@ -13,7 +13,6 @@ namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
     {
-        static bool WTF = false;
         private const int MaxFormWidth = 500, MaxFormHeight = 500;
         Sources source = new Sources();
         Mechanics mech = new Mechanics();
@@ -30,6 +29,7 @@ namespace OfficeMan_1._1
         int sky_fontY = 0;
         int sky_trans_fontX = 0;
         int sky_trans_fontY = 0;
+        int points100_anim = 0;
         Rectangle[] PegionFlock_Place = new Rectangle[5];
         
         public Form1()
@@ -40,9 +40,9 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
 
             InitializeComponent();
             timerGame.Tick += delegate
@@ -75,7 +75,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 200;
+            timerGame.Interval = 1000;
             timerGame.Start();
         }
 
@@ -106,49 +106,66 @@ namespace OfficeMan_1._1
                 }
             }
             DrawAllBirds(e);
-            CheckIntersection(e);
-            Draw100pointsAnimation(e);
+            CheckIntersection(e, ref points100_anim);
+            Draw100pointsAnimation(e, ref points100_anim);
             if (mech[Mechanics.game.pause])
                 DrawMenu(e);
             e.Dispose();
         }
 
-        private void CheckIntersection(PaintEventArgs e)
+        private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
         {
             if (Rectangle.Intersect(CharacterPlace, PegionPlace) != Rectangle.Empty)
             {
-
-                mech[Mechanics.game.points100] = true;              
+                points100_anim = 1;
                 FormElement.Add100Points(PointsLabel);
                 return;
             }
             for (int i = 0; i < 5; i++)
                 if (Rectangle.Intersect(CharacterPlace, PegionFlock_Place[i]) != Rectangle.Empty)
                 {
-                    mech[Mechanics.game.points100] = true;                                                     
+                    points100_anim = 1;
                     FormElement.Add100Points(PointsLabel);
                     return;
                 }
         }
 
-        private void Draw100pointsAnimation(PaintEventArgs e)
+        private void Draw100pointsAnimation(PaintEventArgs e, ref int points100_anim)
         {
-            if (mech[Mechanics.game.points100])
+            switch(points100_anim)
             {
-                e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y - 30);
-                mech[Mechanics.game.points100] = false;
-                mech[Mechanics.game.points100ht] = true;
-            }
-            if (mech[Mechanics.game.points100ht])
-            {
-                e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterPlace.X, CharacterPlace.Y - 40);
-                mech[Mechanics.game.points100ht] = false; ;
-                mech[Mechanics.game.points100t] = true;
-            }
-            if (mech[Mechanics.game.points100t])
-            {
-                e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterPlace.X, CharacterPlace.Y - 50);
-                mech[Mechanics.game.points100t] = false;
+                case 0:
+                        break;
+                case 1:
+                    {
+                        e.Graphics.DrawImage(source.Get100Points(), CharacterPlace.X, CharacterPlace.Y - 30);
+                        points100_anim = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        points100_anim = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterPlace.X, CharacterPlace.Y - 40);
+                        points100_anim = 4;
+                        break;
+                    }
+                case 4:
+                    {
+                        points100_anim = 5;
+                        break;
+                    }
+                case 5:
+                    {
+                        e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterPlace.X, CharacterPlace.Y - 50);
+                        points100_anim = 0;
+                        break;
+                    }
+                default:
+                    break;
             }
         }
 
