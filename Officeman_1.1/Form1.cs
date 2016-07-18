@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,10 @@ namespace OfficeMan_1._1
         Timer timerGame = new Timer();
         Rectangle CharacterPlace = new Rectangle(160, 40, 23, 36);
         Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
+        Rectangle CleanerPlace = new Rectangle(50, 50, 25, 36);
         int stand_pic = 0;
         int jump_anim_pic = -1;
+        int cleaner_anim = 0;
         int pegion_pic = 0;
         int fall_pic = 0;
         int buldingY1 = 0;
@@ -40,9 +43,9 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
 
             InitializeComponent();
             timerGame.Tick += delegate
@@ -81,21 +84,20 @@ namespace OfficeMan_1._1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
             if (!mech[Mechanics.character.falling])
             {
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref sky_fontX), sky_fontX, sky_fontY);
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref sky_trans_fontX), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
                 e.Graphics.DrawImage(source.DrawBuilding(), 0, buldingY1, 165, MaxFormHeight);
                 if (mech[Mechanics.character.stand])
                     e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), 122, 14);
                 if (mech[Mechanics.character.jumping])
                     e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace, mech), CharacterPlace.X, CharacterPlace.Y);
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref sky_trans_fontX), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
+           
             }
             if (mech[Mechanics.character.falling])
             {
                 e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY1), 0, buldingY1, 165, MaxFormHeight);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY2), 0, buldingY2, 165, MaxFormHeight);
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
@@ -104,8 +106,21 @@ namespace OfficeMan_1._1
                     buldingY1 = -5;
                     buldingY2 = MaxFormHeight - 5;
                 }
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
             }
             DrawAllBirds(e);
+
+            //--------------------------------------------------------------- draws cleaner
+            //Matrix turnMatrix = new Matrix();
+            //turnMatrix.Rotate(-30);
+            //e.Graphics.Transform = turnMatrix;
+
+            //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
+
+            //Matrix returnMatrix = new Matrix();
+            //returnMatrix.Rotate(30);
+            //e.Graphics.Transform = returnMatrix;
+
             CheckIntersection(e, ref points100_anim);
             Draw100pointsAnimation(e, ref points100_anim);
             if (mech[Mechanics.game.pause])
