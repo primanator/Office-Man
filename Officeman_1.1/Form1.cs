@@ -14,13 +14,14 @@ namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
     {
+        double globalGameTime = 0;
         private const int MaxFormWidth = 500, MaxFormHeight = 500;
         Sources source = new Sources();
         Mechanics mech = new Mechanics();
         Timer timerGame = new Timer();
         Rectangle CharacterPlace = new Rectangle(160, 40, 23, 36);
         Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
-        Rectangle CleanerPlace = new Rectangle(50, 50, 25, 36);
+        Rectangle CleanerPlace = new Rectangle(-50, 50, 25, 36);
         int stand_pic = 0;
         int jump_anim_pic = -1;
         int cleaner_anim = 0;
@@ -50,6 +51,13 @@ namespace OfficeMan_1._1
             InitializeComponent();
             timerGame.Tick += delegate
             {
+                if (globalGameTime >= 60)
+                {
+                    mech[Mechanics.character.falling] = false;
+                    mech[Mechanics.game.end] = true;
+                }
+                else
+                    globalGameTime += 0.150;
                 if (mech[Mechanics.character.falling])
                 {
                     PointsLabel.Visible = true;
@@ -108,18 +116,25 @@ namespace OfficeMan_1._1
                 }
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
             }
+            //if (mech[Mechanics.game.end])
+            //{
+            //    e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
+            //    e.Graphics.DrawImage(source.DrawBuilding(), 0, 0, 165, MaxFormHeight);
+            //    mech.TurnDown(ref CharacterPlace);
+            //    e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
+            //    e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
+            //}
             DrawAllBirds(e);
 
             //--------------------------------------------------------------- draws cleaner
-            //Matrix turnMatrix = new Matrix();
-            //turnMatrix.Rotate(-30);
-            //e.Graphics.Transform = turnMatrix;
+            //e.Graphics.RotateTransform(180);
+            //e.Graphics.TranslateTransform(0, -MaxFormHeight);
 
             //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
 
-            //Matrix returnMatrix = new Matrix();
-            //returnMatrix.Rotate(30);
-            //e.Graphics.Transform = returnMatrix;
+            //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
+            //e.Graphics.RotateTransform(180);
+            //----------------------------------------------------------------
 
             CheckIntersection(e, ref points100_anim);
             Draw100pointsAnimation(e, ref points100_anim);

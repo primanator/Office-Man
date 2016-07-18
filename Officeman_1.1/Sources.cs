@@ -25,7 +25,7 @@ namespace Officeman_1._1
         static int cleaner_size = 3;
         static Image[] man_stand = new Image[man_stand_size];
         Image[] man_jump = new Image[man_jump_size];
-        Image[] cleaner = new Image[cleaner_size];
+        static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
         Image points100, points100ht, points100t, menufont;
@@ -69,6 +69,7 @@ namespace Officeman_1._1
             cleaner[0] = Image.FromFile("..\\..\\images\\window001.png");
             cleaner[1] = Image.FromFile("..\\..\\images\\window002.png");
             cleaner[2] = Image.FromFile("..\\..\\images\\window003.png");
+            Sources.RotateCleanerPicture();
         }
 
         public Image DrawCleaner(ref int index)
@@ -142,6 +143,15 @@ namespace Officeman_1._1
         public Image PauseMenu_Focus(int index)
         {
             return pausemenu_focus[index];
+        }
+
+        public static void RotateCleanerPicture()
+        {
+            for (int i = 0; i < cleaner_size; i++)
+            {
+                cleaner[i].RotateFlip(RotateFlipType.Rotate180FlipX);
+                cleaner[i].RotateFlip(RotateFlipType.Rotate180FlipY);
+            }
         }
 
         public static void RotateCharacterPictures()
