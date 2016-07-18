@@ -40,6 +40,11 @@ namespace OfficeMan_1._1
             // 
             // PointsLabel
             // 
+            PrivateFontCollection newFont = new PrivateFontCollection();
+            newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
+            FontFamily chava = new FontFamily("Chava", newFont);
+            this.PointsLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+
             this.PointsLabel.AutoSize = true;
             this.PointsLabel.BackColor = System.Drawing.Color.Transparent;
             this.PointsLabel.Location = new System.Drawing.Point(352, 9);
