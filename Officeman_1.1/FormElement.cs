@@ -42,5 +42,26 @@ namespace Officeman_1._1
             PauseMenu_LeaderboardLabel.Visible = false;
             PauseMenu_ExitLabel.Visible = false;
         }
+
+        public static void ShowTotalScore(Label TotalScoreLabel)
+        {
+            TotalScoreLabel.Visible = true;
+        }
+
+        public static void TotalScore_ChangeImage(Label TotalScoreLabel, Sources e)
+        {
+            int what_pic = 1;
+            Random pegion_probability = new Random();
+            what_pic = pegion_probability.Next(2);
+            if (what_pic == 1)
+                TotalScoreLabel.Image = e.TotalPointsBlueFrame();
+            if (what_pic == 0)
+                TotalScoreLabel.Image = e.TotalPointsGoldFrame();
+        }
+
+        public static void DrawTotalScore(Label TotalScoreLabel, Label PointsLabel)
+        {
+            TotalScoreLabel.Text = PointsLabel.Text; 
+        }
     }
 }

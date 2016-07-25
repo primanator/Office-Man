@@ -21,7 +21,7 @@ namespace OfficeMan_1._1
         Timer timerGame = new Timer();
         Rectangle CharacterPlace = new Rectangle(160, 40, 23, 36);
         Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
-        Rectangle CleanerPlace = new Rectangle(-50, 50, 25, 36);
+        Rectangle CleanerPlace = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
         int stand_pic = 0;
         int jump_anim_pic = -1;
         int cleaner_anim = 0;
@@ -116,32 +116,27 @@ namespace OfficeMan_1._1
                 }
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
             }
-            //if (mech[Mechanics.game.end])
-            //{
-            //    e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
-            //    e.Graphics.DrawImage(source.DrawBuilding(), 0, 0, 165, MaxFormHeight);
-            //    mech.TurnDown(ref CharacterPlace);
-            //    e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
-            //    e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
-            //}
+            if (mech[Mechanics.game.end])
+            {
+                e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
+                e.Graphics.DrawImage(source.DrawBuilding(), 0, 0, 165, MaxFormHeight);
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
+                e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y);
+            }
             DrawAllBirds(e);
-
-            //--------------------------------------------------------------- draws cleaner
-            //e.Graphics.RotateTransform(180);
+            //e.Graphics.RotateTransform(180); //  -- draws cleaner
             //e.Graphics.TranslateTransform(0, -MaxFormHeight);
-
             //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
-
             //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
-            //e.Graphics.RotateTransform(180);
-            //----------------------------------------------------------------
-
+            //e.Graphics.RotateTransform(180); // --X
             CheckIntersection(e, ref points100_anim);
             Draw100pointsAnimation(e, ref points100_anim);
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
             else
                 HidePauseMenu();
+            if (mech[Mechanics.game.end])
+                DrawTotalScore(e);
             e.Dispose();
         }
 
@@ -238,6 +233,20 @@ namespace OfficeMan_1._1
             timerGame.Stop();
         }
 
+        private void DrawTotalScore(PaintEventArgs e)
+        {
+            FormElement.ShowTotalScore(TotalScoreLabel);
+            FormElement.DrawTotalScore(TotalScoreLabel, PointsLabel);
+            timerGame.Stop();
+            Timer totalScoreAnimation = new Timer();
+            totalScoreAnimation.Tick += delegate
+            {
+                FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
+            };
+            totalScoreAnimation.Interval = 150;
+            totalScoreAnimation.Start();
+        }
+
         private void HidePauseMenu()
         {
             FormElement.HidePauseMenuItems(PauseMenu_ContinueLabel, PauseMenu_FAQLabel, PauseMenu_LeaderboardLabel, PauseMenu_ExitLabel);           
@@ -245,6 +254,10 @@ namespace OfficeMan_1._1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.F4)
+            {
+                mech[Mechanics.game.end] = true;
+            }
             if (e.KeyCode == Keys.Escape)
             {
                 if (!mech[Mechanics.game.pause])
@@ -280,6 +293,7 @@ namespace OfficeMan_1._1
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])                
                     mech.TurnDown(ref CharacterPlace);
             }
+            
         }
 
         private void PauseMenu_ContinueLabel_MouseClick(object sender, MouseEventArgs e)

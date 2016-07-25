@@ -36,6 +36,7 @@ namespace OfficeMan_1._1
             this.PauseMenu_FAQLabel = new System.Windows.Forms.Label();
             this.PauseMenu_LeaderboardLabel = new System.Windows.Forms.Label();
             this.PauseMenu_ExitLabel = new System.Windows.Forms.Label();
+            this.TotalScoreLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -113,11 +114,30 @@ namespace OfficeMan_1._1
             this.PauseMenu_ExitLabel.MouseLeave += new System.EventHandler(this.PauseMenu_ExitLabel_MouseLeave);
             this.PauseMenu_ExitLabel.MouseHover += new System.EventHandler(this.PauseMenu_ExitLabel_MouseHover);
             // 
+            // TotalScoreLabel
+            // 
+            PrivateFontCollection newFont1 = new PrivateFontCollection();
+            newFont1.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
+            FontFamily chava1 = new FontFamily("Chava", newFont);
+            this.TotalScoreLabel.Font = new System.Drawing.Font(chava1, 18, System.Drawing.FontStyle.Regular);
+
+
+            this.TotalScoreLabel.AutoSize = true;
+            this.TotalScoreLabel.Image = ((System.Drawing.Image)(resources.GetObject("TotalScoreLabel.Image")));
+            this.TotalScoreLabel.Location = new System.Drawing.Point(140, 170);
+            this.TotalScoreLabel.MinimumSize = new System.Drawing.Size(200, 70);
+            this.TotalScoreLabel.Name = "TotalScoreLabel";
+            this.TotalScoreLabel.Size = new System.Drawing.Size(200, 70);
+            this.TotalScoreLabel.TabIndex = 6;
+            this.TotalScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TotalScoreLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.TotalScoreLabel);
             this.Controls.Add(this.PauseMenu_ExitLabel);
             this.Controls.Add(this.PauseMenu_LeaderboardLabel);
             this.Controls.Add(this.PauseMenu_FAQLabel);
@@ -145,6 +165,7 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label PauseMenu_FAQLabel;
         private System.Windows.Forms.Label PauseMenu_LeaderboardLabel;
         private System.Windows.Forms.Label PauseMenu_ExitLabel;
+        private System.Windows.Forms.Label TotalScoreLabel;
     }
 }
 

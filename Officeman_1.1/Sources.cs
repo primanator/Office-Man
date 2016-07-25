@@ -28,7 +28,7 @@ namespace Officeman_1._1
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
-        Image points100, points100ht, points100t, menufont;
+        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold;
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
 
@@ -69,7 +69,19 @@ namespace Officeman_1._1
             cleaner[0] = Image.FromFile("..\\..\\images\\window001.png");
             cleaner[1] = Image.FromFile("..\\..\\images\\window002.png");
             cleaner[2] = Image.FromFile("..\\..\\images\\window003.png");
+            totalscore_blue = Image.FromFile("..\\..\\images\\TotalPoints_Blue.png");
+            totalscore_gold = Image.FromFile("..\\..\\images\\TotalPoints_Gold.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image TotalPointsBlueFrame()
+        {
+            return totalscore_blue;
+        }
+
+        public Image TotalPointsGoldFrame()
+        {
+            return totalscore_gold;
         }
 
         public Image DrawCleaner(ref int index)
