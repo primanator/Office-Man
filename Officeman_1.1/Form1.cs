@@ -19,16 +19,19 @@ namespace OfficeMan_1._1
         Sources source = new Sources();
         Mechanics mech = new Mechanics();
         Timer timerGame = new Timer();
-        Rectangle CharacterPlace = new Rectangle(160, 40, 23, 36);
+        Rectangle CharacterPlace = new Rectangle(130, 120, 45, 56);
         Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
         Rectangle CleanerPlace = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
+        Rectangle BuildingPlace = new Rectangle(0,0, 400, 462);
+        Rectangle CloudsBack = new Rectangle(0, 0, 4200, 4200);
+        Rectangle CloudsFont = new Rectangle(0, 0, 9000, 9000);
         int stand_pic = 0;
         int jump_anim_pic = -1;
         int cleaner_anim = 0;
         int pegion_pic = 0;
         int fall_pic = 0;
-        int buldingY1 = 0;
-        int buldingY2 = 500;
+        int buildingY1 = 0;
+        int buildingY2 = 500;
         int sky_fontX = 0;
         int sky_fontY = 0;
         int sky_trans_fontX = 0;
@@ -94,50 +97,47 @@ namespace OfficeMan_1._1
         {
             if (!mech[Mechanics.character.falling])
             {
-                e.Graphics.DrawImage(source.Clouds_When_Stand(ref sky_fontX), sky_fontX, sky_fontY);
-                e.Graphics.DrawImage(source.DrawBuilding(), 0, buldingY1, 165, MaxFormHeight);
+                e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y, CloudsBack.Width, CloudsBack.Height);
+                e.Graphics.DrawImage(source.DrawBuilding(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
                 if (mech[Mechanics.character.stand])
-                    e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), 122, 14);
+                    e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y, CharacterPlace.Width, CharacterPlace.Height);///////////// !!!!!!!!!
                 if (mech[Mechanics.character.jumping])
                     e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace, mech), CharacterPlace.X, CharacterPlace.Y);
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref sky_trans_fontX), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
-           
+
             }
             if (mech[Mechanics.character.falling])
             {
-                e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
-                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY1), 0, buldingY1, 165, MaxFormHeight);
-                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buldingY2), 0, buldingY2, 165, MaxFormHeight);
+                e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY, CloudsBack.Width, CloudsBack.Height);
+                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY1), 0, buildingY1, BuildingPlace.Width, BuildingPlace.Height);
+                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY2), 0, buildingY2, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
-                if (buldingY1 <= -MaxFormHeight)
+                if (buildingY1 <= -MaxFormHeight)
                 {
-                    buldingY1 = -5;
-                    buldingY2 = MaxFormHeight - 5;
+                    buildingY1 = -1;
+                    buildingY2 = MaxFormHeight - 43;
                 }
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
-            }
-            if (mech[Mechanics.game.end])
-            {
-                e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY);
-                e.Graphics.DrawImage(source.DrawBuilding(), 0, 0, 165, MaxFormHeight);
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
-                e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y);
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, CloudsFont.Width, CloudsFont.Height);
+                CheckIntersection(e, ref points100_anim);
+                Draw100pointsAnimation(e, ref points100_anim);
             }
             DrawAllBirds(e);
-            //e.Graphics.RotateTransform(180); //  -- draws cleaner
-            //e.Graphics.TranslateTransform(0, -MaxFormHeight);
-            //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
-            //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
-            //e.Graphics.RotateTransform(180); // --X
-            CheckIntersection(e, ref points100_anim);
-            Draw100pointsAnimation(e, ref points100_anim);
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
             else
                 HidePauseMenu();
             if (mech[Mechanics.game.end])
+            {
+                e.Graphics.DrawImage(source.BuildingEnter(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
+                e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y);
                 DrawTotalScore(e);
+            }
             e.Dispose();
+            //e.Graphics.RotateTransform(180); //  -- draws cleaner
+            //e.Graphics.TranslateTransform(0, -MaxFormHeight);
+            //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
+            //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
+            //e.Graphics.RotateTransform(180); // --X
         }
 
         private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
@@ -237,11 +237,14 @@ namespace OfficeMan_1._1
         {
             FormElement.ShowTotalScore(TotalScoreLabel);
             FormElement.DrawTotalScore(TotalScoreLabel, PointsLabel);
+            FormElement.ShowButtonOK(OKLabel);
             timerGame.Stop();
             Timer totalScoreAnimation = new Timer();
             totalScoreAnimation.Tick += delegate
             {
+                //e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y , CloudsBack.Width, CloudsBack.Height);
                 FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
+                e.Dispose();
             };
             totalScoreAnimation.Interval = 150;
             totalScoreAnimation.Start();
@@ -257,6 +260,7 @@ namespace OfficeMan_1._1
             if (e.KeyCode == Keys.F4)
             {
                 mech[Mechanics.game.end] = true;
+                OKLabel.Visible = true;
             }
             if (e.KeyCode == Keys.Escape)
             {
@@ -340,6 +344,16 @@ namespace OfficeMan_1._1
         private void PauseMenu_LeaderboardLabel_MouseLeave(object sender, EventArgs e)
         {
             PauseMenu_LeaderboardLabel.Image = source.PauseMenu_Regular(2);
+        }
+
+        private void ButtonOK_MouseDown(object sender, MouseEventArgs e)
+        {
+            OKLabel.Image = source.PressedButtonOK();
+        }
+
+        private void ButtonOK_MouseClick(object sender, MouseEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

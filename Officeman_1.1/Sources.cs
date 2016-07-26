@@ -14,7 +14,7 @@ namespace Officeman_1._1
 {
     class Sources
     {
-        Image building_init, building_fall;
+        Image building_init, building_fall, building_enter;
         Image sky_clouds, transparent_clouds;
         char cleaner_way = 'f';
         static int man_stand_size = 4;
@@ -28,7 +28,7 @@ namespace Officeman_1._1
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
-        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold;
+        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok;
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
 
@@ -71,7 +71,19 @@ namespace Officeman_1._1
             cleaner[2] = Image.FromFile("..\\..\\images\\window003.png");
             totalscore_blue = Image.FromFile("..\\..\\images\\TotalPoints_Blue.png");
             totalscore_gold = Image.FromFile("..\\..\\images\\TotalPoints_Gold.png");
+            button_ok = Image.FromFile("..\\..\\images\\ButtonOK_pressed.png");
+            building_enter = Image.FromFile("..\\..\\images\\building_enter.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image BuildingEnter()
+        {
+            return building_enter;
+        }
+
+        public Image PressedButtonOK()
+        {
+            return button_ok;
         }
 
         public Image TotalPointsBlueFrame()
@@ -174,15 +186,15 @@ namespace Officeman_1._1
                 man_stand[i].RotateFlip(RotateFlipType.Rotate180FlipY);
         }
 
-        public Image Clouds_When_Stand(ref int sky_fontX)
+        public Image Clouds_When_Stand(ref Rectangle CloudsBack)
         {
-            sky_fontX -= 3;
+            CloudsBack.X -= 1;
             return sky_clouds;
         }
         public Image Clouds_When_Fall(ref int skyX, ref int skyY)
         {
-            skyX -= 3;
-            skyY -= 3;
+            skyX -= 1;
+            skyY -= 2;
             return sky_clouds;
         }
         public Image Transparent_Clouds_When_Stand(ref int sky_trans_fontX)

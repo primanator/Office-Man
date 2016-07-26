@@ -37,6 +37,7 @@ namespace OfficeMan_1._1
             this.PauseMenu_LeaderboardLabel = new System.Windows.Forms.Label();
             this.PauseMenu_ExitLabel = new System.Windows.Forms.Label();
             this.TotalScoreLabel = new System.Windows.Forms.Label();
+            this.OKLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -116,11 +117,7 @@ namespace OfficeMan_1._1
             // 
             // TotalScoreLabel
             // 
-            PrivateFontCollection newFont1 = new PrivateFontCollection();
-            newFont1.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
-            FontFamily chava1 = new FontFamily("Chava", newFont);
-            this.TotalScoreLabel.Font = new System.Drawing.Font(chava1, 18, System.Drawing.FontStyle.Regular);
-
+            this.TotalScoreLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
 
             this.TotalScoreLabel.AutoSize = true;
             this.TotalScoreLabel.Image = ((System.Drawing.Image)(resources.GetObject("TotalScoreLabel.Image")));
@@ -132,11 +129,26 @@ namespace OfficeMan_1._1
             this.TotalScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TotalScoreLabel.Visible = false;
             // 
+            // OKLabel
+            // 
+            this.OKLabel.AutoSize = true;
+            this.OKLabel.Image = ((System.Drawing.Image)(resources.GetObject("OKLabel.Image")));
+            this.OKLabel.Location = new System.Drawing.Point(214, 215);
+            this.OKLabel.MinimumSize = new System.Drawing.Size(50, 22);
+            this.OKLabel.Name = "OKLabel";
+            this.OKLabel.Size = new System.Drawing.Size(50, 22);
+            this.OKLabel.TabIndex = 7;
+            this.OKLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.OKLabel.Visible = false;
+            this.OKLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ButtonOK_MouseClick);
+            this.OKLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonOK_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.OKLabel);
             this.Controls.Add(this.TotalScoreLabel);
             this.Controls.Add(this.PauseMenu_ExitLabel);
             this.Controls.Add(this.PauseMenu_LeaderboardLabel);
@@ -166,6 +178,7 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label PauseMenu_LeaderboardLabel;
         private System.Windows.Forms.Label PauseMenu_ExitLabel;
         private System.Windows.Forms.Label TotalScoreLabel;
+        private System.Windows.Forms.Label OKLabel;
     }
 }
 

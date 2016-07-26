@@ -63,5 +63,10 @@ namespace Officeman_1._1
         {
             TotalScoreLabel.Text = PointsLabel.Text; 
         }
+
+        public static void ShowButtonOK(Label OK)
+        {
+            OK.Visible = true;
+        }
     }
 }
