@@ -31,12 +31,13 @@ namespace OfficeMan_1._1
         int pegion_pic = 0;
         int fall_pic = 0;
         int buildingY1 = 0;
-        int buildingY2 = 500;
+        int buildingY2 = 462;
         int sky_fontX = 0;
         int sky_fontY = 0;
         int sky_trans_fontX = 0;
         int sky_trans_fontY = 0;
         int points100_anim = 0;
+        private int cloudsFontTransparencyIndex = -1;
         Rectangle[] PegionFlock_Place = new Rectangle[5];
         
         public Form1()
@@ -54,6 +55,8 @@ namespace OfficeMan_1._1
             InitializeComponent();
             timerGame.Tick += delegate
             {
+                if (globalGameTime >= 35)
+                    cloudsFontTransparencyIndex++;
                 if (globalGameTime >= 60)
                 {
                     mech[Mechanics.character.falling] = false;
@@ -103,7 +106,7 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y, CharacterPlace.Width, CharacterPlace.Height);///////////// !!!!!!!!!
                 if (mech[Mechanics.character.jumping])
                     e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace, mech), CharacterPlace.X, CharacterPlace.Y);
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref sky_trans_fontX), sky_trans_fontX, sky_trans_fontY, 10000, 10000);
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);
 
             }
             if (mech[Mechanics.character.falling])
@@ -112,12 +115,12 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY1), 0, buildingY1, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY2), 0, buildingY2, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
-                if (buildingY1 <= -MaxFormHeight)
+                if (buildingY1 <= -462)
                 {
-                    buildingY1 = -1;
-                    buildingY2 = MaxFormHeight - 43;
+                    buildingY1 = -11;
+                    buildingY2 = 451;
                 }
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref sky_trans_fontX, ref sky_trans_fontY), sky_trans_fontX, sky_trans_fontY, CloudsFont.Width, CloudsFont.Height);
+                e.Graphics.DrawImage(CheckFontCloudsTrancparency(), CloudsFont.X, CloudsFont.Y, 10000, 10000);
                 CheckIntersection(e, ref points100_anim);
                 Draw100pointsAnimation(e, ref points100_anim);
             }
@@ -138,6 +141,39 @@ namespace OfficeMan_1._1
             //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
             //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
             //e.Graphics.RotateTransform(180); // --X
+        }
+
+        private Image CheckFontCloudsTrancparency()
+        {
+            switch (cloudsFontTransparencyIndex)
+            {
+                case 0:
+                    {
+                        return source.Transparent_Clouds_When_Fall(ref CloudsFont);
+                    }
+                case 1:
+                    {
+                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
+                    }
+                case 2:
+                    {
+                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
+                    }
+                case 3:
+                    {
+                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
+
+                    }
+                case 4:
+                    {
+                        mech[Mechanics.game.frontclouds] = false;
+                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
+                    }
+                default:
+                    {
+                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
+                    }
+            }
         }
 
         private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
@@ -276,6 +312,7 @@ namespace OfficeMan_1._1
             {
                 mech[Mechanics.character.stand] = false;
                 mech[Mechanics.character.jumping] = true;
+
             }
             if (e.KeyCode == Keys.A)
             {
