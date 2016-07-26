@@ -123,7 +123,8 @@ namespace Officeman_1._1
                         break;
                     }
             }
-            Transparent_Clouds_When_Fall(ref CloudsFont);
+            CloudsFont.X -= 10;
+            CloudsFont.Y -= 10;
             return transparent_clouds[index];
         }
 
