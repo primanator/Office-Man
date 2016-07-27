@@ -78,54 +78,19 @@ namespace Officeman_1._1
             Sources.RotateCleanerPicture();
         }
 
-        public Image DrawTransparentClouds(ref int index, ref Rectangle CloudsFont)
+        public void MakeFrontCloudsMoreTransparent()
         {
-            switch (index)
-            {
-                case 0:
-                    {
-                        index = 1;
-                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds1.png");
-                        break;
-                    }
-                case 1:
-                    {
-                        index = 2;
-                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds2.png");
-                        break;
-                    }
-                case 2:
-                    {
-                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds3.png");
-                        index = 3;
-                        break;
-                    }
-                case 3:
-                    {
-                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds4.png");
-                        index = 4;
-                        break;
-                    }
-                case 4:
-                    {
-                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds5.png");
-                        index = 5;
-                        break;
-                    }
-                case 5:
-                    {
-                        index = 0;
-                        break;
-                    }
-                default:
-                    {
-                        index = 0;
-                        break;
-                    }
-            }
-            CloudsFont.X -= 10;
-            CloudsFont.Y -= 10;
-            return transparent_clouds;
+            transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds1.png");
+        }
+
+        public void MakeFrontCloudsEvenMoreTransparent()
+        {
+            transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds2.png");
+        }
+
+        public void MakeFrontCloudsMaximumTransparent()
+        {
+            transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds3.png");
         }
 
         public Image Buildings_Back()

@@ -14,34 +14,31 @@ namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
     {
-        public bool prev = false;
         private int buildingsBackMoveCounter = 0;
-        double globalGameTime = 0;
+        private int changeTransparency = 0;
+        private double globalGameTime = 0;
         private const int MaxFormWidth = 500, MaxFormHeight = 500;
-        Sources source = new Sources();
-        Mechanics mech = new Mechanics();
-        Timer timerGame = new Timer();
-        Rectangle CharacterPlace = new Rectangle(130, 120, 45, 56);
-        Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
-        Rectangle CleanerPlace = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
-        Rectangle BuildingPlace = new Rectangle(0,0, 400, 462);
-        Rectangle CloudsBack = new Rectangle(0, 0, 4200, 4200);
-        Rectangle CloudsFont = new Rectangle(0, 0, 9000, 9000);
-        Rectangle BuildingsBackForm = new Rectangle(-95, 110, 590, 600);
-        int stand_pic = 0;
-        int jump_anim_pic = -1;
-        int cleaner_anim = 0;
-        int pegion_pic = 0;
-        int fall_pic = 0;
-        int buildingY1 = 0;
-        int buildingY2 = 462;
-        int sky_fontX = 0;
-        int sky_fontY = 0;
-        int sky_trans_fontX = 0;
-        int sky_trans_fontY = 0;
-        int points100_anim = 0;
-        private int cloudsFontTransparencyIndex = -1;
-        Rectangle[] PegionFlock_Place = new Rectangle[5];
+        private Sources source = new Sources();
+        private Mechanics mech = new Mechanics();
+        private Timer timerGame = new Timer();
+        private Rectangle CharacterPlace = new Rectangle(130, 120, 45, 56);
+        private Rectangle PegionPlace = new Rectangle(450, 450, 13, 7);
+        private Rectangle CleanerPlace = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
+        private Rectangle BuildingPlace = new Rectangle(0, 0, 400, 462);
+        private Rectangle CloudsBack = new Rectangle(0, 0, 4200, 4200);
+        private Rectangle CloudsFont = new Rectangle(0, 0, 9000, 9000);
+        private Rectangle BuildingsBackForm = new Rectangle(-95, 110, 590, 600);
+        private int stand_pic = 0;
+        private int jump_anim_pic = -1;
+        //private int cleaner_anim = 0;
+        private int pegion_pic = 0;
+        private int fall_pic = 0;
+        private int buildingY1 = 0;
+        private int buildingY2 = 462;
+        private int sky_fontX = 0;
+        private int sky_fontY = 0;
+        private int points100_anim = 0;
+        private Rectangle[] PegionFlock_Place = new Rectangle[5];
         
         public Form1()
         {
@@ -58,25 +55,31 @@ namespace OfficeMan_1._1
             InitializeComponent();
             timerGame.Tick += delegate
             {
-                if (globalGameTime >= 10)
+                if ((globalGameTime >= 10) & (changeTransparency == 0))
                 {
-
+                    source.MakeFrontCloudsMoreTransparent();
+                    changeTransparency++;
                 }
-                if (globalGameTime >= 35)
-                    if (!prev)
-                    {
-                        cloudsFontTransparencyIndex++;
-                        prev = true;
-                    }
+                if (globalGameTime >= 25 & (changeTransparency == 1))
+                {
+                    source.MakeFrontCloudsEvenMoreTransparent();
+                    changeTransparency++;
+                }
+                if (globalGameTime >= 35 & (changeTransparency == 2))
+                {
+                    source.MakeFrontCloudsMaximumTransparent();
+                    changeTransparency++;
+                }
+                if (globalGameTime >= 45 & (changeTransparency == 3))
+                    mech[Mechanics.game.frontclouds] = false;
                 if (globalGameTime >= 60)
                 {
                     mech[Mechanics.character.falling] = false;
                     mech[Mechanics.game.end] = true;
                 }
-                else
-                    globalGameTime += 0.150;
                 if (mech[Mechanics.character.falling])
                 {
+                    globalGameTime += 0.150;
                     PointsLabel.Visible = true;
                     FormElement.DrawPoints(PointsLabel);
                 }
@@ -139,7 +142,8 @@ namespace OfficeMan_1._1
                     buildingY1 = -11;
                     buildingY2 = 451;
                 }
-                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);
+                if (mech[Mechanics.game.frontclouds])
+                    e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);
                 CheckIntersection(e, ref points100_anim);
                 Draw100pointsAnimation(e, ref points100_anim);
             }
