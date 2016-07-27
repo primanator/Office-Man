@@ -14,6 +14,8 @@ namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
     {
+        public bool prev = false;
+        private int buildingsBackMoveCounter = 0;
         double globalGameTime = 0;
         private const int MaxFormWidth = 500, MaxFormHeight = 500;
         Sources source = new Sources();
@@ -25,6 +27,7 @@ namespace OfficeMan_1._1
         Rectangle BuildingPlace = new Rectangle(0,0, 400, 462);
         Rectangle CloudsBack = new Rectangle(0, 0, 4200, 4200);
         Rectangle CloudsFont = new Rectangle(0, 0, 9000, 9000);
+        Rectangle BuildingsBackForm = new Rectangle(-95, 110, 590, 600);
         int stand_pic = 0;
         int jump_anim_pic = -1;
         int cleaner_anim = 0;
@@ -48,15 +51,19 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
 
             InitializeComponent();
             timerGame.Tick += delegate
             {
                 if (globalGameTime >= 35)
-                    cloudsFontTransparencyIndex++;
+                    if (!prev)
+                    {
+                        cloudsFontTransparencyIndex++;
+                        prev = true;
+                    }
                 if (globalGameTime >= 60)
                 {
                     mech[Mechanics.character.falling] = false;
@@ -101,6 +108,7 @@ namespace OfficeMan_1._1
             if (!mech[Mechanics.character.falling])
             {
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y, CloudsBack.Width, CloudsBack.Height);
+                e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
                 if (mech[Mechanics.character.stand])
                     e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y, CharacterPlace.Width, CharacterPlace.Height);///////////// !!!!!!!!!
@@ -111,7 +119,14 @@ namespace OfficeMan_1._1
             }
             if (mech[Mechanics.character.falling])
             {
+                buildingsBackMoveCounter++;
                 e.Graphics.DrawImage(source.Clouds_When_Fall(ref sky_fontX, ref sky_fontY), sky_fontX, sky_fontY, CloudsBack.Width, CloudsBack.Height);
+                e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);                
+                if (buildingsBackMoveCounter == 5)
+                {
+                    source.Buildings_Back_Move(ref BuildingsBackForm);
+                    buildingsBackMoveCounter = 0;
+                }
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY1), 0, buildingY1, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY2), 0, buildingY2, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
@@ -149,6 +164,7 @@ namespace OfficeMan_1._1
             {
                 case 0:
                     {
+
                         return source.Transparent_Clouds_When_Fall(ref CloudsFont);
                     }
                 case 1:

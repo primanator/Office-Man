@@ -25,15 +25,14 @@ namespace Officeman_1._1
         static int cleaner_size = 3;
         static int transparent_clouds_size = 6;
         static Image[] man_stand = new Image[man_stand_size];
-        static Image[] transparent_clouds = new Image[transparent_clouds_size];
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
         Image[] man_jump = new Image[man_jump_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
-        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok;
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
-
+        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
+        Image buildings_back;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -74,12 +73,8 @@ namespace Officeman_1._1
             totalscore_gold = Image.FromFile("..\\..\\images\\TotalPoints_Gold.png");
             button_ok = Image.FromFile("..\\..\\images\\ButtonOK_pressed.png");
             building_enter = Image.FromFile("..\\..\\images\\building_enter.png");
-            transparent_clouds[0] = Image.FromFile("..\\..\\images\\transparent_clouds0.png");
-            transparent_clouds[1] = Image.FromFile("..\\..\\images\\transparent_clouds1.png");
-            transparent_clouds[2] = Image.FromFile("..\\..\\images\\transparent_clouds2.png");
-            transparent_clouds[3] = Image.FromFile("..\\..\\images\\transparent_clouds3.png");
-            transparent_clouds[4] = Image.FromFile("..\\..\\images\\transparent_clouds4.png");
-            transparent_clouds[5] = Image.FromFile("..\\..\\images\\transparent_clouds5.png");
+            transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds0.png");
+            buildings_back = Image.FromFile("..\\..\\images\\buildings_back.png");
             Sources.RotateCleanerPicture();
         }
 
@@ -90,25 +85,30 @@ namespace Officeman_1._1
                 case 0:
                     {
                         index = 1;
+                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds1.png");
                         break;
                     }
                 case 1:
                     {
                         index = 2;
+                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds2.png");
                         break;
                     }
                 case 2:
                     {
+                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds3.png");
                         index = 3;
                         break;
                     }
                 case 3:
                     {
+                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds4.png");
                         index = 4;
                         break;
                     }
                 case 4:
                     {
+                        transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds5.png");
                         index = 5;
                         break;
                     }
@@ -125,7 +125,17 @@ namespace Officeman_1._1
             }
             CloudsFont.X -= 10;
             CloudsFont.Y -= 10;
-            return transparent_clouds[index];
+            return transparent_clouds;
+        }
+
+        public Image Buildings_Back()
+        {
+            return buildings_back;
+        }
+
+        public void Buildings_Back_Move(ref Rectangle BuildingsBackForm)
+        {
+            BuildingsBackForm.Y--;
         }
 
         public Image BuildingEnter()
@@ -252,14 +262,14 @@ namespace Officeman_1._1
         public Image Transparent_Clouds_When_Stand(ref Rectangle CloudsFont)
         {
             CloudsFont.X -= 10;
-            return transparent_clouds[0];
+            return transparent_clouds;
         }
 
         public Image Transparent_Clouds_When_Fall(ref Rectangle CloudsFont)
         {
             CloudsFont.X -= 10;
             CloudsFont.Y -= 10;
-            return transparent_clouds[0];
+            return transparent_clouds;
         }
 
         public Image DrawBuilding()
