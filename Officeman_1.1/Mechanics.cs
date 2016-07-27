@@ -30,7 +30,7 @@ namespace OfficeMan_1._1
             GameState.Add(game.pause, false);
             GameState.Add(game.intersection, false);
             GameState.Add(game.end, false);
-            GameState.Add(game.frontclouds, true);////////////////// !!!!!!!!!!!!!!!!!!!!
+            GameState.Add(game.frontclouds, true);
             direction = 'r';
         }
 

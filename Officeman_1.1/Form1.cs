@@ -58,6 +58,10 @@ namespace OfficeMan_1._1
             InitializeComponent();
             timerGame.Tick += delegate
             {
+                if (globalGameTime >= 10)
+                {
+
+                }
                 if (globalGameTime >= 35)
                     if (!prev)
                     {
@@ -135,7 +139,7 @@ namespace OfficeMan_1._1
                     buildingY1 = -11;
                     buildingY2 = 451;
                 }
-                e.Graphics.DrawImage(CheckFontCloudsTrancparency(), CloudsFont.X, CloudsFont.Y, 10000, 10000);
+                e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);
                 CheckIntersection(e, ref points100_anim);
                 Draw100pointsAnimation(e, ref points100_anim);
             }
@@ -157,40 +161,6 @@ namespace OfficeMan_1._1
             //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
             //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
             //e.Graphics.RotateTransform(180); // --X
-        }
-
-        private Image CheckFontCloudsTrancparency()
-        {
-            switch (cloudsFontTransparencyIndex)
-            {
-                case 0:
-                    {
-
-                        return source.Transparent_Clouds_When_Fall(ref CloudsFont);
-                    }
-                case 1:
-                    {
-                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
-                    }
-                case 2:
-                    {
-                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
-                    }
-                case 3:
-                    {
-                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
-
-                    }
-                case 4:
-                    {
-                        mech[Mechanics.game.frontclouds] = false;
-                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
-                    }
-                default:
-                    {
-                        return source.DrawTransparentClouds(ref cloudsFontTransparencyIndex, ref CloudsFont);
-                    }
-            }
         }
 
         private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
