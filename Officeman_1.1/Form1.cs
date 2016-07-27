@@ -146,6 +146,7 @@ namespace OfficeMan_1._1
                 HidePauseMenu();
             if (mech[Mechanics.game.end])
             {
+                OKLabel.Visible = true;
                 e.Graphics.DrawImage(source.BuildingEnter(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y);
                 DrawTotalScore(e);
@@ -312,7 +313,6 @@ namespace OfficeMan_1._1
             if (e.KeyCode == Keys.F4)
             {
                 mech[Mechanics.game.end] = true;
-                OKLabel.Visible = true;
             }
             if (e.KeyCode == Keys.Escape)
             {
