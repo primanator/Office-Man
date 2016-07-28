@@ -32,7 +32,7 @@ namespace Officeman_1._1
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
-        Image buildings_back;
+        Image buildings_back, buildings_front, background, background_gradient;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -75,7 +75,35 @@ namespace Officeman_1._1
             building_enter = Image.FromFile("..\\..\\images\\building_enter.png");
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds0.png");
             buildings_back = Image.FromFile("..\\..\\images\\buildings_back.png");
+            buildings_front = Image.FromFile("..\\..\\images\\buildings_front.png");
+            background = Image.FromFile("..\\..\\images\\background.png");
+            background_gradient = Image.FromFile("..\\..\\images\\bg_gradient.png");
             Sources.RotateCleanerPicture();
+        }
+
+          public void Background_Gradient_Move(ref Rectangle BackgroundGradientForm)
+        {
+            BackgroundGradientForm.Y -= 2;
+        }
+
+        public void Buildings_Front_Move(ref Rectangle BuildingsFrontForm)
+        {
+            BuildingsFrontForm.Y -= 2;
+        }
+
+        public Image Background_Gradient()
+        {
+            return background_gradient;
+        }
+
+        public Image Buildings_Front()
+        {
+            return buildings_front;
+        }
+
+        public Image Background()
+        {
+            return background;
         }
 
         public void MakeFrontCloudsMoreTransparent()
@@ -218,10 +246,10 @@ namespace Officeman_1._1
             CloudsBack.X -= 1;
             return sky_clouds;
         }
-        public Image Clouds_When_Fall(ref int skyX, ref int skyY)
+        public Image Clouds_When_Fall(ref Rectangle CloudsBack)
         {
-            skyX -= 1;
-            skyY -= 2;
+            CloudsBack.X -= 1;
+            CloudsBack.Y -= 2;            
             return sky_clouds;
         }
         public Image Transparent_Clouds_When_Stand(ref Rectangle CloudsFont)
