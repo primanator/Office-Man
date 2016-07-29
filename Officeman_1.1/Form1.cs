@@ -28,9 +28,9 @@ namespace OfficeMan_1._1
         private Rectangle BuildingPlace = new Rectangle(0, 0, 400, 462);
         private Rectangle CloudsBack = new Rectangle(0, 0, 4200, 4200);
         private Rectangle CloudsFont = new Rectangle(0, 0, 9000, 9000);
-        private Rectangle BuildingsBackForm = new Rectangle(-95, 70, 590, 600);
+        private Rectangle BuildingsBackForm = new Rectangle(-95, 40, 590, 600);
         private Rectangle BuildingsFrontForm = new Rectangle(-95, 80, 590, 600);
-        private Rectangle BackgroundGradientForm = new Rectangle(40, 200, 462, 462);
+        private Rectangle BackgroundGradientForm = new Rectangle(40, 150, 462, 462);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 462, 462);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
@@ -150,7 +150,7 @@ namespace OfficeMan_1._1
                     source.Buildings_Back_Move(ref BuildingsBackForm);
                     buildingsBackMoveCounter = 0;
                 }
-                if( buildingsFrontMoveCounter == 8)
+                if( buildingsFrontMoveCounter == 10)
                 {
                     source.Background_Gradient_Move(ref BackgroundGradientForm);
                     source.Buildings_Front_Move(ref BuildingsFrontForm);

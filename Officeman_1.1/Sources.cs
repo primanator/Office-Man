@@ -83,7 +83,7 @@ namespace Officeman_1._1
 
           public void Background_Gradient_Move(ref Rectangle BackgroundGradientForm)
         {
-            BackgroundGradientForm.Y -= 2;
+            BackgroundGradientForm.Y += 2;
         }
 
         public void Buildings_Front_Move(ref Rectangle BuildingsFrontForm)
