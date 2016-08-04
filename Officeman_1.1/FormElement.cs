@@ -48,6 +48,11 @@ namespace Officeman_1._1
             TotalScoreLabel.Visible = true;
         }
 
+        public static void HideTotalScore(Label TotalScoreLabel)
+        {
+            TotalScoreLabel.Visible = false;
+        }
+
         public static void TotalScore_ChangeImage(Label TotalScoreLabel, Sources e)
         {
             int what_pic = 1;
@@ -59,14 +64,43 @@ namespace Officeman_1._1
                 TotalScoreLabel.Image = e.TotalPointsGoldFrame();
         }
 
-        public static void DrawTotalScore(Label TotalScoreLabel, Label PointsLabel)
+        public static void InitTotalScore(Label TotalScoreLabel, Label PointsLabel)
         {
             TotalScoreLabel.Text = PointsLabel.Text; 
+        }
+
+
+        public static int GetTotalScore(Label TotalScoreLabel)
+        {
+            int result = Int32.Parse(TotalScoreLabel.Text);
+            return result;
         }
 
         public static void ShowButtonOK(Label OK)
         {
             OK.Visible = true;
+        }
+
+        public static void HideButtonOK(Label OK)
+        {
+            OK.Visible = false;
+        }
+
+        public static void ShowHighScoreLabels(Label HighScoreLabel1, Label HighScoreLabel2)
+        {
+            int what_pic = 1;
+            Random pegion_probability = new Random();
+            what_pic = pegion_probability.Next(2);
+            if (what_pic == 1)
+            {
+                HighScoreLabel2.Visible = false;
+                HighScoreLabel1.Visible = true;
+            }
+            if (what_pic == 0)
+            {
+                HighScoreLabel1.Visible = false;
+                HighScoreLabel2.Visible = true;
+            }
         }
     }
 }

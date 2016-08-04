@@ -44,6 +44,11 @@ namespace OfficeMan_1._1
             // 
             // PointsLabel
             // 
+            PrivateFontCollection newFont = new PrivateFontCollection();
+            newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
+            FontFamily chava = new FontFamily("Chava", newFont);
+            this.PointsLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+
             this.PointsLabel.AutoSize = true;
             this.PointsLabel.BackColor = System.Drawing.Color.Transparent;
             this.PointsLabel.Location = new System.Drawing.Point(352, 9);
@@ -114,6 +119,8 @@ namespace OfficeMan_1._1
             // 
             // TotalScoreLabel
             // 
+            this.TotalScoreLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+
             this.TotalScoreLabel.AutoSize = true;
             this.TotalScoreLabel.Image = ((System.Drawing.Image)(resources.GetObject("TotalScoreLabel.Image")));
             this.TotalScoreLabel.Location = new System.Drawing.Point(140, 170);
@@ -156,7 +163,7 @@ namespace OfficeMan_1._1
             this.HighScoreLabel2.Location = new System.Drawing.Point(0, 0);
             this.HighScoreLabel2.MinimumSize = new System.Drawing.Size(500, 500);
             this.HighScoreLabel2.Name = "HighScoreLabel2";
-            this.HighScoreLabel2.Size = new System.Drawing.Size(500, 500);
+            this.HighScoreLabel2.Size = new System.Drawing.Size(462, 462);
             this.HighScoreLabel2.TabIndex = 9;
             this.HighScoreLabel2.Visible = false;
             // 

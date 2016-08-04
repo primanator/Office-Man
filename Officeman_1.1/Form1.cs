@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace OfficeMan_1._1
         private Rectangle BuildingsFrontForm = new Rectangle(-95, 80, 590, 600);
         private Rectangle BackgroundGradientForm = new Rectangle(40, 150, 462, 462);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 462, 462);
+        private Rectangle HighscoreForm = new Rectangle(0, 0, 462, 462);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         //private int cleaner_anim = 0;
@@ -43,6 +45,8 @@ namespace OfficeMan_1._1
         private int sky_fontY = 0;
         private int points100_anim = 0;
         private Rectangle[] PegionFlock_Place = new Rectangle[5];
+        Timer timerTotalScoreAnimation = new Timer();
+        Timer timerHighscoreAnimation = new Timer();
         
         public Form1()
         {
@@ -52,9 +56,23 @@ namespace OfficeMan_1._1
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
 
+
             //System.Media.SoundPlayer Audio;
             //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
             //Audio.Load(); Audio.PlayLooping();
+            timerHighscoreAnimation.Tick += delegate
+            {
+                FormElement.ShowHighScoreLabels(HighScoreLabel1, HighScoreLabel2);
+            };
+            timerHighscoreAnimation.Interval = 150;
+
+            timerTotalScoreAnimation.Tick += delegate
+            {
+                //e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y , CloudsBack.Width, CloudsBack.Height);
+                FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
+                //e.Dispose(); DO NOT DISPOSE BEFORE RELEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            };
+            timerTotalScoreAnimation.Interval = 150;
 
             InitializeComponent();
             timerGame.Tick += delegate
@@ -176,6 +194,7 @@ namespace OfficeMan_1._1
                 HidePauseMenu();
             if (mech[Mechanics.game.end])
             {
+
                 OKLabel.Visible = true;
                 e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y, CloudsBack.Width, CloudsBack.Height);
@@ -184,6 +203,12 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.BuildingEnter(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y);
                 DrawTotalScore(e);
+                timerGame.Stop();
+                timerTotalScoreAnimation.Start();
+            }
+            if(mech[Mechanics.game.new_highscore])
+            {
+                timerHighscoreAnimation.Start();
             }
             e.Dispose();
             //e.Graphics.RotateTransform(180); //  -- draws cleaner
@@ -283,24 +308,20 @@ namespace OfficeMan_1._1
         {
             e.Graphics.DrawImage(source.GetMenuFont(), 140, 100);
             FormElement.ShowPauseMenuItems(PauseMenu_ContinueLabel, PauseMenu_FAQLabel, PauseMenu_LeaderboardLabel, PauseMenu_ExitLabel);
-            timerGame.Stop();
+
         }
 
         private void DrawTotalScore(PaintEventArgs e)
         {
             FormElement.ShowTotalScore(TotalScoreLabel);
-            FormElement.DrawTotalScore(TotalScoreLabel, PointsLabel);
+            FormElement.InitTotalScore(TotalScoreLabel, PointsLabel);
             FormElement.ShowButtonOK(OKLabel);
-            timerGame.Stop();
-            Timer totalScoreAnimation = new Timer();
-            totalScoreAnimation.Tick += delegate
-            {
-                //e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y , CloudsBack.Width, CloudsBack.Height);
-                FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
-                e.Dispose();
-            };
-            totalScoreAnimation.Interval = 150;
-            totalScoreAnimation.Start();
+        }
+
+        private void HideTotalScore()
+        {
+            FormElement.HideButtonOK(OKLabel);
+            FormElement.HideTotalScore(TotalScoreLabel);
         }
 
         private void HidePauseMenu()
@@ -322,7 +343,6 @@ namespace OfficeMan_1._1
                     return;
                 }
                 mech[Mechanics.game.pause] = false;
-                timerGame.Start();
             }
             if (e.KeyCode == Keys.Space)
             {
@@ -406,7 +426,10 @@ namespace OfficeMan_1._1
 
         private void ButtonOK_MouseClick(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            HideTotalScore();
+            mech[Mechanics.game.end] = false;
+            mech[Mechanics.game.new_highscore] = true;
+            timerTotalScoreAnimation.Stop();
         }
     }
 }

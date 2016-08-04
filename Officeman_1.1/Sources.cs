@@ -32,7 +32,7 @@ namespace Officeman_1._1
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
-        Image buildings_back, buildings_front, background, background_gradient;
+        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -78,10 +78,22 @@ namespace Officeman_1._1
             buildings_front = Image.FromFile("..\\..\\images\\buildings_front.png");
             background = Image.FromFile("..\\..\\images\\background.png");
             background_gradient = Image.FromFile("..\\..\\images\\bg_gradient.png");
+            highscore_init = Image.FromFile("..\\..\\images\\highscore_init.png");
+            highscore_next = Image.FromFile("..\\..\\images\\highscore_next.png");
             Sources.RotateCleanerPicture();
         }
 
-          public void Background_Gradient_Move(ref Rectangle BackgroundGradientForm)
+        public Image HighScoreInit()
+        {
+            return highscore_init;
+        }
+
+        public Image HighScoreNext()
+        {
+            return highscore_next;
+        }
+
+        public void Background_Gradient_Move(ref Rectangle BackgroundGradientForm)
         {
             BackgroundGradientForm.Y += 2;
         }
