@@ -57,9 +57,10 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
 
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
+
             timerHighscoreAnimation.Tick += delegate
             {
                 FormElement.ShowHighScoreLabels(HighScoreLabel1, HighScoreLabel2);
@@ -68,9 +69,7 @@ namespace OfficeMan_1._1
 
             timerTotalScoreAnimation.Tick += delegate
             {
-                //e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y , CloudsBack.Width, CloudsBack.Height);
                 FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
-                //e.Dispose(); DO NOT DISPOSE BEFORE RELEASE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             };
             timerTotalScoreAnimation.Interval = 150;
 
@@ -428,7 +427,13 @@ namespace OfficeMan_1._1
         {
             HideTotalScore();
             mech[Mechanics.game.end] = false;
-            mech[Mechanics.game.new_highscore] = true;
+            int highscore = FileProcessing.ReadHighscore();
+            int totalscore = FormElement.GetTotalScore(TotalScoreLabel);
+            if (totalscore > highscore)
+            {
+                mech[Mechanics.game.new_highscore] = true;
+                FileProcessing.RewriteHighscore(totalscore);
+            }
             timerTotalScoreAnimation.Stop();
         }
     }

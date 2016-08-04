@@ -69,7 +69,6 @@ namespace Officeman_1._1
             TotalScoreLabel.Text = PointsLabel.Text; 
         }
 
-
         public static int GetTotalScore(Label TotalScoreLabel)
         {
             int result = Int32.Parse(TotalScoreLabel.Text);
