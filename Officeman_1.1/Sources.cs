@@ -32,7 +32,7 @@ namespace Officeman_1._1
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
-        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next;
+        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next, empty;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -80,6 +80,7 @@ namespace Officeman_1._1
             background_gradient = Image.FromFile("..\\..\\images\\bg_gradient.png");
             highscore_init = Image.FromFile("..\\..\\images\\highscore_init.png");
             highscore_next = Image.FromFile("..\\..\\images\\highscore_next.png");
+            empty = Image.FromFile("..\\..\\images\\empty.png");
             Sources.RotateCleanerPicture();
         }
 
@@ -324,9 +325,6 @@ namespace Officeman_1._1
                     {
                         CharacterPlace.X = 175;
                         CharacterPlace.Y = 50;
-                        index = 0;
-                        mech[Mechanics.character.jumping] = false;
-                        mech[Mechanics.character.falling] = true;
                         break;
                     }
                 default:
@@ -338,6 +336,33 @@ namespace Officeman_1._1
                     }
             }
             return man_jump[index];
+        }
+
+        public Image DrawMan_Fall(ref int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    {
+                        index = 1;
+                        return man_fall[index - 1];
+                    }
+                case 1:
+                    {
+                        index = 2;
+                        return man_fall[index - 1];
+                    }
+                case 2:
+                    {
+                        index = 3;
+                        return man_fall[index - 1];
+                    }
+                default:
+                    {
+                        index = 0;
+                        return empty;
+                    }
+            }
         }
 
         public Image PegionPic(ref int index)
@@ -371,34 +396,6 @@ namespace Officeman_1._1
                     }
             }
             return pegion_fly[index];
-        }
-
-        public Image DrawMan_Fall(ref int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    {
-                        index = 1;
-                        break;
-                    }
-                case 1:
-                    {
-                        index = 2;
-                        break;
-                    }
-                case 2:
-                    {
-                        index = 0;
-                        break;
-                    }
-                default:
-                    {
-                        index = 0;
-                        break;
-                    }
-            }
-            return man_fall[index];
         }
 
         public Image DrawMan_Stand(ref int index)

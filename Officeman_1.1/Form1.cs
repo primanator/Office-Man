@@ -57,9 +57,9 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
 
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -127,7 +127,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 150;
+            timerGame.Interval = 500;
             timerGame.Start();
         }
 
@@ -143,7 +143,7 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y, CharacterPlace.Width, CharacterPlace.Height);///////////// !!!!!!!!!
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);            
-            }            
+            }    
             if (mech[Mechanics.character.jumping])
             {
                 e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
@@ -193,7 +193,6 @@ namespace OfficeMan_1._1
                 HidePauseMenu();
             if (mech[Mechanics.game.end])
             {
-
                 OKLabel.Visible = true;
                 e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBack), CloudsBack.X, CloudsBack.Y, CloudsBack.Width, CloudsBack.Height);
@@ -208,6 +207,12 @@ namespace OfficeMan_1._1
             if(mech[Mechanics.game.new_highscore])
             {
                 timerHighscoreAnimation.Start();
+            }
+
+            if (jump_anim_pic == 4)
+            {
+                mech[Mechanics.character.jumping] = false; // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                mech[Mechanics.character.falling] = true;
             }
             e.Dispose();
             //e.Graphics.RotateTransform(180); //  -- draws cleaner
@@ -330,8 +335,13 @@ namespace OfficeMan_1._1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.KeyCode == Keys.Enter) & (mech[Mechanics.game.new_highscore]))
+            {
+                Application.Exit();
+            }
             if (e.KeyCode == Keys.F4)
             {
+                mech[Mechanics.character.falling] = false;
                 mech[Mechanics.game.end] = true;
             }
             if (e.KeyCode == Keys.Escape)
@@ -346,8 +356,7 @@ namespace OfficeMan_1._1
             if (e.KeyCode == Keys.Space)
             {
                 mech[Mechanics.character.stand] = false;
-                mech[Mechanics.character.jumping] = true;
-
+                mech[Mechanics.character.jumping] = true;  // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
             if (e.KeyCode == Keys.A)
             {
@@ -435,6 +444,7 @@ namespace OfficeMan_1._1
                 FileProcessing.RewriteHighscore(totalscore);
             }
             timerTotalScoreAnimation.Stop();
+            Application.Exit();
         }
     }
 }
