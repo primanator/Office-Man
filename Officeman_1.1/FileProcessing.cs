@@ -70,7 +70,7 @@ namespace Officeman_1._1
         }
 
 
-        public static void RewriteHighscore(int place, int newscore)
+        public static void RewriteHighscore(int place, int newscore, Label NicknameLabel)
         {
             FileStream fs = new FileStream("..\\..\\highscore.txt", FileMode.Open, FileAccess.Read, FileShare.None);
             BinaryReader br = new BinaryReader(fs);
@@ -90,7 +90,7 @@ namespace Officeman_1._1
             {
                 if (count == place)
                 {
-                    bw.Write(kvp.Key.ToString()); /// NEW PLAYERS NICKNAME!!!!!!!!!!!!!
+                    bw.Write(FormElement.GetNickname(NicknameLabel)); /// NEW PLAYERS NICKNAME!!!!!!!!!!!!!
                     bw.Write(newscore); /// NEW PLAYERS HIGHSCORE!!!!!!!!!!!!
                     count--;
                     continue;

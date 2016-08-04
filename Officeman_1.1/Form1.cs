@@ -336,6 +336,16 @@ namespace OfficeMan_1._1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.KeyCode == Keys.Back) & (mech[Mechanics.game.new_highscore]))
+            {
+                if (NicknameLabel.Text.Length > 0)
+                    NicknameLabel.Text = NicknameLabel.Text.Substring(0, NicknameLabel.Text.Length - 1);
+            }
+            if ((e.KeyCode != Keys.Back) & (mech[Mechanics.game.new_highscore]))
+            {
+                if (NicknameLabel.Text.Length < 11)
+                    NicknameLabel.Text += e.KeyData.ToString();
+            }     
             if ((e.KeyCode == Keys.Enter) & (mech[Mechanics.game.new_highscore]))
             {
                 //FileProcessing.DeleteHighscoreFile();
@@ -380,7 +390,6 @@ namespace OfficeMan_1._1
                 if (!mech[Mechanics.character.stand] & mech[Mechanics.character.falling])                
                     mech.TurnDown(ref CharacterPlace);
             }
-            
         }
 
         private void PauseMenu_ContinueLabel_MouseClick(object sender, MouseEventArgs e)
@@ -439,12 +448,12 @@ namespace OfficeMan_1._1
             HideTotalScore();
             mech[Mechanics.game.end] = false; // ????????????
             timerTotalScoreAnimation.Stop();
-
             if (FileProcessing.CheckHighscore(FormElement.GetTotalScore(TotalScoreLabel)))
             {
                 mech[Mechanics.game.new_highscore] = true;
+                FormElement.ShowNicknameLabel(NicknameLabel);
                 FormElement.ShowNewNicknameLabel(NewNicknameLabel);
-                FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel));
+                FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel), NicknameLabel);
             }
             //main menu exit
         }

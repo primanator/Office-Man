@@ -108,5 +108,15 @@ namespace Officeman_1._1
         {
             NewNicknameLabel.Visible = true;
         }
+
+        public static void ShowNicknameLabel(Label NicknameLabel)
+        {
+            NicknameLabel.Visible = true;
+        }
+
+        public static string GetNickname(Label NicknameLabel)
+        {
+            return NicknameLabel.Text.ToString();
+        }
     }
 }

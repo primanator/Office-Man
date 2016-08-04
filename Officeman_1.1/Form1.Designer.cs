@@ -41,6 +41,7 @@ namespace OfficeMan_1._1
             this.HighScoreLabel1 = new System.Windows.Forms.Label();
             this.HighScoreLabel2 = new System.Windows.Forms.Label();
             this.NewNicknameLabel = new System.Windows.Forms.Label();
+            this.NicknameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -180,11 +181,24 @@ namespace OfficeMan_1._1
             this.NewNicknameLabel.TabIndex = 10;
             this.NewNicknameLabel.Visible = false;
             // 
+            // NicknameLabel
+            // 
+            this.NicknameLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+
+            this.NicknameLabel.AutoSize = true;
+            this.NicknameLabel.Location = new System.Drawing.Point(153, 366);
+            this.NicknameLabel.MinimumSize = new System.Drawing.Size(200, 50);
+            this.NicknameLabel.Name = "NicknameLabel";
+            this.NicknameLabel.Size = new System.Drawing.Size(200, 50);
+            this.NicknameLabel.TabIndex = 11;
+            this.NicknameLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.NicknameLabel);
             this.Controls.Add(this.NewNicknameLabel);
             this.Controls.Add(this.HighScoreLabel2);
             this.Controls.Add(this.HighScoreLabel1);
@@ -222,6 +236,7 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label HighScoreLabel1;
         private System.Windows.Forms.Label HighScoreLabel2;
         private System.Windows.Forms.Label NewNicknameLabel;
+        private System.Windows.Forms.Label NicknameLabel;
     }
 }
 
