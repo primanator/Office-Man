@@ -55,7 +55,7 @@ namespace OfficeMan_1._1
             this.MaximumSize = new Size(MaxFormWidth, MaxFormHeight);
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
-
+            FileProcessing.CreateHighscoreTable();
 
             //System.Media.SoundPlayer Audio;
             //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
@@ -63,13 +63,14 @@ namespace OfficeMan_1._1
 
             timerHighscoreAnimation.Tick += delegate
             {
-                FormElement.ShowHighScoreLabels(HighScoreLabel1, HighScoreLabel2);
+                FormElement.ShowHighScoreLabels(HighScoreLabel1, HighScoreLabel2, NewNicknameLabel, source);
             };
             timerHighscoreAnimation.Interval = 150;
 
             timerTotalScoreAnimation.Tick += delegate
             {
                 FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
+                //
             };
             timerTotalScoreAnimation.Interval = 150;
 
@@ -337,6 +338,7 @@ namespace OfficeMan_1._1
         {
             if ((e.KeyCode == Keys.Enter) & (mech[Mechanics.game.new_highscore]))
             {
+                //FileProcessing.DeleteHighscoreFile();
                 Application.Exit();
             }
             if (e.KeyCode == Keys.F4)
@@ -435,16 +437,16 @@ namespace OfficeMan_1._1
         private void ButtonOK_MouseClick(object sender, MouseEventArgs e)
         {
             HideTotalScore();
-            mech[Mechanics.game.end] = false;
-            int highscore = FileProcessing.ReadHighscore();
-            int totalscore = FormElement.GetTotalScore(TotalScoreLabel);
-            if (totalscore > highscore)
+            mech[Mechanics.game.end] = false; // ????????????
+            timerTotalScoreAnimation.Stop();
+
+            if (FileProcessing.CheckHighscore(FormElement.GetTotalScore(TotalScoreLabel)))
             {
                 mech[Mechanics.game.new_highscore] = true;
-                FileProcessing.RewriteHighscore(totalscore);
+                FormElement.ShowNewNicknameLabel(NewNicknameLabel);
+                FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel));
             }
-            timerTotalScoreAnimation.Stop();
-            Application.Exit();
+            //main menu exit
         }
     }
 }

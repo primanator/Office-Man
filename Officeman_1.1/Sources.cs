@@ -23,7 +23,6 @@ namespace Officeman_1._1
         static int man_jump_size = 6;
         static int pausemenu_size = 4;
         static int cleaner_size = 3;
-        static int transparent_clouds_size = 6;
         static Image[] man_stand = new Image[man_stand_size];
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
@@ -32,7 +31,8 @@ namespace Officeman_1._1
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
-        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next, empty;
+        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
+        Image new_nicknameLabel_bg_next;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -81,7 +81,19 @@ namespace Officeman_1._1
             highscore_init = Image.FromFile("..\\..\\images\\highscore_init.png");
             highscore_next = Image.FromFile("..\\..\\images\\highscore_next.png");
             empty = Image.FromFile("..\\..\\images\\empty.png");
+            new_nicknameLabel_bg_init = Image.FromFile("..\\..\\images\\new_nicknamelabel_bg_init.png");
+            new_nicknameLabel_bg_next = Image.FromFile("..\\..\\images\\new_nicknamelabel_bg_next.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image NicknameLabel_BG_Init()
+        {
+            return new_nicknameLabel_bg_init;
+        }
+
+        public Image NicknameLabel_BG_Next()
+        {
+            return new_nicknameLabel_bg_next;
         }
 
         public Image HighScoreInit()

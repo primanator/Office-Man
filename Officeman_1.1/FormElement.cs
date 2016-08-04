@@ -66,7 +66,7 @@ namespace Officeman_1._1
 
         public static void InitTotalScore(Label TotalScoreLabel, Label PointsLabel)
         {
-            TotalScoreLabel.Text = PointsLabel.Text; 
+            TotalScoreLabel.Text = PointsLabel.Text;
         }
 
         public static int GetTotalScore(Label TotalScoreLabel)
@@ -85,21 +85,28 @@ namespace Officeman_1._1
             OK.Visible = false;
         }
 
-        public static void ShowHighScoreLabels(Label HighScoreLabel1, Label HighScoreLabel2)
+        public static void ShowHighScoreLabels(Label HighScoreLabel1, Label HighScoreLabel2, Label NewNicknameLabel, Sources source)
         {
             int what_pic = 1;
             Random pegion_probability = new Random();
             what_pic = pegion_probability.Next(2);
             if (what_pic == 1)
             {
+                NewNicknameLabel.Image = source.NicknameLabel_BG_Init();
                 HighScoreLabel2.Visible = false;
                 HighScoreLabel1.Visible = true;
             }
             if (what_pic == 0)
             {
+                NewNicknameLabel.Image = source.NicknameLabel_BG_Next();
                 HighScoreLabel1.Visible = false;
                 HighScoreLabel2.Visible = true;
             }
+        }
+
+        public static void ShowNewNicknameLabel(Label NewNicknameLabel)
+        {
+            NewNicknameLabel.Visible = true;
         }
     }
 }

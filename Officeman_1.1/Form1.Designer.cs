@@ -40,6 +40,7 @@ namespace OfficeMan_1._1
             this.OKLabel = new System.Windows.Forms.Label();
             this.HighScoreLabel1 = new System.Windows.Forms.Label();
             this.HighScoreLabel2 = new System.Windows.Forms.Label();
+            this.NewNicknameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -167,11 +168,24 @@ namespace OfficeMan_1._1
             this.HighScoreLabel2.TabIndex = 9;
             this.HighScoreLabel2.Visible = false;
             // 
+            // NewNicknameLabel
+            // 
+            this.NewNicknameLabel.AutoSize = true;
+            this.NewNicknameLabel.BackColor = System.Drawing.Color.White;
+            this.NewNicknameLabel.Image = ((System.Drawing.Image)(resources.GetObject("NewNicknameLabel.Image")));
+            this.NewNicknameLabel.Location = new System.Drawing.Point(153, 250);
+            this.NewNicknameLabel.MinimumSize = new System.Drawing.Size(200, 100);
+            this.NewNicknameLabel.Name = "NewNicknameLabel";
+            this.NewNicknameLabel.Size = new System.Drawing.Size(200, 100);
+            this.NewNicknameLabel.TabIndex = 10;
+            this.NewNicknameLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.NewNicknameLabel);
             this.Controls.Add(this.HighScoreLabel2);
             this.Controls.Add(this.HighScoreLabel1);
             this.Controls.Add(this.OKLabel);
@@ -207,6 +221,7 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label OKLabel;
         private System.Windows.Forms.Label HighScoreLabel1;
         private System.Windows.Forms.Label HighScoreLabel2;
+        private System.Windows.Forms.Label NewNicknameLabel;
     }
 }
 
