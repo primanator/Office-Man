@@ -354,12 +354,12 @@ namespace Officeman_1._1
                     }
                 case 2:
                     {
-                        index = 3;
-                        return man_fall[index - 1];
+                        index = 0;
+                        return man_fall[2];
                     }
                 default:
                     {
-                        index = 0;
+                        index = 0; // NEVER GONNA REACH YOU UP! NEVER GONNA CRASH YOU DOWN!!
                         return empty;
                     }
             }

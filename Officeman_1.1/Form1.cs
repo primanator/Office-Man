@@ -127,7 +127,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 500;
+            timerGame.Interval = 150;
             timerGame.Start();
         }
 
@@ -211,7 +211,7 @@ namespace OfficeMan_1._1
 
             if (jump_anim_pic == 4)
             {
-                mech[Mechanics.character.jumping] = false; // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                mech[Mechanics.character.jumping] = false;
                 mech[Mechanics.character.falling] = true;
             }
             e.Dispose();
@@ -341,7 +341,7 @@ namespace OfficeMan_1._1
             }
             if (e.KeyCode == Keys.F4)
             {
-                mech[Mechanics.character.falling] = false;
+                mech[Mechanics.character.falling] = false;  // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 mech[Mechanics.game.end] = true;
             }
             if (e.KeyCode == Keys.Escape)
