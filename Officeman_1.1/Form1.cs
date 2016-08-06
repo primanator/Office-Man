@@ -59,11 +59,9 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             FileProcessing.CreateHighscoreTable();
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
-
-            timerHighscoreAnimation.Interval = 150;
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -302,7 +300,7 @@ namespace OfficeMan_1._1
             switch(points100_anim)
             {
                 case 0:
-                        break;
+                    break;
                 case 1:
                     {
                         e.Graphics.DrawImage(source.Get100Points(), CharacterForm.X, CharacterForm.Y - 30);
@@ -311,21 +309,11 @@ namespace OfficeMan_1._1
                     }
                 case 2:
                     {
+                        e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
                         points100_anim = 3;
                         break;
                     }
                 case 3:
-                    {
-                        e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
-                        points100_anim = 4;
-                        break;
-                    }
-                case 4:
-                    {
-                        points100_anim = 5;
-                        break;
-                    }
-                case 5:
                     {
                         e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
                         points100_anim = 0;
