@@ -302,15 +302,15 @@ namespace Officeman_1._1
             return building_init;
         }
 
-        public Image DrawBuilding_Fall(ref int buildingY)
+        public Image DrawBuilding_Fall(ref Rectangle BuildingForm)
         {
-            buildingY -= 11;
+            BuildingForm.Y -= 14;
             return building_fall;
         }
 
         public void Smoker_Move (ref Rectangle SmokerForm)
         {
-            SmokerForm.Y -= 11;
+            SmokerForm.Y -= 14;
         }
 
         public Image SmokerPic_AnimationForward(ref int index)
