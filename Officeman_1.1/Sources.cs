@@ -35,7 +35,7 @@ namespace Officeman_1._1
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
         Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
-        Image new_nicknameLabel_bg_next;
+        Image new_nicknameLabel_bg_next, tree_init, tree_next, cars_init;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -90,7 +90,36 @@ namespace Officeman_1._1
             smoker[1] = Image.FromFile("..\\..\\images\\smoker2.png");
             smoker[2] = Image.FromFile("..\\..\\images\\smoker3.png");
             smoker[3] = Image.FromFile("..\\..\\images\\smoker4.png");
+            tree_init = Image.FromFile("..\\..\\images\\tree1.png");
+            tree_next = Image.FromFile("..\\..\\images\\tree2.png");
+            cars_init = Image.FromFile("..\\..\\images\\сars_init.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image CarsInit()
+        {
+            return cars_init;
+        }
+
+        public void TreesAnimation(PaintEventArgs e, Rectangle TreesForm)
+        {
+            int what_pic = 1;
+            Random rand = new Random();
+            what_pic = rand.Next(2);
+            if (what_pic == 1)
+                e.Graphics.DrawImage(tree_init, TreesForm);
+            if (what_pic == 0)
+                e.Graphics.DrawImage(tree_next, TreesForm);
+        }
+
+        public Image TreeInit()
+        {
+            return tree_init;
+        }
+
+        public Image TreeNext()
+        {
+            return tree_next;
         }
 
         public Image NicknameLabel_BG_Init()
@@ -420,6 +449,7 @@ namespace Officeman_1._1
                     {
                         CharacterPlace.X = 175;
                         CharacterPlace.Y = 50;
+                        index = 5;
                         break;
                     }
                 default:

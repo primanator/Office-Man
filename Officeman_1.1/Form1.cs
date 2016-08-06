@@ -37,6 +37,8 @@ namespace OfficeMan_1._1
         private Rectangle BackgroundForm = new Rectangle(25, 0, 462, 462);
         private Rectangle HighscoreForm = new Rectangle(0, 0, 462, 462);
         private Rectangle SmokerForm = new Rectangle(92, 297, 38, 71);
+        private Rectangle TreesForm = new Rectangle(195, 325, 300, 120);
+        private Rectangle CarsForm = new Rectangle(215, 410, 228, 46);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         //private int cleaner_anim = 0;
@@ -57,9 +59,11 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             FileProcessing.CreateHighscoreTable();
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
+
+            timerHighscoreAnimation.Interval = 150;
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -216,6 +220,8 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
+                source.TreesAnimation(e, TreesForm);
+                e.Graphics.DrawImage(source.CarsInit(), CarsForm);
                 e.Graphics.DrawImage(source.BuildingEnter(), 0, 0, BuildingForm2.Width, BuildingForm2.Height); // PAINT IN FROM!!!!!!!!!
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterForm.X, CharacterForm.Y);
                 DrawTotalScore(e);
