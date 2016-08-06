@@ -17,15 +17,18 @@ namespace Officeman_1._1
         Image building_init, building_fall, building_enter;
         Image sky_clouds;
         char cleaner_way = 'f';
+        public char smoker_way = 'f';
         static int man_stand_size = 4;
         static int man_fall_size = 3;
         static int pegion_fly_size = 4;
         static int man_jump_size = 6;
         static int pausemenu_size = 4;
         static int cleaner_size = 3;
+        static int smoker_size = 4;
         static Image[] man_stand = new Image[man_stand_size];
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
+        static Image[] smoker = new Image[smoker_size];
         Image[] man_jump = new Image[man_jump_size];
         Image[] pegion_fly = new Image[pegion_fly_size];
         Image[] pausemenu_reg = new Image[pausemenu_size];
@@ -83,6 +86,10 @@ namespace Officeman_1._1
             empty = Image.FromFile("..\\..\\images\\empty.png");
             new_nicknameLabel_bg_init = Image.FromFile("..\\..\\images\\new_nicknamelabel_bg_init.png");
             new_nicknameLabel_bg_next = Image.FromFile("..\\..\\images\\new_nicknamelabel_bg_next.png");
+            smoker[0] = Image.FromFile("..\\..\\images\\smoker1.png");
+            smoker[1] = Image.FromFile("..\\..\\images\\smoker2.png");
+            smoker[2] = Image.FromFile("..\\..\\images\\smoker3.png");
+            smoker[3] = Image.FromFile("..\\..\\images\\smoker4.png");
             Sources.RotateCleanerPicture();
         }
 
@@ -301,7 +308,48 @@ namespace Officeman_1._1
             return building_fall;
         }
 
-        public Image JumpPic(ref int index, ref Rectangle CharacterPlace, Mechanics mech)
+        public void Smoker_Move (ref Rectangle SmokerForm)
+        {
+            SmokerForm.Y -= 11;
+        }
+
+        public Image SmokerPic_AnimationForward(ref int index)
+        {
+            switch(index)
+            {
+                case 0:
+                    {
+                        index = 1;
+                        break;
+                    }
+                case 1:
+                    {
+                        index = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        smoker_way = 'b';
+                        index = 3;
+                        break;
+                    }
+                default:
+                    {
+                        index = 0;
+                        break;
+                    }
+            }
+            return smoker[index];
+        }
+
+        public Image SmokerPic_AnimationBackward(int index)
+        {
+            if (index == 0)
+                smoker_way = 'f';
+            return smoker[index];
+        }
+
+        public Image JumpPic(ref int index, ref Rectangle CharacterPlace)
         {
             switch (index)
             {

@@ -34,6 +34,7 @@ namespace OfficeMan_1._1
         private Rectangle BackgroundGradientForm = new Rectangle(40, 150, 462, 462);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 462, 462);
         private Rectangle HighscoreForm = new Rectangle(0, 0, 462, 462);
+        private Rectangle SmokerForm = new Rectangle(92, 297, 38, 70);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         //private int cleaner_anim = 0;
@@ -41,9 +42,8 @@ namespace OfficeMan_1._1
         private int fall_pic = 0;
         private int buildingY1 = 0;
         private int buildingY2 = 462;
-        private int sky_fontX = 0;
-        private int sky_fontY = 0;
         private int points100_anim = 0;
+        private int smoker_anim_pic = -1;
         private Rectangle[] PegionFlock_Place = new Rectangle[5];
         Timer timerTotalScoreAnimation = new Timer();
         Timer timerHighscoreAnimation = new Timer();
@@ -57,9 +57,9 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             FileProcessing.CreateHighscoreTable();
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -105,6 +105,25 @@ namespace OfficeMan_1._1
                     PointsLabel.Visible = true;
                     FormElement.DrawPoints(PointsLabel);
                 }
+                if (mech[Mechanics.game.smoker])
+                {
+                    if (SmokerForm.Y <= -SmokerForm.Height)
+                        mech[Mechanics.game.smoker] = false;
+                }
+                if ((!mech[Mechanics.game.smoker]) & (mech[Mechanics.character.falling]))
+                {
+                    SmokerForm.Y = 451;
+                    Random place_rand = new Random();
+                    int s = place_rand.Next(2);
+                    if (s == 1)
+                        SmokerForm.X = 92;
+                    else
+                        SmokerForm.X = 54;
+                    Random smoker_rand = new Random();
+                    int k = place_rand.Next(2);
+                    if (k == 1)
+                        mech[Mechanics.game.smoker] = true;
+                }
                 if (!mech[Mechanics.game.bird])
                 {
                     PegionPlace.X = 450;
@@ -142,6 +161,8 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
+                if (mech[Mechanics.game.smoker])
+                    DrawSmoker(source, e);                
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterPlace.X, CharacterPlace.Y, CharacterPlace.Width, CharacterPlace.Height);///////////// !!!!!!!!!
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);            
             }    
@@ -152,7 +173,9 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingPlace.X, BuildingPlace.Y, BuildingPlace.Width, BuildingPlace.Height);
-                e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace, mech), CharacterPlace.X, CharacterPlace.Y);
+                if (mech[Mechanics.game.smoker])
+                    DrawSmoker(source, e);                
+                e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterPlace), CharacterPlace.X, CharacterPlace.Y);
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFont), CloudsFont.X, CloudsFont.Y, 10000, 10000);
             }
             if (mech[Mechanics.character.falling])
@@ -176,6 +199,9 @@ namespace OfficeMan_1._1
                 }
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY1), 0, buildingY1, BuildingPlace.Width, BuildingPlace.Height);
                 e.Graphics.DrawImage(source.DrawBuilding_Fall(ref buildingY2), 0, buildingY2, BuildingPlace.Width, BuildingPlace.Height);
+                source.Smoker_Move(ref SmokerForm);
+                if (mech[Mechanics.game.smoker])
+                    DrawSmoker(source, e);                
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterPlace.X, CharacterPlace.Y);
                 if (buildingY1 <= -462)
                 {
@@ -209,7 +235,6 @@ namespace OfficeMan_1._1
             {
                 timerHighscoreAnimation.Start();
             }
-
             if (jump_anim_pic == 4)
             {
                 mech[Mechanics.character.jumping] = false;
@@ -221,6 +246,19 @@ namespace OfficeMan_1._1
             //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
             //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
             //e.Graphics.RotateTransform(180); // --X
+        }
+
+        private void DrawSmoker(Sources source, PaintEventArgs e)
+        {
+            {
+                if (source.smoker_way == 'f')
+                    e.Graphics.DrawImage(source.SmokerPic_AnimationForward(ref smoker_anim_pic), SmokerForm.X, SmokerForm.Y, SmokerForm.Width, SmokerForm.Height);
+                else
+                {
+                    e.Graphics.DrawImage(source.SmokerPic_AnimationBackward(smoker_anim_pic), SmokerForm.X, SmokerForm.Y, SmokerForm.Width, SmokerForm.Height);
+                    smoker_anim_pic--;
+                }
+            }
         }
 
         private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
@@ -338,7 +376,12 @@ namespace OfficeMan_1._1
         {
             if ((e.KeyCode == Keys.Back) & (mech[Mechanics.game.new_highscore]))
             {
-                if (NicknameLabel.Text.Length > 0)
+                if (NicknameLabel.Text.Length == 1)
+                {
+                    NicknameLabel.ResetText();
+                    return;
+                }
+                if (NicknameLabel.Text.Length > 1)
                     NicknameLabel.Text = NicknameLabel.Text.Substring(0, NicknameLabel.Text.Length - 1);
             }
             if ((e.KeyCode != Keys.Back) & (mech[Mechanics.game.new_highscore]))

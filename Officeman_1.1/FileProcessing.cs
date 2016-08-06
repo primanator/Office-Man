@@ -90,7 +90,7 @@ namespace Officeman_1._1
             {
                 if (count == place)
                 {
-                    bw.Write(FormElement.GetNickname(NicknameLabel)); /// NEW PLAYERS NICKNAME!!!!!!!!!!!!!
+                    bw.Write(FormElement.GetNickname(NicknameLabel).ToString()); /// NEW PLAYERS NICKNAME!!!!!!!!!!!!!
                     bw.Write(newscore); /// NEW PLAYERS HIGHSCORE!!!!!!!!!!!!
                     count--;
                     continue;
