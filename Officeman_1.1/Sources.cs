@@ -329,9 +329,29 @@ namespace Officeman_1._1
                     }
                 case 2:
                     {
-                        smoker_way = 'b';
                         index = 3;
                         break;
+                    }
+                case 3:
+                    {
+                        index = 4;
+                        return smoker[3];
+                    }
+                case 4:
+                    {
+                        index = 5;
+                        return smoker[3];
+                    }
+                case 5:
+                    {
+                        index = 6;
+                        return smoker[3];
+                    }
+                case 6:
+                    {
+                        smoker_way = 'b';
+                        index = 7;
+                        return smoker[3];
                     }
                 default:
                     {
@@ -344,8 +364,13 @@ namespace Officeman_1._1
 
         public Image SmokerPic_AnimationBackward(int index)
         {
-            if (index == 0)
+            if (index == -1)
+            {
                 smoker_way = 'f';
+                return smoker[0];
+            }
+            if (index > 3)
+                return smoker[3];
             return smoker[index];
         }
 

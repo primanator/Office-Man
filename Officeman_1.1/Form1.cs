@@ -24,7 +24,7 @@ namespace OfficeMan_1._1
         private Mechanics mech = new Mechanics();
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(130, 120, 45, 56);
-        private Rectangle PegionForm = new Rectangle(450, 450, 13, 7);
+        private Rectangle PegionForm = new Rectangle(450, 450, 16, 10);
         private Rectangle CleanerForm = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 400, 462);
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 400, 462);
@@ -43,7 +43,7 @@ namespace OfficeMan_1._1
         private int fall_pic = 0;
         private int points100_anim = 0;
         private int smoker_anim_pic = -1;
-        private Rectangle[] PegionFlock_Place = new Rectangle[5];
+        private Rectangle[] PegionFlock_Form = new Rectangle[5];
         Timer timerTotalScoreAnimation = new Timer();
         Timer timerHighscoreAnimation = new Timer();
         
@@ -69,7 +69,6 @@ namespace OfficeMan_1._1
             timerTotalScoreAnimation.Tick += delegate
             {
                 FormElement.TotalScore_ChangeImage(TotalScoreLabel, source);
-                //
             };
             timerTotalScoreAnimation.Interval = 150;
 
@@ -120,11 +119,11 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
-                    PegionFlock_Place[0] = new Rectangle(600, 280, 13, 7);
-                    PegionFlock_Place[1] = new Rectangle(470, 250, 13, 7);
-                    PegionFlock_Place[2] = new Rectangle(485, 315, 13, 7);
-                    PegionFlock_Place[3] = new Rectangle(530, 265, 13, 7);
-                    PegionFlock_Place[4] = new Rectangle(560, 330, 13, 7);
+                    PegionFlock_Form[0] = new Rectangle(600, 280, 16, 10);
+                    PegionFlock_Form[1] = new Rectangle(470, 250, 16, 10);
+                    PegionFlock_Form[2] = new Rectangle(485, 315, 16, 10);
+                    PegionFlock_Form[3] = new Rectangle(530, 265, 16, 10);
+                    PegionFlock_Form[4] = new Rectangle(560, 330, 16, 10);
                     Random pegion_probability = new Random();
                     int s = pegion_probability.Next(2);
                     if (s == 1)
@@ -188,15 +187,7 @@ namespace OfficeMan_1._1
                 if (mech[Mechanics.game.smoker])
                     DrawSmoker(source, e);                
                 e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
-
-                /// right place ?
-                if (BuildingForm1.Y <= -462)
-                {
-                    BuildingForm1.Y = 0;
-                    BuildingForm2.Y = 462;
-                    if (SmokerForm.Y <= -SmokerForm.Height)
-                        CreateSmoker();
-                }
+                
                 if (mech[Mechanics.game.frontclouds])
                     e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
                 CheckIntersection(e, ref points100_anim);
@@ -229,6 +220,13 @@ namespace OfficeMan_1._1
                 mech[Mechanics.character.jumping] = false;
                 mech[Mechanics.character.falling] = true;
             }
+            if (BuildingForm1.Y <= -462)
+            {
+                BuildingForm1.Y = 0;
+                BuildingForm2.Y = 462;
+                if (SmokerForm.Y <= -SmokerForm.Height)
+                    CreateSmoker();
+            }
             e.Dispose();
             //e.Graphics.RotateTransform(180); //  -- draws cleaner
             //e.Graphics.TranslateTransform(0, -MaxFormHeight);
@@ -246,9 +244,9 @@ namespace OfficeMan_1._1
                 SmokerForm.X = 52;
             else
                 SmokerForm.X = 92;
-            Random smoker_rand = new Random();
-            int k = place_rand.Next(2);
-            if (k == 1)
+            //Random smoker_rand = new Random();
+            //int k = place_rand.Next(2);
+            //if (k == 1)
                 mech[Mechanics.game.smoker] = true;
         }
 
@@ -274,7 +272,7 @@ namespace OfficeMan_1._1
                 return;
             }
             for (int i = 0; i < 5; i++)
-                if (Rectangle.Intersect(CharacterForm, PegionFlock_Place[i]) != Rectangle.Empty)
+                if (Rectangle.Intersect(CharacterForm, PegionFlock_Form[i]) != Rectangle.Empty)
                 {
                     points100_anim = 1;
                     FormElement.Add100Points(PointsLabel);
@@ -327,7 +325,7 @@ namespace OfficeMan_1._1
             {
                 if (PegionForm.X >= 0)
                 {
-                    e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionForm.X, PegionForm.Y);
+                    e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionForm.X, PegionForm.Y, PegionForm.Width, PegionForm.Height);
                     mech.PegionFly(ref PegionForm);
                 }
                 else
@@ -338,10 +336,10 @@ namespace OfficeMan_1._1
                 int gone = 0;
                 for (int i = 0; i < 5; i++)
                 {
-                    if (PegionFlock_Place[i].X >= 0)
+                    if (PegionFlock_Form[i].X >= 0)
                     {
-                        e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionFlock_Place[i].X, PegionFlock_Place[i].Y);
-                        mech.PegionFly(ref PegionFlock_Place[i]);
+                        e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionFlock_Form[i].X, PegionFlock_Form[i].Y, PegionFlock_Form[i].Width, PegionFlock_Form[i].Height);
+                        mech.PegionFly(ref PegionFlock_Form[i]);
                     }
                     else
                         gone++;
