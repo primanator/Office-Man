@@ -284,6 +284,16 @@ namespace Officeman_1._1
             CloudsBack.Y -= 2;            
             return sky_clouds;
         }
+
+        public Image Clouds_Front()
+        {
+            return transparent_clouds;
+        }
+
+        public Image Clouds_Back()
+        {
+            return sky_clouds;
+        }
         public Image Transparent_Clouds_When_Stand(ref Rectangle CloudsFont)
         {
             CloudsFont.X -= 10;

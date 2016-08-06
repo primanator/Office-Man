@@ -183,8 +183,6 @@ namespace OfficeMan_1._1
             // 
             // NicknameLabel
             // 
-            this.NicknameLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
-
             this.NicknameLabel.AutoSize = true;
             this.NicknameLabel.Location = new System.Drawing.Point(153, 366);
             this.NicknameLabel.MinimumSize = new System.Drawing.Size(200, 50);

@@ -15,6 +15,7 @@ namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
     {
+        private bool repaint = false;
         private int buildingsBackMoveCounter = 0;
         private int buildingsFrontMoveCounter = 0;
         private int changeTransparency = 0;
@@ -101,7 +102,7 @@ namespace OfficeMan_1._1
                 {
                     globalGameTime += 0.150;
                     PointsLabel.Visible = true;
-                    FormElement.DrawPoints(PointsLabel);
+
                 }
                 if (mech[Mechanics.game.smoker])
                 {
@@ -149,7 +150,7 @@ namespace OfficeMan_1._1
                     DrawSmoker(source, e);                
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterForm.X, CharacterForm.Y, CharacterForm.Width, CharacterForm.Height);///////////// !!!!!!!!!
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);            
-            }    
+            }
             if (mech[Mechanics.character.jumping])
             {
                 e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
@@ -158,40 +159,50 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                 if (mech[Mechanics.game.smoker])
-                    DrawSmoker(source, e);                
+                    DrawSmoker(source, e);
                 e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterForm), CharacterForm.X, CharacterForm.Y);
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
             }
             if (mech[Mechanics.character.falling])
             {
-                buildingsBackMoveCounter++;
-                buildingsFrontMoveCounter++;
-                e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
                 e.Graphics.DrawImage(source.Clouds_When_Fall(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
-                e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
-                e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
-                if (buildingsBackMoveCounter == 13)
-                {
-                    source.Buildings_Back_Move(ref BuildingsBackForm);
-                    buildingsBackMoveCounter = 0;
-                }
-                if( buildingsFrontMoveCounter == 10)
-                {
-                    source.Background_Gradient_Move(ref BackgroundGradientForm);
-                    source.Buildings_Front_Move(ref BuildingsFrontForm);
-                    buildingsFrontMoveCounter = 0;
-                }
-                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
-                e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm2), BuildingForm2.X, BuildingForm2.Y, BuildingForm2.Width, BuildingForm2.Height);
-                source.Smoker_Move(ref SmokerForm);
-                if (mech[Mechanics.game.smoker])
-                    DrawSmoker(source, e);                
-                e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
-                
                 if (mech[Mechanics.game.frontclouds])
                     e.Graphics.DrawImage(source.Transparent_Clouds_When_Fall(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
-                CheckIntersection(e, ref points100_anim);
-                Draw100pointsAnimation(e, ref points100_anim);
+                if (!repaint)
+                {
+                    buildingsBackMoveCounter++;
+                    buildingsFrontMoveCounter++;
+                    e.Graphics.DrawImage(source.Background_Gradient(), BackgroundGradientForm.X, BackgroundGradientForm.Y, BackgroundGradientForm.Width, BackgroundGradientForm.Height);
+                    e.Graphics.DrawImage(source.Clouds_Back(), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
+                    
+                    e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                    e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
+                    if (buildingsBackMoveCounter == 13)
+                    {
+                        source.Buildings_Back_Move(ref BuildingsBackForm);
+                        buildingsBackMoveCounter = 0;
+                    }
+                    if (buildingsFrontMoveCounter == 10)
+                    {
+                        source.Background_Gradient_Move(ref BackgroundGradientForm);
+                        source.Buildings_Front_Move(ref BuildingsFrontForm);
+                        buildingsFrontMoveCounter = 0;
+                    }
+                    e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
+                    e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm2), BuildingForm2.X, BuildingForm2.Y, BuildingForm2.Width, BuildingForm2.Height);
+                    source.Smoker_Move(ref SmokerForm);
+                    if (mech[Mechanics.game.smoker])
+                        DrawSmoker(source, e);
+                    e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
+                    if (mech[Mechanics.game.frontclouds])
+                        e.Graphics.DrawImage(source.Clouds_Front(), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
+                    CheckIntersection(e, ref points100_anim);
+                    Draw100pointsAnimation(e, ref points100_anim);
+                    FormElement.DrawPoints(PointsLabel);
+                    repaint = true;
+                }
+                else
+                    repaint = false;
             }
             DrawAllBirds(e);
             if (mech[Mechanics.game.pause])
@@ -353,7 +364,6 @@ namespace OfficeMan_1._1
         {
             e.Graphics.DrawImage(source.GetMenuFont(), 140, 100);
             FormElement.ShowPauseMenuItems(PauseMenu_ContinueLabel, PauseMenu_FAQLabel, PauseMenu_LeaderboardLabel, PauseMenu_ExitLabel);
-
         }
 
         private void DrawTotalScore(PaintEventArgs e)
