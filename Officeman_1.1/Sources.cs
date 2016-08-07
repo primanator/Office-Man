@@ -34,8 +34,8 @@ namespace Officeman_1._1
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
-        Image buildings_back, buildings_front, background, background_gradient, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
-        Image new_nicknameLabel_bg_next, tree_init, tree_next, cars_init;
+        Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
+        Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -80,7 +80,8 @@ namespace Officeman_1._1
             buildings_back = Image.FromFile("..\\..\\images\\buildings_back.png");
             buildings_front = Image.FromFile("..\\..\\images\\buildings_front.png");
             background = Image.FromFile("..\\..\\images\\background.png");
-            background_gradient = Image.FromFile("..\\..\\images\\bg_gradient.png");
+            background_gradient_sec = Image.FromFile("..\\..\\images\\bg_gradient2.png");
+            background_gradient_fst = Image.FromFile("..\\..\\images\\bg_gradient1.png");
             highscore_init = Image.FromFile("..\\..\\images\\highscore_init.png");
             highscore_next = Image.FromFile("..\\..\\images\\highscore_next.png");
             empty = Image.FromFile("..\\..\\images\\empty.png");
@@ -92,13 +93,13 @@ namespace Officeman_1._1
             smoker[3] = Image.FromFile("..\\..\\images\\smoker4.png");
             tree_init = Image.FromFile("..\\..\\images\\tree1.png");
             tree_next = Image.FromFile("..\\..\\images\\tree2.png");
-            cars_init = Image.FromFile("..\\..\\images\\сars_init.png");
+            car_one_init = Image.FromFile("..\\..\\images\\car_one_init.png");
             Sources.RotateCleanerPicture();
         }
 
-        public Image CarsInit()
+        public Image CarOneInit()
         {
-            return cars_init;
+            return car_one_init;
         }
 
         public void TreesAnimation(PaintEventArgs e, Rectangle TreesForm)
@@ -142,9 +143,14 @@ namespace Officeman_1._1
             return highscore_next;
         }
 
-        public void Background_Gradient_Move(ref Rectangle BackgroundGradientForm)
+        public void Background_GradientF_Move(ref Rectangle BackgroundGradientForm)
         {
             BackgroundGradientForm.Y += 2;
+        }
+
+        public void Background_GradientB_Move(ref Rectangle BackgroundGradientForm)
+        {
+            BackgroundGradientForm.Y += 1;
         }
 
         public void Buildings_Front_Move(ref Rectangle BuildingsFrontForm)
@@ -152,9 +158,14 @@ namespace Officeman_1._1
             BuildingsFrontForm.Y -= 2;
         }
 
-        public Image Background_Gradient()
+        public Image Background_Gradient_B()
         {
-            return background_gradient;
+            return background_gradient_fst;
+        }
+
+        public Image Background_Gradient_F()
+        {
+            return background_gradient_sec;
         }
 
         public Image Buildings_Front()
@@ -189,7 +200,7 @@ namespace Officeman_1._1
 
         public void Buildings_Back_Move(ref Rectangle BuildingsBackForm)
         {
-            BuildingsBackForm.Y--;
+            BuildingsBackForm.Y +=2;
         }
 
         public Image BuildingEnter()
@@ -445,13 +456,12 @@ namespace Officeman_1._1
                         index = 4;
                         break;
                     }
-                case 4:
-                    {
-                        CharacterPlace.X = 175;
-                        CharacterPlace.Y = 50;
-                        index = 5;
-                        break;
-                    }
+                //case 4:
+                //    {
+                //        CharacterPlace.X = 175;
+                //        CharacterPlace.Y = 50;
+                //        break;
+                //    }
                 default:
                     {
                         CharacterPlace.X = 122;
