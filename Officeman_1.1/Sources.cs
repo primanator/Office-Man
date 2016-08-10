@@ -19,12 +19,14 @@ namespace Officeman_1._1
         char cleaner_way = 'f';
         public char smoker_way = 'f';
         static int man_stand_size = 4;
-        static int man_fall_size = 3;
+        static int man_fall_size = 4;
         static int pegion_fly_size = 4;
         static int man_jump_size = 6;
         static int pausemenu_size = 4;
         static int cleaner_size = 3;
         static int smoker_size = 4;
+        static int crash_pic_size = 5;
+        static int banner_trickle_size = 6;
         static Image[] man_stand = new Image[man_stand_size];
         static Image[] cleaner = new Image[cleaner_size];
         static Image[] man_fall = new Image[man_fall_size];
@@ -33,6 +35,8 @@ namespace Officeman_1._1
         Image[] pegion_fly = new Image[pegion_fly_size];
         Image[] pausemenu_reg = new Image[pausemenu_size];
         Image[] pausemenu_focus = new Image[pausemenu_size];
+        Image[] crashpictures = new Image[crash_pic_size];
+        Image[] banner_trickle = new Image[banner_trickle_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init;
@@ -48,6 +52,7 @@ namespace Officeman_1._1
             man_fall[0] = Image.FromFile("..\\..\\images\\fall1.png");
             man_fall[1] = Image.FromFile("..\\..\\images\\fall2.png");
             man_fall[2] = Image.FromFile("..\\..\\images\\fall3.png");
+            man_fall[3] = Image.FromFile("..\\..\\images\\fall4.png");
             man_jump[0] = Image.FromFile("..\\..\\images\\jump1.png");
             man_jump[1] = Image.FromFile("..\\..\\images\\jump2.png");
             man_jump[2] = Image.FromFile("..\\..\\images\\jump3.png");
@@ -93,13 +98,62 @@ namespace Officeman_1._1
             smoker[3] = Image.FromFile("..\\..\\images\\smoker4.png");
             tree_init = Image.FromFile("..\\..\\images\\tree1.png");
             tree_next = Image.FromFile("..\\..\\images\\tree2.png");
+            crashpictures[0] = Image.FromFile("..\\..\\images\\crash1.png");
+            crashpictures[1] = Image.FromFile("..\\..\\images\\crash2.png");
+            crashpictures[2] = Image.FromFile("..\\..\\images\\crash3.png");
+            crashpictures[3] = Image.FromFile("..\\..\\images\\crash4.png");
+            crashpictures[4] = Image.FromFile("..\\..\\images\\crash5.png");
             car_one_init = Image.FromFile("..\\..\\images\\car_one_init.png");
+            banner_trickle[0] = Image.FromFile("..\\..\\images\\baner1.png");
+            banner_trickle[1] = Image.FromFile("..\\..\\images\\baner2.png");
+            banner_trickle[2] = Image.FromFile("..\\..\\images\\baner3.png");
+            banner_trickle[3] = Image.FromFile("..\\..\\images\\baner4.png");
+            banner_trickle[4] = Image.FromFile("..\\..\\images\\baner5.png");
+            banner_trickle[5] = Image.FromFile("..\\..\\images\\baner6.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image Banner_Init()
+        {
+            return banner_trickle[0];
+        }
+
+        public Image BannerMove(ref Rectangle BannerForm)
+        {
+            BannerForm.Y -= 14;
+            return banner_trickle[0];
+        }
+
+        public Image DrawDead()
+        {
+            return crashpictures[4];
+        }
+
+        public Image CrashPictures(int crash_pic)
+        {
+            return crashpictures[crash_pic];
         }
 
         public Image CarOneInit()
         {
             return car_one_init;
+        }
+
+        public Image CarOneMove(ref Rectangle CarOneFrom)
+        {
+            CarOneFrom.Y -= 14;
+            return car_one_init;
+        }
+
+        public Image TreesMoveAnimation(PaintEventArgs e, ref Rectangle TreesForm)
+        {
+            TreesForm.Y -= 14;
+            int what_pic = 1;
+            Random rand = new Random();
+            what_pic = rand.Next(2);
+            if (what_pic == 1)
+                return tree_init;
+            return tree_next;
         }
 
         public void TreesAnimation(PaintEventArgs e, Rectangle TreesForm)
@@ -200,7 +254,13 @@ namespace Officeman_1._1
 
         public void Buildings_Back_Move(ref Rectangle BuildingsBackForm)
         {
-            BuildingsBackForm.Y +=2;
+            BuildingsBackForm.Y +=1;
+        }
+
+        public Image BuildingEnterMove(ref Rectangle BuildingEnterForm)
+        {
+            BuildingEnterForm.Y -= 14;
+            return building_enter;
         }
 
         public Image BuildingEnter()
@@ -430,42 +490,36 @@ namespace Officeman_1._1
             {
                 case 0:
                     {
-                        CharacterPlace.X = 136;
-                        CharacterPlace.Y = 17;
+                        CharacterPlace.X += 23;
+                        CharacterPlace.Y += 5;
                         index = 1;
                         break;
                     }
                 case 1:
                     {
-                        CharacterPlace.X = 140;
-                        CharacterPlace.Y = 14;
+                        CharacterPlace.X += 4;
+                        CharacterPlace.Y -= 5;
                         index = 2;
                         break;
                     }
                 case 2:
                     {
-                        CharacterPlace.X = 150;
-                        CharacterPlace.Y = 14;
+                        CharacterPlace.X += 14;
+                        CharacterPlace.Y -= 9;
                         index = 3;
                         break;
                     }
                 case 3:
                     {
-                        CharacterPlace.X = 170;
-                        CharacterPlace.Y = 40;
+                        CharacterPlace.X += 45;
+                        CharacterPlace.Y += 30;
                         index = 4;
                         break;
                     }
-                //case 4:
-                //    {
-                //        CharacterPlace.X = 175;
-                //        CharacterPlace.Y = 50;
-                //        break;
-                //    }
                 default:
                     {
-                        CharacterPlace.X = 122;
-                        CharacterPlace.Y = 15;
+                        CharacterPlace.X -= 2;
+                        CharacterPlace.Y += 1;
                         index = 0;
                         break;
                     }
@@ -489,8 +543,13 @@ namespace Officeman_1._1
                     }
                 case 2:
                     {
+                        index = 3;
+                        return man_fall[index - 1];
+                    }
+                case 3:
+                    {
                         index = 0;
-                        return man_fall[2];
+                        return man_fall[3];
                     }
                 default:
                     {

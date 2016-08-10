@@ -14,8 +14,8 @@ namespace OfficeMan_1._1
 {
     class Mechanics
     {
-        public enum character { stand, jumping, falling };
-        public enum game { bird, birds, pause, intersection, new_highscore, end, frontclouds, smoker};
+        public enum character { stand, jumping, falling, landing, crashing };
+        public enum game { bird, birds, pause, intersection, new_highscore, end, frontclouds, smoker, post_death_animation};
         Hashtable CharacterState = new Hashtable();
         Hashtable GameState = new Hashtable();
         char direction;
@@ -25,6 +25,8 @@ namespace OfficeMan_1._1
             CharacterState.Add(character.stand, true);
             CharacterState.Add(character.jumping, false);
             CharacterState.Add(character.falling, false);
+            CharacterState.Add(character.landing, false);
+            CharacterState.Add(character.crashing, false);
             GameState.Add(game.bird, false);
             GameState.Add(game.birds, false);
             GameState.Add(game.pause, false);
@@ -33,6 +35,7 @@ namespace OfficeMan_1._1
             GameState.Add(game.frontclouds, true);
             GameState.Add(game.new_highscore, false);
             GameState.Add(game.smoker, true);
+            GameState.Add(game.post_death_animation, false);
             direction = 'r';
         }
 
@@ -102,7 +105,7 @@ namespace OfficeMan_1._1
 
         public void TurnDown(ref Rectangle CharacterPlace)
         {
-            if (CharacterPlace.Y < 390)
+            if (CharacterPlace.Y < 400) // 390
                 CharacterPlace.Y += 20;
         }
     }
