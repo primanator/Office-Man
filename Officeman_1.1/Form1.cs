@@ -32,8 +32,9 @@ namespace OfficeMan_1._1
         private Rectangle BuildingEnterForm = new Rectangle(0, 462, 442, 462);
         private Rectangle CloudsBackForm = new Rectangle(0, 0, 4200, 4200);
         private Rectangle CloudsFontForm = new Rectangle(0, 0, 9000, 9000);
-        private Rectangle BuildingsBackForm = new Rectangle(-37, 25, 521, 521);
-        private Rectangle BuildingsFrontForm = new Rectangle(-29, 80, 521, 521);
+        private Rectangle BuildingsBackForm = new Rectangle(-37, 35, 521, 521);
+        private Rectangle BuildingsMidForm = new Rectangle(-29, 65, 521, 521);
+        private Rectangle BuildingsFrontForm = new Rectangle(-29, 45, 521, 521);
         private Rectangle BackgroundGradientBForm = new Rectangle(50, -140, 450, 500);
         private Rectangle BackgroundGradientFForm = new Rectangle(40, 140, 500, 500);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 500, 500);
@@ -51,6 +52,7 @@ namespace OfficeMan_1._1
         private int points100_anim = 0;
         private int smoker_anim_pic = -1;
         private int crash_pic = -1;
+        private int banner_trickle_anim = 0;
         private Rectangle[] PegionFlock_Form = new Rectangle[5];
         Timer timerTotalScoreAnimation = new Timer();
         Timer timerHighscoreAnimation = new Timer();
@@ -64,9 +66,9 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             FileProcessing.CreateHighscoreTable();
 
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            //System.Media.SoundPlayer Audio;
+            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            //Audio.Load(); Audio.PlayLooping();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -160,6 +162,7 @@ namespace OfficeMan_1._1
                
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                 if (mech[Mechanics.game.smoker])
@@ -176,6 +179,7 @@ namespace OfficeMan_1._1
                 
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                 if (mech[Mechanics.game.smoker])
@@ -203,11 +207,13 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);                    
                     e.Graphics.DrawImage(source.Clouds_Back(), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                     e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                    e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);
                     e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                     if (buildingsMoveCounter == 9)
                     {
                         source.Buildings_Back_Move(ref BuildingsBackForm);
                         source.Buildings_Front_Move(ref BuildingsFrontForm);
+                        source.Buildings_Mid_Move(ref BuildingsMidForm);
                         buildingsMoveCounter = 0;
                     }
                     if (gradientMoveCounter == 5)
@@ -245,11 +251,13 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);
                     e.Graphics.DrawImage(source.Clouds_Back(), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                     e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                    e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                    
                     e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                     if (buildingsMoveCounter == 9)
                     {
                         source.Buildings_Back_Move(ref BuildingsBackForm);
                         source.Buildings_Front_Move(ref BuildingsFrontForm);
+                        source.Buildings_Mid_Move(ref BuildingsMidForm);
                         buildingsMoveCounter = 0;
                     }
                     if (gradientMoveCounter == 5)
@@ -295,6 +303,7 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);
                     e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                     e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                    e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                    
                     e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                     source.TreesAnimation(e, TreesForm);
                     e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
@@ -306,7 +315,6 @@ namespace OfficeMan_1._1
                         DrawCrash(e);
                     else
                         e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
-
                     CheckIntersection(e, ref points100_anim);
                     Draw100pointsAnimation(e, ref points100_anim);
                     FormElement.DrawPoints(PointsLabel);
@@ -325,21 +333,21 @@ namespace OfficeMan_1._1
                      e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);
                      e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                      e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
+                     e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                     
                      e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                      source.TreesAnimation(e, TreesForm);
                      e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
-                     e.Graphics.DrawImage(source.Banner_Init(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
-                     
+                     if (!mech[Mechanics.game.banner_trickled])
+                         e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
+                     else
+                         e.Graphics.DrawImage(source.Banner_Trickled(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
                      e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
                      e.Graphics.DrawImage(source.DrawDead(), CharacterCrashForm.X, CharacterCrashForm.Y, CharacterCrashForm.Width, CharacterCrashForm.Height);
-                     
                      repaint = true;
-
                  }
                  else
                      repaint = false;
             }
-
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
             else
@@ -378,6 +386,12 @@ namespace OfficeMan_1._1
                 mech[Mechanics.game.post_death_animation] = true;
                 repaint = true;
             }
+            //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
+            //{
+            //    mech[Mechanics.character.crashing] = false;
+            //    mech[Mechanics.game.post_death_animation] = true;
+            //    repaint = true;
+            //}
             e.Dispose();
             //e.Graphics.RotateTransform(180); //  -- draws cleaner
             //e.Graphics.TranslateTransform(0, -MaxFormHeight);

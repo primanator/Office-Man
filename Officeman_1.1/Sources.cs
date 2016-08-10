@@ -39,7 +39,7 @@ namespace Officeman_1._1
         Image[] banner_trickle = new Image[banner_trickle_size];
         Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
-        Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init;
+        Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -84,6 +84,7 @@ namespace Officeman_1._1
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds0.png");
             buildings_back = Image.FromFile("..\\..\\images\\buildings_back.png");
             buildings_front = Image.FromFile("..\\..\\images\\buildings_front.png");
+            buildings_mid = Image.FromFile("..\\..\\images\\buildings_mid.png");
             background = Image.FromFile("..\\..\\images\\background.png");
             background_gradient_sec = Image.FromFile("..\\..\\images\\bg_gradient2.png");
             background_gradient_fst = Image.FromFile("..\\..\\images\\bg_gradient1.png");
@@ -111,6 +112,44 @@ namespace Officeman_1._1
             banner_trickle[4] = Image.FromFile("..\\..\\images\\baner5.png");
             banner_trickle[5] = Image.FromFile("..\\..\\images\\baner6.png");
             Sources.RotateCleanerPicture();
+        }
+
+        public Image Banner_Trickled()
+        {
+            return banner_trickle[5];            
+        }
+
+        public Image Banner_Trickle(ref int banner_trickle_anim)
+        {
+            switch(banner_trickle_anim)
+            {
+                case 0:
+                    {
+                        banner_trickle_anim = 1;
+                        break;
+                    }
+                case 1:
+                    {
+                        banner_trickle_anim = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        banner_trickle_anim = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        banner_trickle_anim = 4;
+                        break;
+                    }
+                case 4:
+                    {
+                        banner_trickle_anim = 5;
+                        break;
+                    }
+            }
+            return banner_trickle[banner_trickle_anim];
         }
 
         public Image Banner_Init()
@@ -212,6 +251,11 @@ namespace Officeman_1._1
             BuildingsFrontForm.Y -= 2;
         }
 
+        public void Buildings_Mid_Move(ref Rectangle BuildingsMidForm)
+        {
+            BuildingsMidForm.Y -= 2;
+        }
+
         public Image Background_Gradient_B()
         {
             return background_gradient_fst;
@@ -225,6 +269,11 @@ namespace Officeman_1._1
         public Image Buildings_Front()
         {
             return buildings_front;
+        }
+
+        public Image Buildings_Mid()
+        {
+            return buildings_mid;
         }
 
         public Image Background()

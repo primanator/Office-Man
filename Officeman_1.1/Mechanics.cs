@@ -15,7 +15,7 @@ namespace OfficeMan_1._1
     class Mechanics
     {
         public enum character { stand, jumping, falling, landing, crashing };
-        public enum game { bird, birds, pause, intersection, new_highscore, end, frontclouds, smoker, post_death_animation};
+        public enum game { bird, birds, pause, intersection, new_highscore, end, frontclouds, smoker, post_death_animation, banner_trickled};
         Hashtable CharacterState = new Hashtable();
         Hashtable GameState = new Hashtable();
         char direction;
@@ -36,6 +36,7 @@ namespace OfficeMan_1._1
             GameState.Add(game.new_highscore, false);
             GameState.Add(game.smoker, true);
             GameState.Add(game.post_death_animation, false);
+            GameState.Add(game.banner_trickled, false);
             direction = 'r';
         }
 
