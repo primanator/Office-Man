@@ -19,6 +19,19 @@ namespace Officeman_1._1
             value++;
             PointLabel.Text = value.ToString();
         }
+        public static void Add20Points(Label PointLabel)
+        {
+            int value = Int32.Parse(PointLabel.Text);
+            value += 20;
+            PointLabel.Text = value.ToString();
+        }
+
+        public static void Add50Points(Label PointLabel)
+        {
+            int value = Int32.Parse(PointLabel.Text);
+            value += 50;
+            PointLabel.Text = value.ToString();
+        }
 
         public static void Add100Points(Label PointLabel)
         {

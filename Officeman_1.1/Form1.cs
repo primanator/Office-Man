@@ -50,6 +50,8 @@ namespace OfficeMan_1._1
         private int pegion_pic = 0;
         private int fall_pic = 0;
         private int points100_anim = 0;
+        private int points50_anim = 0;
+        private int points20_anim = 0;
         private int smoker_anim_pic = -1;
         private int crash_pic = -1;
         private int banner_trickle_anim = 0;
@@ -243,7 +245,9 @@ namespace OfficeMan_1._1
                     if (mech[Mechanics.game.frontclouds])
                         e.Graphics.DrawImage(source.Clouds_Front(), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
                     DrawAllBirds(e);
-                    CheckIntersection(e, ref points100_anim);
+                    CheckIntersection(e, ref points100_anim, ref points50_anim, ref points20_anim);
+                    Draw20pointsAnimation(e, ref points20_anim);
+                    Draw50pointsAnimation(e, ref points50_anim);
                     Draw100pointsAnimation(e, ref points100_anim);
                     FormElement.DrawPoints(PointsLabel);
                     repaint = true;
@@ -292,8 +296,9 @@ namespace OfficeMan_1._1
                         DrawCleaner(source, e);
                     e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     DrawAllBirds(e);
-
-                    CheckIntersection(e, ref points100_anim);
+                    CheckIntersection(e, ref points100_anim, ref points50_anim, ref points20_anim);
+                    Draw20pointsAnimation(e, ref points20_anim);
+                    Draw50pointsAnimation(e, ref points50_anim);
                     Draw100pointsAnimation(e, ref points100_anim);
                     FormElement.DrawPoints(PointsLabel);
                     repaint = true;
@@ -332,7 +337,9 @@ namespace OfficeMan_1._1
                         DrawCrash(e);
                     else
                         e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
-                    CheckIntersection(e, ref points100_anim);
+                    CheckIntersection(e, ref points100_anim, ref points50_anim, ref points20_anim);
+                    Draw20pointsAnimation(e, ref points20_anim);
+                    Draw50pointsAnimation(e, ref points50_anim);
                     Draw100pointsAnimation(e, ref points100_anim);
                     FormElement.DrawPoints(PointsLabel);
                     repaint = true;
@@ -530,8 +537,20 @@ namespace OfficeMan_1._1
             }
         }
 
-        private void CheckIntersection(PaintEventArgs e, ref int points100_anim)
+        private void CheckIntersection(PaintEventArgs e, ref int points100_anim, ref int points50_anim, ref int points20_anim)
         {
+            if (Rectangle.Intersect(CharacterForm, new Rectangle(SmokerForm.X + 6, SmokerForm.Y + 11, 13, 23)) != Rectangle.Empty)
+            {
+                points50_anim = 1;
+                FormElement.Add50Points(PointsLabel);
+                return;
+            }
+            if (Rectangle.Intersect(CharacterForm, new Rectangle(CleanerForm.X + 27, CleanerForm.Y, 14, 35)) != Rectangle.Empty)
+            {
+                points20_anim = 1;
+                FormElement.Add20Points(PointsLabel);
+                return;
+            }
             if (Rectangle.Intersect(CharacterForm, PegionForm) != Rectangle.Empty)
             {
                 points100_anim = 1;
@@ -545,6 +564,64 @@ namespace OfficeMan_1._1
                     FormElement.Add100Points(PointsLabel);
                     return;
                 }
+        }
+
+        private void Draw20pointsAnimation(PaintEventArgs e, ref int points20_anim)
+        {
+            switch (points20_anim)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        e.Graphics.DrawImage(source.Get20Points(), CharacterForm.X, CharacterForm.Y - 30);
+                        points20_anim = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        e.Graphics.DrawImage(source.Get20PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
+                        points20_anim = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        e.Graphics.DrawImage(source.Get20PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
+                        points20_anim = 0;
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+
+        private void Draw50pointsAnimation(PaintEventArgs e, ref int points50_anim)
+        {
+            switch (points50_anim)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        e.Graphics.DrawImage(source.Get50Points(), CharacterForm.X, CharacterForm.Y - 30);
+                        points50_anim = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        e.Graphics.DrawImage(source.Get50PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
+                        points50_anim = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        e.Graphics.DrawImage(source.Get50PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
+                        points50_anim = 0;
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
 
         private void Draw100pointsAnimation(PaintEventArgs e, ref int points100_anim)

@@ -37,9 +37,10 @@ namespace Officeman_1._1
         Image[] pausemenu_focus = new Image[pausemenu_size];
         Image[] crashpictures = new Image[crash_pic_size];
         Image[] banner_trickle = new Image[banner_trickle_size];
-        Image points100, points100ht, points100t, menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
+        Image menufont, totalscore_blue, totalscore_gold, button_ok, transparent_clouds;
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
+        Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -112,6 +113,12 @@ namespace Officeman_1._1
             cleaner[1] = Image.FromFile("..\\..\\images\\cleaner2.png");
             cleaner[2] = Image.FromFile("..\\..\\images\\cleaner3.png");
             cleaner[3] = Image.FromFile("..\\..\\images\\cleaner4.png");
+            points20 = Image.FromFile("..\\..\\images\\points20.png");
+            points20ht = Image.FromFile("..\\..\\images\\points20ht.png");
+            points20t = Image.FromFile("..\\..\\images\\points20t.png");
+            points50 = Image.FromFile("..\\..\\images\\points50.png");
+            points50ht = Image.FromFile("..\\..\\images\\points50ht.png");
+            points50t = Image.FromFile("..\\..\\images\\points50t.png");
             //Sources.RotateCleanerPicture();
         }
         public Image CleanerPic_AnimationForward(ref int index)
@@ -409,6 +416,35 @@ namespace Officeman_1._1
             return points100t;
         }
 
+        public Image Get50Points()
+        {
+            return points50;
+        }
+
+        public Image Get50PointsHalfTransparent()
+        {
+            return points50ht;
+        }
+
+        public Image Get50PointsTransparent()
+        {
+            return points50t;
+        }
+        
+        public Image Get20Points()
+        {
+            return points20;
+        }
+
+        public Image Get20PointsHalfTransparent()
+        {
+            return points20ht;
+        }
+
+        public Image Get20PointsTransparent()
+        {
+            return points20t;
+        }
         public Image PauseMenu_Regular(int index)
         {
             return pausemenu_reg[index];
