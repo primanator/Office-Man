@@ -26,7 +26,7 @@ namespace OfficeMan_1._1
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(150, 102, 40, 75);
         private Rectangle PegionForm = new Rectangle(450, 450, 16, 10);
-        private Rectangle CleanerForm = new Rectangle(-70, 70, 100, 120); // 25, 36 prev size
+        private Rectangle CleanerForm = new Rectangle(0, 200, 136, 82); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 442, 462); // 442 462
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 442, 462);
         private Rectangle BuildingEnterForm = new Rectangle(0, 462, 442, 462);
@@ -46,7 +46,7 @@ namespace OfficeMan_1._1
         private Rectangle BannerForm = new Rectangle(10, 690, 190, 75); // 236
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
-        //private int cleaner_anim = 0;
+        private int cleaner_anim = -1;
         private int pegion_pic = 0;
         private int fall_pic = 0;
         private int points100_anim = 0;
@@ -120,6 +120,11 @@ namespace OfficeMan_1._1
                 {
                     globalGameTime += 0.150;
                 }
+                if (mech[Mechanics.game.cleaner])
+                {
+                    if (CleanerForm.Y <= -CleanerForm.Height)
+                        mech[Mechanics.game.cleaner] = false;
+                }
                 if (mech[Mechanics.game.smoker])
                 {
                     if (SmokerForm.Y <= -SmokerForm.Height)
@@ -166,7 +171,9 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                 if (mech[Mechanics.game.smoker])
-                    DrawSmoker(source, e);                
+                    DrawSmoker(source, e);
+                if (mech[Mechanics.game.cleaner])
+                    DrawCleaner(source, e);
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterForm.X, CharacterForm.Y, CharacterForm.Width, CharacterForm.Height);///////////// !!!!!!!!!
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
                 DrawAllBirds(e);
@@ -184,6 +191,8 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.DrawBuilding(), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                 if (mech[Mechanics.game.smoker])
                     DrawSmoker(source, e);
+                if (mech[Mechanics.game.cleaner])
+                    DrawCleaner(source, e);
                 e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterForm), CharacterForm.X, CharacterForm.Y);
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
                 if (jump_anim_pic == 4)
@@ -225,8 +234,11 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                     e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm2), BuildingForm2.X, BuildingForm2.Y, BuildingForm2.Width, BuildingForm2.Height);
                     source.Smoker_Move(ref SmokerForm);
+                    source.Cleaner_Move(ref CleanerForm);
                     if (mech[Mechanics.game.smoker])
                         DrawSmoker(source, e);
+                    if (mech[Mechanics.game.cleaner])
+                        DrawCleaner(source, e);
                     e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     if (mech[Mechanics.game.frontclouds])
                         e.Graphics.DrawImage(source.Clouds_Front(), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
@@ -273,8 +285,11 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.CarOneMove(ref CarOneFrom), CarOneFrom);
 
                     source.Smoker_Move(ref SmokerForm);
+                    source.Cleaner_Move(ref CleanerForm);
                     if (mech[Mechanics.game.smoker])
                         DrawSmoker(source, e);
+                    if (mech[Mechanics.game.cleaner])
+                        DrawCleaner(source, e);
                     e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     DrawAllBirds(e);
 
@@ -310,6 +325,8 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Banner_Init(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
                     //
                     e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
+                    if (mech[Mechanics.game.cleaner])
+                        DrawCleaner(source, e);
                     mech.TurnDown(ref CharacterForm);
                     if (CharacterForm.Y >= 400)
                         DrawCrash(e);
@@ -342,6 +359,8 @@ namespace OfficeMan_1._1
                      else
                          e.Graphics.DrawImage(source.Banner_Trickled(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
                      e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
+                     if (mech[Mechanics.game.cleaner])
+                         DrawCleaner(source, e);
                      e.Graphics.DrawImage(source.DrawDead(), CharacterCrashForm.X, CharacterCrashForm.Y, CharacterCrashForm.Width, CharacterCrashForm.Height);
                      repaint = true;
                  }
@@ -379,6 +398,11 @@ namespace OfficeMan_1._1
                 BuildingForm2.Y = 462;
                 if (SmokerForm.Y <= -SmokerForm.Height)
                     CreateSmoker();
+            }
+            if (!mech[Mechanics.game.cleaner])
+            {
+                if (CleanerForm.Y <= -CleanerForm.Height)
+                    CreateCleaner();
             }
             if ((crash_pic == 4) & (mech[Mechanics.character.crashing]))
             {
@@ -450,6 +474,20 @@ namespace OfficeMan_1._1
             }
             e.Graphics.DrawImage(source.CrashPictures(crash_pic), CharacterCrashForm.X,CharacterCrashForm.Y, CharacterCrashForm.Width, CharacterCrashForm.Height);
         }
+        private void CreateCleaner()
+        {
+            CleanerForm.Y = 554;
+            Random place_rand = new Random();
+            int s = place_rand.Next(2);
+            if (s == 1)
+                CleanerForm.X = 15;
+            else
+                CleanerForm.X = 80;
+            //Random smoker_rand = new Random();
+            //int k = place_rand.Next(2);
+            //if (k == 1)
+            mech[Mechanics.game.cleaner] = true;
+        }
 
         private void CreateSmoker()
         {
@@ -464,6 +502,19 @@ namespace OfficeMan_1._1
             //int k = place_rand.Next(2);
             //if (k == 1)
                 mech[Mechanics.game.smoker] = true;
+        }
+
+        private void DrawCleaner(Sources source, PaintEventArgs e)
+        {
+            {
+                if (source.cleaner_way == 'f')
+                    e.Graphics.DrawImage(source.CleanerPic_AnimationForward(ref cleaner_anim), CleanerForm.X, CleanerForm.Y, CleanerForm.Width, CleanerForm.Height);
+                else
+                {
+                    e.Graphics.DrawImage(source.CleanerPic_AnimationBackward(cleaner_anim), CleanerForm.X, CleanerForm.Y, CleanerForm.Width, CleanerForm.Height);
+                    cleaner_anim--;
+                }
+            }
         }
 
         private void DrawSmoker(Sources source, PaintEventArgs e)
