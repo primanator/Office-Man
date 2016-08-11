@@ -43,7 +43,7 @@ namespace OfficeMan_1._1
         private Rectangle TreesForm = new Rectangle(195, 785, 300, 120);
         private Rectangle CarOneFrom = new Rectangle(345, 870, 113, 49); //
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
-        private Rectangle BannerForm = new Rectangle(10, 690, 190, 75); // 236
+        private Rectangle BannerForm = new Rectangle(10, 682, 190, 75); // 236
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -155,7 +155,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 70;
+            timerGame.Interval = 100;
             timerGame.Start();
         }
 
@@ -229,6 +229,7 @@ namespace OfficeMan_1._1
                     }
                     if (gradientMoveCounter == 5)
                     {
+                        // myLabel.ForeColor = Color.FromArgb(231, 163, 39);
                         source.Background_GradientB_Move(ref BackgroundGradientBForm);
                         source.Background_GradientF_Move(ref BackgroundGradientFForm);
                         gradientMoveCounter = 0;
@@ -362,7 +363,7 @@ namespace OfficeMan_1._1
                      source.TreesAnimation(e, TreesForm);
                      e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
                      if (!mech[Mechanics.game.banner_trickled])
-                         e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
+                         e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim, ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
                      else
                          e.Graphics.DrawImage(source.Banner_Trickled(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
                      e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);

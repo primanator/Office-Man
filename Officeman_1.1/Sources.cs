@@ -182,7 +182,7 @@ namespace Officeman_1._1
             return banner_trickle[5];            
         }
 
-        public Image Banner_Trickle(ref int banner_trickle_anim)
+        public Image Banner_Trickle(ref int banner_trickle_anim, ref Rectangle BannerForm)
         {
             switch(banner_trickle_anim)
             {
@@ -203,6 +203,7 @@ namespace Officeman_1._1
                     }
                 case 3:
                     {
+                        BannerForm.Height = 84;
                         banner_trickle_anim = 4;
                         break;
                     }
