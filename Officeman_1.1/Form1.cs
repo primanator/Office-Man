@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// myLabel.ForeColor = Color.FromArgb(231, 163, 39);
+
 namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
@@ -41,9 +43,10 @@ namespace OfficeMan_1._1
         private Rectangle HighscoreForm = new Rectangle(0, 0, 500, 500);
         private Rectangle SmokerForm = new Rectangle(92, 297, 38, 71);
         private Rectangle TreesForm = new Rectangle(195, 785, 300, 120);
-        private Rectangle CarOneFrom = new Rectangle(345, 870, 113, 49); //
+        private Rectangle CarOneFrom = new Rectangle(345, 870, 113, 49);
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
-        private Rectangle BannerForm = new Rectangle(10, 682, 190, 75); // 236
+        private Rectangle BannerForm = new Rectangle(10, 682, 190, 75);
+        private Rectangle TotalScoreForm = new Rectangle(0, 0, 484, 462);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -68,9 +71,9 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             FileProcessing.CreateHighscoreTable();
 
-            //System.Media.SoundPlayer Audio;
-            //Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            //Audio.Load(); Audio.PlayLooping();
+            System.Media.SoundPlayer Audio;
+            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
+            Audio.Load(); Audio.PlayLooping();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -229,7 +232,6 @@ namespace OfficeMan_1._1
                     }
                     if (gradientMoveCounter == 5)
                     {
-                        // myLabel.ForeColor = Color.FromArgb(231, 163, 39);
                         source.Background_GradientB_Move(ref BackgroundGradientBForm);
                         source.Background_GradientF_Move(ref BackgroundGradientFForm);
                         gradientMoveCounter = 0;
@@ -283,10 +285,10 @@ namespace OfficeMan_1._1
                         source.Background_GradientF_Move(ref BackgroundGradientFForm);
                         gradientMoveCounter = 0;
                     }
+                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref TreesForm), TreesForm);
                     e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                     e.Graphics.DrawImage(source.BuildingEnterMove(ref BuildingEnterForm), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height); // PAINT IN FROM!!!!!!!!!
                     e.Graphics.DrawImage(source.BannerMove(ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
-                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref TreesForm), TreesForm);
                     e.Graphics.DrawImage(source.CarOneMove(ref CarOneFrom), CarOneFrom);
 
                     source.Smoker_Move(ref SmokerForm);
@@ -362,10 +364,7 @@ namespace OfficeMan_1._1
                      e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                      source.TreesAnimation(e, TreesForm);
                      e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
-                     if (!mech[Mechanics.game.banner_trickled])
-                         e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim, ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
-                     else
-                         e.Graphics.DrawImage(source.Banner_Trickled(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
+                     e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim, ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
                      e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
                      if (mech[Mechanics.game.cleaner])
                          DrawCleaner(source, e);
@@ -374,6 +373,10 @@ namespace OfficeMan_1._1
                  }
                  else
                      repaint = false;
+            }
+            if (mech[Mechanics.game.totascore])
+            {
+                ShowTotalScore(e);
             }
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
@@ -418,6 +421,13 @@ namespace OfficeMan_1._1
                 mech[Mechanics.game.post_death_animation] = true;
                 repaint = true;
             }
+            if (banner_trickle_anim == 5 & !mech[Mechanics.game.totascore])
+            {
+                PointsLabel.Visible = false;
+                mech[Mechanics.game.banner_trickled] = false;
+                mech[Mechanics.game.post_death_animation] = false;
+                mech[Mechanics.game.totascore] = true;
+            }
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
             //{
             //    mech[Mechanics.character.crashing] = false;
@@ -425,6 +435,26 @@ namespace OfficeMan_1._1
             //    repaint = true;
             //}
             e.Dispose();
+        }
+
+        public void ShowTotalScore(PaintEventArgs e)
+        {
+            if (source.highscore == '1')
+            {
+                source.highscore = '2';
+                e.Graphics.DrawImage(source.TotalScoreBG1(), TotalScoreForm.X, TotalScoreForm.Y, TotalScoreForm.Width, TotalScoreForm.Height);
+                return;
+            }
+            if (source.highscore == '2')
+            {
+                source.highscore = '1';
+                e.Graphics.DrawImage(source.TotalScoreBG2(), TotalScoreForm.X, TotalScoreForm.Y, TotalScoreForm.Width, TotalScoreForm.Height);
+            }
+            //FormElement.PigeonAmountLabel_Score(PigeonAmountLabel);
+            //FormElement.CleanerAmountLabel_Score(CleanerAmountLabel);
+            //FormElement.SmokerAmountLabel_Score(SmokerAmountLabel);
+            //FormElement.TimeAmountLabel_Score(TimeAmountLabel);
+            //FormElement.TotalScore(TotalScoreLabel);
         }
 
         public void DrawCrash(PaintEventArgs e)

@@ -18,6 +18,7 @@ namespace Officeman_1._1
         Image sky_clouds;
         public char cleaner_way = 'f';
         public char smoker_way = 'f';
+        public char highscore = '1';
         static int man_stand_size = 4;
         static int man_fall_size = 4;
         static int pegion_fly_size = 4;
@@ -41,6 +42,7 @@ namespace Officeman_1._1
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
+        Image highscore1, highscore2;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -119,6 +121,18 @@ namespace Officeman_1._1
             points50 = Image.FromFile("..\\..\\images\\points50.png");
             points50ht = Image.FromFile("..\\..\\images\\points50ht.png");
             points50t = Image.FromFile("..\\..\\images\\points50t.png");
+            highscore1 = Image.FromFile("..\\..\\images\\highscore1.png");
+            highscore2 = Image.FromFile("..\\..\\images\\highscore2.png");
+        }
+
+        public Image TotalScoreBG1()
+        {
+            return highscore1;
+        }
+
+        public Image TotalScoreBG2()
+        {
+            return highscore2;
         }
         public Image CleanerPic_AnimationForward(ref int index)
         {
