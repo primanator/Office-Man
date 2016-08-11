@@ -42,7 +42,7 @@ namespace Officeman_1._1
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
-        Image highscore1, highscore2;
+        Image highscore1, highscore2, car_two_init;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -105,6 +105,7 @@ namespace Officeman_1._1
             crashpictures[3] = Image.FromFile("..\\..\\images\\crash4.png");
             crashpictures[4] = Image.FromFile("..\\..\\images\\crash5.png");
             car_one_init = Image.FromFile("..\\..\\images\\car_one_init.png");
+            car_two_init = Image.FromFile("..\\..\\images\\car_two_init.png");
             banner_trickle[0] = Image.FromFile("..\\..\\images\\baner1.png");
             banner_trickle[1] = Image.FromFile("..\\..\\images\\baner2.png");
             banner_trickle[2] = Image.FromFile("..\\..\\images\\baner3.png");
@@ -251,9 +252,19 @@ namespace Officeman_1._1
             return crashpictures[crash_pic];
         }
 
+        public Image CarTwoInit()
+        {
+            return car_two_init;
+        }
+
         public Image CarOneInit()
         {
             return car_one_init;
+        }
+        public Image CarTwoMove(ref Rectangle CarTwoFrom)
+        {
+            CarTwoFrom.Y -= 14;
+            return car_two_init;
         }
 
         public Image CarOneMove(ref Rectangle CarOneFrom)
@@ -694,11 +705,6 @@ namespace Officeman_1._1
                 case 2:
                     {
                         index = 3;
-                        break;
-                    }
-                case 3:
-                    {
-                        index = 0;
                         break;
                     }
                 default:

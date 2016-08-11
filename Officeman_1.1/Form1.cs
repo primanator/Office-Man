@@ -27,7 +27,7 @@ namespace OfficeMan_1._1
         private Mechanics mech = new Mechanics();
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(150, 102, 40, 75);
-        private Rectangle PegionForm = new Rectangle(450, 450, 16, 10);
+        private Rectangle PegionForm = new Rectangle(450, 450, 27, 17);
         private Rectangle CleanerForm = new Rectangle(0, 200, 136, 82); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 442, 462); // 442 462
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 442, 462);
@@ -43,14 +43,16 @@ namespace OfficeMan_1._1
         private Rectangle HighscoreForm = new Rectangle(0, 0, 500, 500);
         private Rectangle SmokerForm = new Rectangle(92, 297, 38, 71);
         private Rectangle TreesForm = new Rectangle(195, 785, 300, 120);
-        private Rectangle CarOneFrom = new Rectangle(345, 870, 113, 49);
+        private Rectangle CarOneForm = new Rectangle(345, 870, 113, 49);
+        private Rectangle CarTwoForm = new Rectangle(205, 870, 105, 49);
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
         private Rectangle BannerForm = new Rectangle(10, 682, 190, 75);
         private Rectangle TotalScoreForm = new Rectangle(0, 0, 484, 462);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
-        private int pegion_pic = 0;
+        private int pegion_pic = -1;
+        private int [] pegion_flock_pic = new int[5];
         private int fall_pic = 0;
         private int points100_anim = 0;
         private int points50_anim = 0;
@@ -108,14 +110,15 @@ namespace OfficeMan_1._1
                 if (globalGameTime >= 45 & (changeTransparency == 3))
                     mech[Mechanics.game.frontclouds] = false;
                 
-                if (globalGameTime >= 60)
+                if (globalGameTime >= 60) /// ADD HERE NEW GAME STATES!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
-                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]))
+                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totascore]))
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
                         TreesForm.Y = BuildingEnterForm.Y + 335;
-                        CarOneFrom.Y = BuildingEnterForm.Y + 410;
+                        CarOneForm.Y = BuildingEnterForm.Y + 410;
+                        CarTwoForm.Y = BuildingEnterForm.Y + 410;
                         mech[Mechanics.character.falling] = false;
                         mech[Mechanics.character.landing] = true;
                         repaint = false;
@@ -146,11 +149,16 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
-                    PegionFlock_Form[0] = new Rectangle(600, 280, 16, 10);
-                    PegionFlock_Form[1] = new Rectangle(470, 250, 16, 10);
-                    PegionFlock_Form[2] = new Rectangle(485, 315, 16, 10);
-                    PegionFlock_Form[3] = new Rectangle(530, 265, 16, 10);
-                    PegionFlock_Form[4] = new Rectangle(560, 330, 16, 10);
+                    pegion_flock_pic[0] = -1;
+                    PegionFlock_Form[0] = new Rectangle(600, 280, 27, 17);
+                    PegionFlock_Form[1] = new Rectangle(470, 250, 27, 17);
+                    pegion_flock_pic[1] = -1;
+                    PegionFlock_Form[2] = new Rectangle(485, 315, 27, 17);
+                    pegion_flock_pic[2] = -1;
+                    PegionFlock_Form[3] = new Rectangle(530, 265, 27, 17);
+                    pegion_flock_pic[3] = -1;
+                    PegionFlock_Form[4] = new Rectangle(560, 330, 27, 17);
+                    pegion_flock_pic[4] = -1;
                     Random pegion_probability = new Random();
                     int s = pegion_probability.Next(2);
                     if (s == 1)
@@ -158,7 +166,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 100;
+            timerGame.Interval = 70;
             timerGame.Start();
         }
 
@@ -199,6 +207,7 @@ namespace OfficeMan_1._1
                 if (mech[Mechanics.game.cleaner])
                     DrawCleaner(source, e);
                 e.Graphics.DrawImage(source.JumpPic(ref jump_anim_pic, ref CharacterForm), CharacterForm.X, CharacterForm.Y);
+                DrawAllBirds(e);                
                 e.Graphics.DrawImage(source.Transparent_Clouds_When_Stand(ref CloudsFontForm), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
                 if (jump_anim_pic == 4)
                 {
@@ -206,7 +215,6 @@ namespace OfficeMan_1._1
                     mech[Mechanics.character.falling] = true;
                     return;
                 }
-                DrawAllBirds(e);
             }
             if (mech[Mechanics.character.falling])
             {
@@ -244,10 +252,10 @@ namespace OfficeMan_1._1
                         DrawSmoker(source, e);
                     if (mech[Mechanics.game.cleaner])
                         DrawCleaner(source, e);
+                    DrawAllBirds(e);                
                     e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     if (mech[Mechanics.game.frontclouds])
                         e.Graphics.DrawImage(source.Clouds_Front(), CloudsFontForm.X, CloudsFontForm.Y, 10000, 10000);
-                    DrawAllBirds(e);
                     CheckIntersection(e, ref points100_anim, ref points50_anim, ref points20_anim);
                     Draw20pointsAnimation(e, ref points20_anim);
                     Draw50pointsAnimation(e, ref points50_anim);
@@ -286,10 +294,11 @@ namespace OfficeMan_1._1
                         gradientMoveCounter = 0;
                     }
                     e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref TreesForm), TreesForm);
+                    e.Graphics.DrawImage(source.CarOneMove(ref CarOneForm), CarOneForm);
+                    e.Graphics.DrawImage(source.CarTwoMove(ref CarTwoForm), CarTwoForm);
                     e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
                     e.Graphics.DrawImage(source.BuildingEnterMove(ref BuildingEnterForm), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height); // PAINT IN FROM!!!!!!!!!
                     e.Graphics.DrawImage(source.BannerMove(ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
-                    e.Graphics.DrawImage(source.CarOneMove(ref CarOneFrom), CarOneFrom);
 
                     source.Smoker_Move(ref SmokerForm);
                     source.Cleaner_Move(ref CleanerForm);
@@ -297,8 +306,8 @@ namespace OfficeMan_1._1
                         DrawSmoker(source, e);
                     if (mech[Mechanics.game.cleaner])
                         DrawCleaner(source, e);
-                    e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     DrawAllBirds(e);
+                    e.Graphics.DrawImage(source.DrawMan_Fall(ref fall_pic), CharacterForm.X, CharacterForm.Y);
                     CheckIntersection(e, ref points100_anim, ref points50_anim, ref points20_anim);
                     Draw20pointsAnimation(e, ref points20_anim);
                     Draw50pointsAnimation(e, ref points50_anim);
@@ -329,12 +338,14 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                    
                     e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                     source.TreesAnimation(e, TreesForm);
+                    e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
+                    e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                     e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
                     e.Graphics.DrawImage(source.Banner_Init(), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);
                     //
-                    e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
                     if (mech[Mechanics.game.cleaner])
                         DrawCleaner(source, e);
+                    DrawAllBirds(e);
                     mech.TurnDown(ref CharacterForm);
                     if (CharacterForm.Y >= 400)
                         DrawCrash(e);
@@ -363,12 +374,14 @@ namespace OfficeMan_1._1
                      e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                     
                      e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                      source.TreesAnimation(e, TreesForm);
+                     e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
+                     e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                      e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
                      e.Graphics.DrawImage(source.Banner_Trickle(ref banner_trickle_anim, ref BannerForm), BannerForm.X, BannerForm.Y, BannerForm.Width, BannerForm.Height);                         
-                     e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
                      if (mech[Mechanics.game.cleaner])
                          DrawCleaner(source, e);
-                     e.Graphics.DrawImage(source.DrawDead(), CharacterCrashForm.X, CharacterCrashForm.Y, CharacterCrashForm.Width, CharacterCrashForm.Height);
+                     DrawAllBirds(e);
+                    e.Graphics.DrawImage(source.DrawDead(), CharacterCrashForm.X, CharacterCrashForm.Y, CharacterCrashForm.Width, CharacterCrashForm.Height);
                      repaint = true;
                  }
                  else
@@ -392,7 +405,8 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
                 source.TreesAnimation(e, TreesForm);
-                e.Graphics.DrawImage(source.CarOneInit(), CarOneFrom);
+                e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
+                e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                 e.Graphics.DrawImage(source.BuildingEnter(), 0, 0, BuildingForm2.Width, BuildingForm2.Height); // PAINT IN FROM!!!!!!!!!
                 e.Graphics.DrawImage(source.DrawMan_Stand(ref stand_pic), CharacterForm.X, CharacterForm.Y);
                 DrawTotalScore(e);
@@ -421,13 +435,16 @@ namespace OfficeMan_1._1
                 mech[Mechanics.game.post_death_animation] = true;
                 repaint = true;
             }
-            if (banner_trickle_anim == 5 & !mech[Mechanics.game.totascore])
-            {
-                PointsLabel.Visible = false;
-                mech[Mechanics.game.banner_trickled] = false;
-                mech[Mechanics.game.post_death_animation] = false;
-                mech[Mechanics.game.totascore] = true;
-            }
+            //if (banner_trickle_anim == 5 & mech[Mechanics.game.post_death_animation])
+            //{
+            //    PointsLabel.Visible = false;
+            //    mech[Mechanics.character.falling] = false;
+            //    mech[Mechanics.character.landing] = false;
+            //    mech[Mechanics.character.crashing] = false;
+            //    mech[Mechanics.game.post_death_animation] = false;
+            //    mech[Mechanics.game.totascore] = true;
+            //    //repaint = true;
+            //}
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
             //{
             //    mech[Mechanics.character.crashing] = false;
@@ -698,7 +715,7 @@ namespace OfficeMan_1._1
                 {
                     if (PegionFlock_Form[i].X >= 0)
                     {
-                        e.Graphics.DrawImage(source.PegionPic(ref pegion_pic), PegionFlock_Form[i].X, PegionFlock_Form[i].Y, PegionFlock_Form[i].Width, PegionFlock_Form[i].Height);
+                        e.Graphics.DrawImage(source.PegionPic(ref pegion_flock_pic[i]), PegionFlock_Form[i].X, PegionFlock_Form[i].Y, PegionFlock_Form[i].Width, PegionFlock_Form[i].Height);
                         mech.PegionFly(ref PegionFlock_Form[i]);
                     }
                     else
