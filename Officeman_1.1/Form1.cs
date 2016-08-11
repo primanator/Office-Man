@@ -424,11 +424,6 @@ namespace OfficeMan_1._1
             //    repaint = true;
             //}
             e.Dispose();
-            //e.Graphics.RotateTransform(180); //  -- draws cleaner
-            //e.Graphics.TranslateTransform(0, -MaxFormHeight);
-            //e.Graphics.DrawImage(source.DrawCleaner(ref cleaner_anim), CleanerPlace);
-            //e.Graphics.TranslateTransform(MaxFormWidth, MaxFormHeight);
-            //e.Graphics.RotateTransform(180); // --X
         }
 
         public void DrawCrash(PaintEventArgs e)
@@ -490,7 +485,7 @@ namespace OfficeMan_1._1
                 CleanerForm.X = 15;
             else
                 CleanerForm.X = 80;
-            //Random smoker_rand = new Random();
+            //Random cleaner_rand = new Random();
             //int k = place_rand.Next(2);
             //if (k == 1)
             mech[Mechanics.game.cleaner] = true;
@@ -745,8 +740,11 @@ namespace OfficeMan_1._1
             }
             if (e.KeyCode == Keys.Space)
             {
-                mech[Mechanics.character.stand] = false;
-                mech[Mechanics.character.jumping] = true;  // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (mech[Mechanics.character.stand])
+                {
+                    mech[Mechanics.character.stand] = false;
+                    mech[Mechanics.character.jumping] = true;
+                }
             }
             if (e.KeyCode == Keys.A)
             {

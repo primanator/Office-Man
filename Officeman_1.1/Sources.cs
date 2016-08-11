@@ -119,7 +119,6 @@ namespace Officeman_1._1
             points50 = Image.FromFile("..\\..\\images\\points50.png");
             points50ht = Image.FromFile("..\\..\\images\\points50ht.png");
             points50t = Image.FromFile("..\\..\\images\\points50t.png");
-            //Sources.RotateCleanerPicture();
         }
         public Image CleanerPic_AnimationForward(ref int index)
         {
