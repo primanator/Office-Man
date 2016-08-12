@@ -505,7 +505,7 @@ namespace Officeman_1._1
         public Image Clouds_When_Fall(ref Rectangle CloudsBack)
         {
             CloudsBack.X -= 1;
-            CloudsBack.Y -= 2;            
+            CloudsBack.Y -= 1;            
             return sky_clouds;
         }
 

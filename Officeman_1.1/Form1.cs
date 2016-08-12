@@ -48,6 +48,8 @@ namespace OfficeMan_1._1
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
         private Rectangle BannerForm = new Rectangle(10, 682, 190, 75);
         private Rectangle TotalScoreForm = new Rectangle(0, 0, 484, 462);
+        private Rectangle Points100Form = new Rectangle(0, 0, 25, 11);
+        private Rectangle Points50and20Form = new Rectangle(0, 0, 18, 11);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -435,16 +437,16 @@ namespace OfficeMan_1._1
                 mech[Mechanics.game.post_death_animation] = true;
                 repaint = true;
             }
-            //if (banner_trickle_anim == 5 & mech[Mechanics.game.post_death_animation])
-            //{
-            //    PointsLabel.Visible = false;
-            //    mech[Mechanics.character.falling] = false;
-            //    mech[Mechanics.character.landing] = false;
-            //    mech[Mechanics.character.crashing] = false;
-            //    mech[Mechanics.game.post_death_animation] = false;
-            //    mech[Mechanics.game.totascore] = true;
-            //    //repaint = true;
-            //}
+            if (banner_trickle_anim == 5 & mech[Mechanics.game.post_death_animation])
+            {
+                PointsLabel.Visible = false;
+                mech[Mechanics.character.falling] = false;
+                mech[Mechanics.character.landing] = false;
+                mech[Mechanics.character.crashing] = false;
+                mech[Mechanics.game.post_death_animation] = false;
+                mech[Mechanics.game.totascore] = true;
+                //repaint = true;
+            }
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
             //{
             //    mech[Mechanics.character.crashing] = false;
@@ -617,19 +619,19 @@ namespace OfficeMan_1._1
                     break;
                 case 1:
                     {
-                        e.Graphics.DrawImage(source.Get20Points(), CharacterForm.X, CharacterForm.Y - 30);
+                        e.Graphics.DrawImage(source.Get20Points(), CharacterForm.X, CharacterForm.Y - 30, Points50and20Form.Width, Points50and20Form.Height);
                         points20_anim = 2;
                         break;
                     }
                 case 2:
                     {
-                        e.Graphics.DrawImage(source.Get20PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
+                        e.Graphics.DrawImage(source.Get20PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40, Points50and20Form.Width, Points50and20Form.Height);
                         points20_anim = 3;
                         break;
                     }
                 case 3:
                     {
-                        e.Graphics.DrawImage(source.Get20PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
+                        e.Graphics.DrawImage(source.Get20PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50, Points50and20Form.Width, Points50and20Form.Height);
                         points20_anim = 0;
                         break;
                     }
@@ -646,19 +648,19 @@ namespace OfficeMan_1._1
                     break;
                 case 1:
                     {
-                        e.Graphics.DrawImage(source.Get50Points(), CharacterForm.X, CharacterForm.Y - 30);
+                        e.Graphics.DrawImage(source.Get50Points(), CharacterForm.X, CharacterForm.Y - 30, Points50and20Form.Width, Points50and20Form.Height);
                         points50_anim = 2;
                         break;
                     }
                 case 2:
                     {
-                        e.Graphics.DrawImage(source.Get50PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
+                        e.Graphics.DrawImage(source.Get50PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40, Points50and20Form.Width, Points50and20Form.Height);
                         points50_anim = 3;
                         break;
                     }
                 case 3:
                     {
-                        e.Graphics.DrawImage(source.Get50PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
+                        e.Graphics.DrawImage(source.Get50PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50, Points50and20Form.Width, Points50and20Form.Height);
                         points50_anim = 0;
                         break;
                     }
@@ -675,19 +677,19 @@ namespace OfficeMan_1._1
                     break;
                 case 1:
                     {
-                        e.Graphics.DrawImage(source.Get100Points(), CharacterForm.X, CharacterForm.Y - 30);
+                        e.Graphics.DrawImage(source.Get100Points(), CharacterForm.X, CharacterForm.Y - 30, Points100Form.Width, Points100Form.Height);
                         points100_anim = 2;
                         break;
                     }
                 case 2:
                     {
-                        e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40);
+                        e.Graphics.DrawImage(source.Get100PointsHalfTransparent(), CharacterForm.X, CharacterForm.Y - 40, Points100Form.Width, Points100Form.Height);
                         points100_anim = 3;
                         break;
                     }
                 case 3:
                     {
-                        e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50);
+                        e.Graphics.DrawImage(source.Get100PointsTransparent(), CharacterForm.X, CharacterForm.Y - 50, Points100Form.Width, Points100Form.Height);
                         points100_anim = 0;
                         break;
                     }
