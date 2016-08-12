@@ -102,17 +102,22 @@ namespace OfficeMan_1._1
                     source.MakeFrontCloudsMoreTransparent();
                     changeTransparency++;
                 }
-                if (globalGameTime >= 25 & (changeTransparency == 1))
+                if (globalGameTime >= 20 & (changeTransparency == 1))
                 {
                     source.MakeFrontCloudsEvenMoreTransparent();
                     changeTransparency++;
                 }
-                if (globalGameTime >= 35 & (changeTransparency == 2))
+                if (globalGameTime >= 30 & (changeTransparency == 2))
+                {
+                    source.MakeFrontCloudsAlmostMaximumTransparent();
+                    changeTransparency++;
+                }
+                if (globalGameTime >= 45 & (changeTransparency == 3))
                 {
                     source.MakeFrontCloudsMaximumTransparent();
                     changeTransparency++;
                 }
-                if (globalGameTime >= 45 & (changeTransparency == 3))
+                if (globalGameTime >= 40 & (changeTransparency == 4))
                     mech[Mechanics.game.frontclouds] = false;
                 
                 if (globalGameTime >= 60) /// ADD HERE NEW GAME STATES!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -395,6 +400,7 @@ namespace OfficeMan_1._1
             if (mech[Mechanics.game.totascore])
             {
                 ShowTotalScore(e);
+                source.ChangeOKAAAYImage(ref OKAAAYLabel);
             }
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
@@ -448,7 +454,19 @@ namespace OfficeMan_1._1
                 mech[Mechanics.character.crashing] = false;
                 mech[Mechanics.game.post_death_animation] = false;
                 mech[Mechanics.game.totascore] = true;
-                //OKAAAYLabel.Visible = true;  // DRAW OKKAAAAY BY LABEL!!!!!!!!!!
+                FormElement.ChangeFontToChava_Statistics(ref PigeonAmountLabel);
+                FormElement.ChangeFontToChava_Statistics(ref CleanerAmountLabel);
+                FormElement.ChangeFontToChava_Statistics(ref SmokerAmountLabel);
+                FormElement.ChangeFontToChava_Statistics(ref TimeAmountLabel);
+                FormElement.ChangeFontToChava_Statistics(ref HighscorePointsLabel);
+
+                PigeonAmountLabel.Visible = true;
+                CleanerAmountLabel.Visible = true;
+                SmokerAmountLabel.Visible = true;
+                TimeAmountLabel.Visible = true;
+                HighscorePointsLabel.Visible = true;
+
+                OKAAAYLabel.Visible = true;  // DRAW OKKAAAAY BY LABEL!!!!!!!!!!
                 //repaint = true;
             }
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
@@ -890,6 +908,11 @@ namespace OfficeMan_1._1
                 FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel), NicknameLabel);
             }
             //main menu exit
+        }
+
+        private void OKAAAYLabel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

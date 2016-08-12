@@ -233,13 +233,14 @@ namespace OfficeMan_1._1
             // OKAAAYLabel
             // 
             this.OKAAAYLabel.AutoSize = true;
-            this.OKAAAYLabel.Location = new System.Drawing.Point(156, 366);
-            this.OKAAAYLabel.MinimumSize = new System.Drawing.Size(150, 20);
+            this.OKAAAYLabel.Image = ((System.Drawing.Image)(resources.GetObject("OKAAAYLabel.Image")));
+            this.OKAAAYLabel.Location = new System.Drawing.Point(175, 370);
+            this.OKAAAYLabel.MinimumSize = new System.Drawing.Size(149, 15);
             this.OKAAAYLabel.Name = "OKAAAYLabel";
-            this.OKAAAYLabel.Size = new System.Drawing.Size(150, 20);
+            this.OKAAAYLabel.Size = new System.Drawing.Size(149, 15);
             this.OKAAAYLabel.TabIndex = 15;
-            this.OKAAAYLabel.Text = "label1";
             this.OKAAAYLabel.Visible = false;
+            this.OKAAAYLabel.Click += new System.EventHandler(this.OKAAAYLabel_Click);
             // 
             // HighscorePointsLabel
             // 

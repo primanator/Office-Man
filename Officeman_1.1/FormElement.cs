@@ -16,46 +16,36 @@ namespace Officeman_1._1
     {
         public static void Hunted_PigeonsLabel_GetResult(ref Label PigeonAmountLabel, int Hunted_PigeonCounter)
         {
-            ChangeFontToChava_Statistics(ref PigeonAmountLabel);
             PigeonAmountLabel.BackColor = Color.FromArgb(255, 231, 188);
             PigeonAmountLabel.ForeColor = Color.FromArgb(231, 163, 39);
             PigeonAmountLabel.Text = Hunted_PigeonCounter.ToString();
-            PigeonAmountLabel.Visible = true;
         }
 
         public static void Hunted_CleanerLabel_GetResult(ref Label CleanerAmountLabel, int Hunted_CleanerCounter)
         {
-            ChangeFontToChava_Statistics(ref CleanerAmountLabel);
             CleanerAmountLabel.BackColor = Color.FromArgb(255, 231, 188);
             CleanerAmountLabel.ForeColor = Color.FromArgb(231, 163, 39);
             CleanerAmountLabel.Text = Hunted_CleanerCounter.ToString();
-            CleanerAmountLabel.Visible = true;
         }
 
         public static void Hunted_SmokerLabel_GetResult(ref Label SmokerAmountLabel, int Hunted_SmokerCounter)
         {
-            ChangeFontToChava_Statistics(ref SmokerAmountLabel);
             SmokerAmountLabel.BackColor = Color.FromArgb(255, 231, 188);
             SmokerAmountLabel.ForeColor = Color.FromArgb(231, 163, 39);
             SmokerAmountLabel.Text = Hunted_SmokerCounter.ToString();
-            SmokerAmountLabel.Visible = true;
         }
 
         public static void TimeAmountLabel_GetResult(ref Label TimeAmountLabel, double globalGameTime)
         {
-            ChangeFontToChava_Statistics(ref TimeAmountLabel);
             TimeAmountLabel.BackColor = Color.FromArgb(255, 231, 188);
             TimeAmountLabel.ForeColor = Color.FromArgb(231, 163, 39);
             TimeAmountLabel.Text = ((int)globalGameTime).ToString();  // change format of output!!
-            TimeAmountLabel.Visible = true;
         }
         public static void TotalScore(ref Label HighscorePointsLabel, Label PointsLabel)
         {
-            ChangeFontToChava_Statistics(ref HighscorePointsLabel);
             HighscorePointsLabel.BackColor = Color.FromArgb(255, 231, 188);
             HighscorePointsLabel.ForeColor = Color.FromArgb(231, 163, 39);
             HighscorePointsLabel.Text = PointsLabel.Text;
-            HighscorePointsLabel.Visible = true;
         }
 
         public static void DrawPoints(Label PointLabel)
@@ -182,7 +172,7 @@ namespace Officeman_1._1
             return NicknameLabel.Text.ToString();
         }
 
-        private static void ChangeFontToChava_Statistics(ref Label Lab)
+        public static void ChangeFontToChava_Statistics(ref Label Lab)
         {
             PrivateFontCollection newFont = new PrivateFontCollection();
             newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");

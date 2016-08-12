@@ -19,6 +19,7 @@ namespace Officeman_1._1
         public char cleaner_way = 'f';
         public char smoker_way = 'f';
         public char highscore = '1';
+        private char okaaay_state = 'i';
         static int man_stand_size = 4;
         static int man_fall_size = 4;
         static int pegion_fly_size = 4;
@@ -42,7 +43,7 @@ namespace Officeman_1._1
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
-        Image highscore1, highscore2, car_two_init;
+        Image highscore1, highscore2, car_two_init, okaaay_init, okaaay_next;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -124,6 +125,23 @@ namespace Officeman_1._1
             points50t = Image.FromFile("..\\..\\images\\points50t.png");
             highscore1 = Image.FromFile("..\\..\\images\\highscore1.png");
             highscore2 = Image.FromFile("..\\..\\images\\highscore2.png");
+            okaaay_init = Image.FromFile("..\\..\\images\\okaaay_init.png");
+            okaaay_next = Image.FromFile("..\\..\\images\\okaaay_next.png");
+        }
+
+        public void ChangeOKAAAYImage(ref Label OKAAAYLabel)
+        {
+            if (okaaay_state == 'i')
+            {
+                OKAAAYLabel.Image = okaaay_next;
+                okaaay_state = 'n';
+                return;
+            }
+            if (okaaay_state == 'n')
+            {
+                OKAAAYLabel.Image = okaaay_init;
+                okaaay_state = 'i';
+            }
         }
 
         public Image TotalScoreBG1()
@@ -380,9 +398,14 @@ namespace Officeman_1._1
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds2.png");
         }
 
-        public void MakeFrontCloudsMaximumTransparent()
+        public void MakeFrontCloudsAlmostMaximumTransparent()
         {
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds3.png");
+        }
+
+        public void MakeFrontCloudsMaximumTransparent()
+        {
+            transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds4.png");
         }
 
         public Image Buildings_Back()
