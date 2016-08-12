@@ -193,7 +193,7 @@ namespace OfficeMan_1._1
             // PigeonAmountLabel
             // 
             this.PigeonAmountLabel.AutoSize = true;
-            this.PigeonAmountLabel.Location = new System.Drawing.Point(310, 160);
+            this.PigeonAmountLabel.Location = new System.Drawing.Point(310, 159);
             this.PigeonAmountLabel.Name = "PigeonAmountLabel";
             this.PigeonAmountLabel.Size = new System.Drawing.Size(61, 13);
             this.PigeonAmountLabel.TabIndex = 12;
@@ -203,7 +203,7 @@ namespace OfficeMan_1._1
             // CleanerAmountLabel
             // 
             this.CleanerAmountLabel.AutoSize = true;
-            this.CleanerAmountLabel.Location = new System.Drawing.Point(310, 200);
+            this.CleanerAmountLabel.Location = new System.Drawing.Point(310, 201);
             this.CleanerAmountLabel.Name = "CleanerAmountLabel";
             this.CleanerAmountLabel.Size = new System.Drawing.Size(61, 13);
             this.CleanerAmountLabel.TabIndex = 0;
@@ -213,7 +213,7 @@ namespace OfficeMan_1._1
             // SmokerAmountLabel
             // 
             this.SmokerAmountLabel.AutoSize = true;
-            this.SmokerAmountLabel.Location = new System.Drawing.Point(310, 240);
+            this.SmokerAmountLabel.Location = new System.Drawing.Point(310, 244);
             this.SmokerAmountLabel.Name = "SmokerAmountLabel";
             this.SmokerAmountLabel.Size = new System.Drawing.Size(61, 13);
             this.SmokerAmountLabel.TabIndex = 13;
@@ -223,7 +223,7 @@ namespace OfficeMan_1._1
             // TimeAmountLabel
             // 
             this.TimeAmountLabel.AutoSize = true;
-            this.TimeAmountLabel.Location = new System.Drawing.Point(310, 280);
+            this.TimeAmountLabel.Location = new System.Drawing.Point(310, 286);
             this.TimeAmountLabel.Name = "TimeAmountLabel";
             this.TimeAmountLabel.Size = new System.Drawing.Size(61, 13);
             this.TimeAmountLabel.TabIndex = 14;
@@ -244,7 +244,7 @@ namespace OfficeMan_1._1
             // HighscorePointsLabel
             // 
             this.HighscorePointsLabel.AutoSize = true;
-            this.HighscorePointsLabel.Location = new System.Drawing.Point(310, 320);
+            this.HighscorePointsLabel.Location = new System.Drawing.Point(310, 329);
             this.HighscorePointsLabel.Name = "HighscorePointsLabel";
             this.HighscorePointsLabel.Size = new System.Drawing.Size(61, 13);
             this.HighscorePointsLabel.TabIndex = 16;
