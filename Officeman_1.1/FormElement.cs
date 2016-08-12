@@ -46,7 +46,7 @@ namespace Officeman_1._1
             ChangeFontToChava_Statistics(ref TimeAmountLabel);
             TimeAmountLabel.BackColor = Color.FromArgb(255, 231, 188);
             TimeAmountLabel.ForeColor = Color.FromArgb(231, 163, 39);
-            TimeAmountLabel.Text = globalGameTime.ToString();  // change format of output!!
+            TimeAmountLabel.Text = ((int)globalGameTime).ToString();  // change format of output!!
             TimeAmountLabel.Visible = true;
         }
         public static void TotalScore(ref Label HighscorePointsLabel, Label PointsLabel)
