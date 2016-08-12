@@ -42,15 +42,16 @@ namespace OfficeMan_1._1
             this.HighScoreLabel2 = new System.Windows.Forms.Label();
             this.NewNicknameLabel = new System.Windows.Forms.Label();
             this.NicknameLabel = new System.Windows.Forms.Label();
+            this.PigeonAmountLabel = new System.Windows.Forms.Label();
+            this.CleanerAmountLabel = new System.Windows.Forms.Label();
+            this.SmokerAmountLabel = new System.Windows.Forms.Label();
+            this.TimeAmountLabel = new System.Windows.Forms.Label();
+            this.OKAAAYLabel = new System.Windows.Forms.Label();
+            this.HighscorePointsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
             // 
-            PrivateFontCollection newFont = new PrivateFontCollection();
-            newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
-            FontFamily chava = new FontFamily("Chava", newFont);
-            this.PointsLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
-
             this.PointsLabel.AutoSize = true;
             this.PointsLabel.BackColor = System.Drawing.Color.Transparent;
             this.PointsLabel.Location = new System.Drawing.Point(352, 9);
@@ -121,8 +122,6 @@ namespace OfficeMan_1._1
             // 
             // TotalScoreLabel
             // 
-            this.TotalScoreLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
-
             this.TotalScoreLabel.AutoSize = true;
             this.TotalScoreLabel.Image = ((System.Drawing.Image)(resources.GetObject("TotalScoreLabel.Image")));
             this.TotalScoreLabel.Location = new System.Drawing.Point(140, 170);
@@ -191,11 +190,78 @@ namespace OfficeMan_1._1
             this.NicknameLabel.TabIndex = 11;
             this.NicknameLabel.Visible = false;
             // 
+            // PigeonAmountLabel
+            // 
+            this.PigeonAmountLabel.AutoSize = true;
+            this.PigeonAmountLabel.Location = new System.Drawing.Point(310, 160);
+            this.PigeonAmountLabel.Name = "PigeonAmountLabel";
+            this.PigeonAmountLabel.Size = new System.Drawing.Size(61, 13);
+            this.PigeonAmountLabel.TabIndex = 12;
+            this.PigeonAmountLabel.Text = "999999999";
+            this.PigeonAmountLabel.Visible = false;
+            // 
+            // CleanerAmountLabel
+            // 
+            this.CleanerAmountLabel.AutoSize = true;
+            this.CleanerAmountLabel.Location = new System.Drawing.Point(310, 200);
+            this.CleanerAmountLabel.Name = "CleanerAmountLabel";
+            this.CleanerAmountLabel.Size = new System.Drawing.Size(61, 13);
+            this.CleanerAmountLabel.TabIndex = 0;
+            this.CleanerAmountLabel.Text = "999999999";
+            this.CleanerAmountLabel.Visible = false;
+            // 
+            // SmokerAmountLabel
+            // 
+            this.SmokerAmountLabel.AutoSize = true;
+            this.SmokerAmountLabel.Location = new System.Drawing.Point(310, 240);
+            this.SmokerAmountLabel.Name = "SmokerAmountLabel";
+            this.SmokerAmountLabel.Size = new System.Drawing.Size(61, 13);
+            this.SmokerAmountLabel.TabIndex = 13;
+            this.SmokerAmountLabel.Text = "999999999";
+            this.SmokerAmountLabel.Visible = false;
+            // 
+            // TimeAmountLabel
+            // 
+            this.TimeAmountLabel.AutoSize = true;
+            this.TimeAmountLabel.Location = new System.Drawing.Point(310, 280);
+            this.TimeAmountLabel.Name = "TimeAmountLabel";
+            this.TimeAmountLabel.Size = new System.Drawing.Size(61, 13);
+            this.TimeAmountLabel.TabIndex = 14;
+            this.TimeAmountLabel.Text = "999999999";
+            this.TimeAmountLabel.Visible = false;
+            // 
+            // OKAAAYLabel
+            // 
+            this.OKAAAYLabel.AutoSize = true;
+            this.OKAAAYLabel.Location = new System.Drawing.Point(156, 366);
+            this.OKAAAYLabel.MinimumSize = new System.Drawing.Size(150, 20);
+            this.OKAAAYLabel.Name = "OKAAAYLabel";
+            this.OKAAAYLabel.Size = new System.Drawing.Size(150, 20);
+            this.OKAAAYLabel.TabIndex = 15;
+            this.OKAAAYLabel.Text = "label1";
+            this.OKAAAYLabel.Visible = false;
+            // 
+            // HighscorePointsLabel
+            // 
+            this.HighscorePointsLabel.AutoSize = true;
+            this.HighscorePointsLabel.Location = new System.Drawing.Point(310, 320);
+            this.HighscorePointsLabel.Name = "HighscorePointsLabel";
+            this.HighscorePointsLabel.Size = new System.Drawing.Size(61, 13);
+            this.HighscorePointsLabel.TabIndex = 16;
+            this.HighscorePointsLabel.Text = "999999999";
+            this.HighscorePointsLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.HighscorePointsLabel);
+            this.Controls.Add(this.OKAAAYLabel);
+            this.Controls.Add(this.TimeAmountLabel);
+            this.Controls.Add(this.SmokerAmountLabel);
+            this.Controls.Add(this.CleanerAmountLabel);
+            this.Controls.Add(this.PigeonAmountLabel);
             this.Controls.Add(this.NicknameLabel);
             this.Controls.Add(this.NewNicknameLabel);
             this.Controls.Add(this.HighScoreLabel2);
@@ -236,6 +302,12 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label HighScoreLabel2;
         private System.Windows.Forms.Label NewNicknameLabel;
         private System.Windows.Forms.Label NicknameLabel;
+        private System.Windows.Forms.Label PigeonAmountLabel;
+        private System.Windows.Forms.Label CleanerAmountLabel;
+        private System.Windows.Forms.Label SmokerAmountLabel;
+        private System.Windows.Forms.Label TimeAmountLabel;
+        private System.Windows.Forms.Label OKAAAYLabel;
+        private System.Windows.Forms.Label HighscorePointsLabel;
     }
 }
 

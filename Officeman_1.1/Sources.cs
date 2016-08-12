@@ -218,7 +218,7 @@ namespace Officeman_1._1
                     }
                 case 3:
                     {
-                        BannerForm.Height = 84;
+                        BannerForm.Height = 63;
                         banner_trickle_anim = 4;
                         break;
                     }
