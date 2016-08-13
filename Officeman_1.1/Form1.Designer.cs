@@ -62,6 +62,7 @@ namespace OfficeMan_1._1
             this.thrdRecordLabel = new System.Windows.Forms.Label();
             this.WOOHOOLabel = new System.Windows.Forms.Label();
             this.EHLabel = new System.Windows.Forms.Label();
+            this.AudioIconLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -440,11 +441,23 @@ namespace OfficeMan_1._1
             this.EHLabel.MouseEnter += new System.EventHandler(this.EHLabel_MouseEnter);
             this.EHLabel.MouseLeave += new System.EventHandler(this.EHLabel_MouseLeave);
             // 
+            // AudioIconLabel
+            // 
+            this.AudioIconLabel.AutoSize = true;
+            this.AudioIconLabel.Image = ((System.Drawing.Image)(resources.GetObject("AudioIconLabel.Image")));
+            this.AudioIconLabel.Location = new System.Drawing.Point(431, 12);
+            this.AudioIconLabel.MinimumSize = new System.Drawing.Size(20, 16);
+            this.AudioIconLabel.Name = "AudioIconLabel";
+            this.AudioIconLabel.Size = new System.Drawing.Size(20, 16);
+            this.AudioIconLabel.TabIndex = 31;
+            this.AudioIconLabel.Click += new System.EventHandler(this.AudioIconLabel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.AudioIconLabel);
             this.Controls.Add(this.EHLabel);
             this.Controls.Add(this.WOOHOOLabel);
             this.Controls.Add(this.thrdRecordLabel);
@@ -525,6 +538,7 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label thrdRecordLabel;
         private System.Windows.Forms.Label WOOHOOLabel;
         private System.Windows.Forms.Label EHLabel;
+        private System.Windows.Forms.Label AudioIconLabel;
     }
 }
 

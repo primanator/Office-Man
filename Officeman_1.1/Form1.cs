@@ -52,6 +52,7 @@ namespace OfficeMan_1._1
         private Rectangle Points100Form = new Rectangle(0, 0, 25, 11);
         private Rectangle Points50and20Form = new Rectangle(0, 0, 18, 11);
         private Rectangle MainMenuForm = new Rectangle(0, 0, 484, 462);
+        private Rectangle AudioIconForm = new Rectangle(480, 20, 20, 16);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -75,11 +76,9 @@ namespace OfficeMan_1._1
             this.MaximumSize = new Size(MaxFormWidth, MaxFormHeight);
             this.MaximizedBounds = new Rectangle(maximizedLocation, this.MaximumSize);
             this.StartPosition = FormStartPosition.CenterScreen;
+            
             FileProcessing.CreateHighscoreTable();
-
-            System.Media.SoundPlayer Audio;
-            Audio = new System.Media.SoundPlayer("..\\..\\sounds\\main.wav");
-            Audio.Load(); Audio.PlayLooping();
+            Sounds.Audio_Init();
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -1286,6 +1285,22 @@ namespace OfficeMan_1._1
         {
             mech[Mechanics.game.leaderboard] = false;
             mech[Mechanics.game.main_menu] = true;
+        }
+
+        private void AudioIconLabel_Click(object sender, EventArgs e)
+        {
+            if(mech[Mechanics.game.audio])
+            {
+                AudioIconLabel.Image = source.Audio_Off();
+                Sounds.Audio_TurnOff();
+                mech[Mechanics.game.audio] = false;
+            }
+            else
+            {
+                AudioIconLabel.Image = source.Audio_On();
+                Sounds.Audio_TurnOn();
+                mech[Mechanics.game.audio] = true;
+            }
         }
     }
 }

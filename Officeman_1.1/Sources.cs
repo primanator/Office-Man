@@ -51,7 +51,7 @@ namespace Officeman_1._1
         Image menu_start_press, menu_shop_on, menu_shop_press, menu_highscore_on, menu_highscore_press, menu_tutorial_on, menu_tutorial_press;
         Image menu_exit_on, menu_exit_press, menu_start_init, menu_shop_init, menu_highscore_init, menu_tutorial_init, menu_exit_init;
         Image newrecord_bg_init, newrecord_bg_next, mooore_init, mooore_next, mooore_pressed, leaderboard_init, leaderboard_next, woohoo_init, woohoo_next;
-        Image woohoo_pressed, eh_init, eh_next, eh_pressed;
+        Image woohoo_pressed, eh_init, eh_next, eh_pressed, audio_on, audio_off;
 
         public Sources()
         {
@@ -167,6 +167,18 @@ namespace Officeman_1._1
             eh_init = Image.FromFile("..\\..\\images\\eh_init.png");
             eh_next = Image.FromFile("..\\..\\images\\eh_next.png");
             eh_pressed = Image.FromFile("..\\..\\images\\eh_pressed.png");
+            audio_on = Image.FromFile("..\\..\\images\\audio_on.png");
+            audio_off = Image.FromFile("..\\..\\images\\audio_off.png");
+        }
+
+        public Image Audio_On()
+        {
+            return audio_on;
+        }
+
+        public Image Audio_Off()
+        {
+            return audio_off;
         }
 
         public Image WOOHOO_Init()
