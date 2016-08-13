@@ -52,7 +52,7 @@ namespace Officeman_1._1
         Image menu_exit_on, menu_exit_press, menu_start_init, menu_shop_init, menu_highscore_init, menu_tutorial_init, menu_exit_init;
         Image newrecord_bg_init, newrecord_bg_next, mooore_init, mooore_next, mooore_pressed, leaderboard_init, leaderboard_next, woohoo_init, woohoo_next;
         Image woohoo_pressed, eh_init, eh_next, eh_pressed, audio_on, audio_off, audio_on_space, audio_off_space, audio_on_menu, audio_off_menu;
-        Image audio_off_hightscore, audio_on_hightscore, audio_off_back, audio_on_back;
+        Image audio_off_hightscore, audio_on_hightscore, audio_off_back, audio_on_back, tree1, tree2, tree3;
 
         public Sources()
         {
@@ -178,6 +178,9 @@ namespace Officeman_1._1
             audio_on_menu = Image.FromFile("..\\..\\images\\audio_on_menu.png");
             audio_off_space = Image.FromFile("..\\..\\images\\audio_off_space.png");
             audio_on_space = Image.FromFile("..\\..\\images\\audio_on_space.png");
+            tree1 = Image.FromFile("..\\..\\images\\tree1.png");
+            tree2 = Image.FromFile("..\\..\\images\\tree2.png");
+            tree3 = Image.FromFile("..\\..\\images\\tree3.png");
         }
 
         public Image AudioIcon_Menu_On()
@@ -545,10 +548,12 @@ namespace Officeman_1._1
             TreesForm.Y -= 14;
             int what_pic = 1;
             Random rand = new Random();
-            what_pic = rand.Next(2);
+            what_pic = rand.Next(3);
             if (what_pic == 1)
-                return tree_init;
-            return tree_next;
+                return tree1;
+            if (what_pic == 2)
+                return tree2;
+            return tree3;
         }
 
         public void TreesAnimation(PaintEventArgs e, Rectangle TreesForm)

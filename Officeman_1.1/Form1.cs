@@ -43,7 +43,9 @@ namespace OfficeMan_1._1
         private Rectangle BackgroundForm = new Rectangle(25, 0, 500, 500);
         private Rectangle HighscoreForm = new Rectangle(0, 0, 500, 500);
         private Rectangle SmokerForm = new Rectangle(117, 297, 42, 73);
-        private Rectangle TreesForm = new Rectangle(195, 785, 300, 120);
+        private Rectangle Tree1_Form = new Rectangle(195, 785, 94, 143);
+        private Rectangle Tree2_Form = new Rectangle(340, 785, 94, 143);
+        private Rectangle Tree3_Form = new Rectangle(500, 785, 94, 143);
         private Rectangle CarOneForm = new Rectangle(345, 870, 113, 49);
         private Rectangle CarTwoForm = new Rectangle(205, 870, 105, 49);
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
@@ -124,7 +126,9 @@ namespace OfficeMan_1._1
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
-                        TreesForm.Y = BuildingEnterForm.Y + 335;
+                        Tree1_Form.Y = BuildingEnterForm.Y + 335;
+                        Tree2_Form.Y = BuildingEnterForm.Y + 335;
+                        Tree3_Form.Y = BuildingEnterForm.Y + 335;
                         CarOneForm.Y = BuildingEnterForm.Y + 410;
                         CarTwoForm.Y = BuildingEnterForm.Y + 410;
                         mech[Mechanics.character.falling] = false;
@@ -425,7 +429,9 @@ namespace OfficeMan_1._1
                         source.Background_GradientF_Move(ref BackgroundGradientFForm);
                         gradientMoveCounter = 0;
                     }
-                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref TreesForm), TreesForm);
+                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref Tree1_Form), Tree1_Form);
+                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref Tree2_Form), Tree2_Form);
+                    e.Graphics.DrawImage(source.TreesMoveAnimation(e, ref Tree3_Form), Tree3_Form);
                     e.Graphics.DrawImage(source.CarOneMove(ref CarOneForm), CarOneForm);
                     e.Graphics.DrawImage(source.CarTwoMove(ref CarTwoForm), CarTwoForm);
                     e.Graphics.DrawImage(source.DrawBuilding_Fall(ref BuildingForm1), BuildingForm1.X, BuildingForm1.Y, BuildingForm1.Width, BuildingForm1.Height);
@@ -469,7 +475,9 @@ namespace OfficeMan_1._1
                     e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                     e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                    
                     e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
-                    source.TreesAnimation(e, TreesForm);
+                    source.TreesAnimation(e, Tree1_Form);
+                    source.TreesAnimation(e, Tree2_Form);
+                    source.TreesAnimation(e, Tree3_Form);
                     e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
                     e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                     e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
@@ -505,7 +513,9 @@ namespace OfficeMan_1._1
                      e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                      e.Graphics.DrawImage(source.Buildings_Mid(), BuildingsMidForm.X, BuildingsMidForm.Y, BuildingsMidForm.Width, BuildingsMidForm.Height);                     
                      e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
-                     source.TreesAnimation(e, TreesForm);
+                     source.TreesAnimation(e, Tree1_Form);
+                     source.TreesAnimation(e, Tree2_Form);
+                     source.TreesAnimation(e, Tree3_Form);
                      e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
                      e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                      e.Graphics.DrawImage(source.BuildingEnter(), BuildingEnterForm.X, BuildingEnterForm.Y, BuildingEnterForm.Width, BuildingEnterForm.Height);
@@ -544,7 +554,9 @@ namespace OfficeMan_1._1
                 e.Graphics.DrawImage(source.Clouds_When_Stand(ref CloudsBackForm), CloudsBackForm.X, CloudsBackForm.Y, CloudsBackForm.Width, CloudsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Back(), BuildingsBackForm.X, BuildingsBackForm.Y, BuildingsBackForm.Width, BuildingsBackForm.Height);
                 e.Graphics.DrawImage(source.Buildings_Front(), BuildingsFrontForm.X, BuildingsFrontForm.Y, BuildingsFrontForm.Width, BuildingsFrontForm.Height);
-                source.TreesAnimation(e, TreesForm);
+                source.TreesAnimation(e, Tree1_Form);
+                source.TreesAnimation(e, Tree2_Form);
+                source.TreesAnimation(e, Tree3_Form);
                 e.Graphics.DrawImage(source.CarOneInit(), CarOneForm);
                 e.Graphics.DrawImage(source.CarTwoInit(), CarTwoForm);
                 e.Graphics.DrawImage(source.BuildingEnter(), 0, 0, BuildingForm2.Width, BuildingForm2.Height); // PAINT IN FROM!!!!!!!!!
