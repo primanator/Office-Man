@@ -558,7 +558,7 @@ namespace Officeman_1._1
 
         public void Buildings_Front_Move(ref Rectangle BuildingsFrontForm)
         {
-            BuildingsFrontForm.Y -= 2;
+            BuildingsFrontForm.Y -= 3;
         }
 
         public void Buildings_Mid_Move(ref Rectangle BuildingsMidForm)

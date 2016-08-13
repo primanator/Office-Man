@@ -29,20 +29,20 @@ namespace OfficeMan_1._1
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(150, 102, 40, 75);
         private Rectangle PegionForm = new Rectangle(450, 450, 27, 17);
-        private Rectangle CleanerForm = new Rectangle(0, 200, 136, 82); // 25, 36 prev size
+        private Rectangle CleanerForm = new Rectangle(0, 200, 143, 86); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 484, 462); // 442 462
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 484, 462);
         private Rectangle BuildingEnterForm = new Rectangle(0, 462, 484, 462);
         private Rectangle CloudsBackForm = new Rectangle(0, 0, 4200, 4200);
         private Rectangle CloudsFontForm = new Rectangle(0, 0, 9000, 9000);
         private Rectangle BuildingsBackForm = new Rectangle(-37, 35, 521, 521);
-        private Rectangle BuildingsMidForm = new Rectangle(-29, 65, 521, 521);
-        private Rectangle BuildingsFrontForm = new Rectangle(-29, 45, 521, 521);
+        private Rectangle BuildingsMidForm = new Rectangle(-29, 135, 521, 521);
+        private Rectangle BuildingsFrontForm = new Rectangle(-29, 180, 521, 521);
         private Rectangle BackgroundGradientBForm = new Rectangle(50, -140, 450, 500);
         private Rectangle BackgroundGradientFForm = new Rectangle(40, 140, 500, 500);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 500, 500);
         private Rectangle HighscoreForm = new Rectangle(0, 0, 500, 500);
-        private Rectangle SmokerForm = new Rectangle(107, 297, 38, 68);
+        private Rectangle SmokerForm = new Rectangle(117, 297, 42, 73);
         private Rectangle TreesForm = new Rectangle(195, 785, 300, 120);
         private Rectangle CarOneForm = new Rectangle(345, 870, 113, 49);
         private Rectangle CarTwoForm = new Rectangle(205, 870, 105, 49);
@@ -708,13 +708,13 @@ namespace OfficeMan_1._1
 
         private void CreateSmoker()
         {
-            SmokerForm.Y = 511;
+            SmokerForm.Y = 480;
             Random place_rand = new Random();
             int s = place_rand.Next(2);
             if (s == 1)
-                SmokerForm.X = 52;
+                SmokerForm.X = 20;
             else
-                SmokerForm.X = 92;
+                SmokerForm.X = 117;
             //Random smoker_rand = new Random();
             //int k = place_rand.Next(2);
             //if (k == 1)
