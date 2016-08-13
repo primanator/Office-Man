@@ -21,6 +21,9 @@ namespace Officeman_1._1
         public char highscore = '1';
         public char mainmenu_bg = '1';
         private char okaaay_state = 'i';
+        private char mooore_state = 'i';
+        public char new_record_bg = '1';
+        public char leaderboard_state = '1';
         static int man_stand_size = 4;
         static int man_fall_size = 4;
         static int pegion_fly_size = 4;
@@ -44,7 +47,12 @@ namespace Officeman_1._1
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
-        Image highscore1, highscore2, car_two_init, okaaay_init, okaaay_next, menu_background1, menu_background2, okaaay_pressed;
+        Image highscore1, highscore2, car_two_init, okaaay_init, okaaay_next, menu_background1, menu_background2, okaaay_pressed, menu_start_on;
+        Image menu_start_press, menu_shop_on, menu_shop_press, menu_highscore_on, menu_highscore_press, menu_tutorial_on, menu_tutorial_press;
+        Image menu_exit_on, menu_exit_press, menu_start_init, menu_shop_init, menu_highscore_init, menu_tutorial_init, menu_exit_init;
+        Image newrecord_bg_init, newrecord_bg_next, mooore_init, mooore_next, mooore_pressed, leaderboard_init, leaderboard_next, woohoo_init, woohoo_next;
+        Image woohoo_pressed, eh_init, eh_next, eh_pressed;
+
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -126,11 +134,176 @@ namespace Officeman_1._1
             points50t = Image.FromFile("..\\..\\images\\points50t.png");
             highscore1 = Image.FromFile("..\\..\\images\\highscore1.png");
             highscore2 = Image.FromFile("..\\..\\images\\highscore2.png");
-            okaaay_init = Image.FromFile("..\\..\\images\\okaaay_init.png");
             okaaay_next = Image.FromFile("..\\..\\images\\okaaay_next.png");
+            okaaay_init = Image.FromFile("..\\..\\images\\okaaay_init.png");
             okaaay_pressed = Image.FromFile("..\\..\\images\\okaaay_pressed.png");
             menu_background1 = Image.FromFile("..\\..\\images\\menu_background1.png");
             menu_background2 = Image.FromFile("..\\..\\images\\menu_background2.png");
+            menu_start_init = Image.FromFile("..\\..\\images\\menu_start.png");
+            menu_start_on = Image.FromFile("..\\..\\images\\menu_start_on.png");
+            menu_start_press = Image.FromFile("..\\..\\images\\menu_start_press.png");
+            menu_shop_init = Image.FromFile("..\\..\\images\\menu_shop.png");
+            menu_shop_on = Image.FromFile("..\\..\\images\\menu_shop_on.png");
+            menu_shop_press = Image.FromFile("..\\..\\images\\menu_shop_press.png");
+            menu_highscore_init = Image.FromFile("..\\..\\images\\menu_highscore.png");
+            menu_highscore_on = Image.FromFile("..\\..\\images\\menu_highscore_on.png");
+            menu_highscore_press = Image.FromFile("..\\..\\images\\menu_highscore_press.png");
+            menu_tutorial_init = Image.FromFile("..\\..\\images\\menu_tutorial.png");
+            menu_tutorial_on = Image.FromFile("..\\..\\images\\menu_tutorial_on.png");
+            menu_tutorial_press = Image.FromFile("..\\..\\images\\menu_tutorial_press.png");
+            menu_exit_init = Image.FromFile("..\\..\\images\\menu_exit.png");
+            menu_exit_on = Image.FromFile("..\\..\\images\\menu_exit_on.png");
+            menu_exit_press = Image.FromFile("..\\..\\images\\menu_exit_press.png");
+            newrecord_bg_init = Image.FromFile("..\\..\\images\\new_record0.png");
+            newrecord_bg_next = Image.FromFile("..\\..\\images\\new_record1.png");
+            mooore_init = Image.FromFile("..\\..\\images\\mooore_init.png");
+            mooore_next = Image.FromFile("..\\..\\images\\mooore_next.png");
+            mooore_pressed = Image.FromFile("..\\..\\images\\mooore_pressed.png");
+            leaderboard_init = Image.FromFile("..\\..\\images\\leaderboard0.png");
+            leaderboard_next = Image.FromFile("..\\..\\images\\leaderboard1.png");
+            woohoo_init = Image.FromFile("..\\..\\images\\woohoo_init.png");
+            woohoo_next = Image.FromFile("..\\..\\images\\woohoo_next.png");
+            woohoo_pressed = Image.FromFile("..\\..\\images\\woohoo_pressed.png");
+            eh_init = Image.FromFile("..\\..\\images\\eh_init.png");
+            eh_next = Image.FromFile("..\\..\\images\\eh_next.png");
+            eh_pressed = Image.FromFile("..\\..\\images\\eh_pressed.png");
+        }
+
+        public Image WOOHOO_Init()
+        {
+            return woohoo_init;
+        }
+
+        public Image WOOHOO_Enter()
+        {
+            return woohoo_next;
+        }
+        public Image WOOHOO_Pressed()
+        {
+            return woohoo_pressed;
+        }
+
+        public Image Eh_Init()
+        {
+            return eh_init;
+        }
+
+        public Image Eh_Enter()
+        {
+            return eh_next; ;
+        }
+        public Image Eh_Pressed()
+        {
+            return eh_pressed;
+        }
+
+        public Image Leaderboard_Init()
+        {
+            return leaderboard_init;
+        }
+        public Image Leaderboard_Next()
+        {
+            return leaderboard_next;
+        }
+
+        public Image MOOORE_Pressed()
+        {
+            return mooore_pressed;
+        }
+
+        public void ChangeMOOOREImage(ref Label MOOORELabel)
+        {
+            if (mooore_state == 'i')
+            {
+                MOOORELabel.Image = mooore_next;
+                mooore_state = 'n';
+                return;
+            }
+            if (mooore_state == 'n')
+            {
+                MOOORELabel.Image = mooore_init;
+                mooore_state = 'i';
+            }
+        }
+
+        public Image NewRecordBG1()
+        {
+            return newrecord_bg_init;
+        }
+
+        public Image NewRecordBG2()
+        {
+            return newrecord_bg_next;
+        }
+
+        public Image Menu_Start_Init()
+        {
+            return menu_start_init;
+        }
+        public Image Menu_Start_Enter()
+        {
+            return menu_start_on;
+        }
+
+        public Image Menu_Start_Press()
+        {
+            return menu_start_press;
+        }
+        public Image Menu_Shop_Init()
+        {
+            return menu_shop_init;
+        }
+
+        public Image Menu_Shop_Enter()
+        {
+            return menu_shop_on;
+        }
+
+        public Image Menu_Shop_Press()
+        {
+            return menu_shop_press;
+        }
+        public Image Menu_Highscore_Init()
+        {
+            return menu_highscore_init;
+        }
+
+        public Image Menu_Highscore_Enter()
+        {
+            return menu_highscore_on;
+        }
+
+        public Image Menu_Highscore_Press()
+        {
+            return menu_highscore_press;
+        }
+        public Image Menu_Tutorial_Init()
+        {
+            return menu_tutorial_init;
+        }
+
+        public Image Menu_Tutorial_Enter()
+        {
+            return menu_tutorial_on;
+        }
+
+        public Image Menu_Tutorial_Press()
+        {
+            return menu_tutorial_press;
+        }
+        public Image Menu_Exit_Init()
+        {
+            return menu_exit_init;
+        }
+
+        public Image Menu_Exit_Enter()
+        {
+            return menu_exit_on;
+        }
+
+        public Image Menu_Exit_Press()
+        {
+            return menu_exit_press;
         }
 
         public Image MainMenuBG2()

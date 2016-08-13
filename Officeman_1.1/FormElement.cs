@@ -14,6 +14,35 @@ namespace Officeman_1._1
 {
     static class FormElement
     {
+        public static void MakeLeaderNicknameVisible_Leaderboard(ref Label NicknameLabel)
+        {
+
+
+            NicknameLabel.BackColor = Color.FromArgb(241, 220, 254);
+            NicknameLabel.ForeColor = Color.FromArgb(255, 255, 255);
+            NicknameLabel.Visible = true;
+        }
+
+        public static void MakeLeaderScoreVisible_Leaderboard(ref Label ScoreLabel)
+        {
+            ScoreLabel.BackColor = Color.FromArgb(241, 220, 254);
+            ScoreLabel.ForeColor = Color.FromArgb(120, 25, 179);
+            ScoreLabel.Visible = true;
+        }
+
+        public static void MakeLeaderScoreVisible(ref Label LeaderScoreLabel)
+        {
+            LeaderScoreLabel.BackColor = Color.FromArgb(241, 220, 254);
+            LeaderScoreLabel.ForeColor = Color.FromArgb(120, 25, 179);
+            LeaderScoreLabel.Visible = true;
+        }
+        public static void MakeLeaderNicknameVisible(ref Label LeaderNickLabel)
+        {
+            LeaderNickLabel.BackColor = Color.FromArgb(241, 220, 254);
+            LeaderNickLabel.ForeColor = Color.FromArgb(255, 255, 255);
+            LeaderNickLabel.Visible = true;
+        }
+
         public static void Hunted_PigeonsLabel_GetResult(ref Label PigeonAmountLabel, int Hunted_PigeonCounter)
         {
             PigeonAmountLabel.BackColor = Color.FromArgb(255, 231, 188);

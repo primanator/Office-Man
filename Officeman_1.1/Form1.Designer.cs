@@ -53,6 +53,15 @@ namespace OfficeMan_1._1
             this.Menu_HighscoreLabel = new System.Windows.Forms.Label();
             this.Menu_TutorialLabel = new System.Windows.Forms.Label();
             this.Menu_ExitLabel = new System.Windows.Forms.Label();
+            this.MOOORELabel = new System.Windows.Forms.Label();
+            this.fstNicknameLabel = new System.Windows.Forms.Label();
+            this.secNicknameLabel = new System.Windows.Forms.Label();
+            this.thrdNicknameLabel = new System.Windows.Forms.Label();
+            this.fstRecordLabel = new System.Windows.Forms.Label();
+            this.secRecordLabel = new System.Windows.Forms.Label();
+            this.thrdRecordLabel = new System.Windows.Forms.Label();
+            this.WOOHOOLabel = new System.Windows.Forms.Label();
+            this.EHLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PointsLabel
@@ -198,7 +207,7 @@ namespace OfficeMan_1._1
             // PigeonAmountLabel
             // 
             this.PigeonAmountLabel.AutoSize = true;
-            this.PigeonAmountLabel.Location = new System.Drawing.Point(310, 159);
+            this.PigeonAmountLabel.Location = new System.Drawing.Point(310, 134);
             this.PigeonAmountLabel.Name = "PigeonAmountLabel";
             this.PigeonAmountLabel.Size = new System.Drawing.Size(43, 13);
             this.PigeonAmountLabel.TabIndex = 12;
@@ -208,7 +217,7 @@ namespace OfficeMan_1._1
             // CleanerAmountLabel
             // 
             this.CleanerAmountLabel.AutoSize = true;
-            this.CleanerAmountLabel.Location = new System.Drawing.Point(310, 201);
+            this.CleanerAmountLabel.Location = new System.Drawing.Point(310, 176);
             this.CleanerAmountLabel.Name = "CleanerAmountLabel";
             this.CleanerAmountLabel.Size = new System.Drawing.Size(43, 13);
             this.CleanerAmountLabel.TabIndex = 0;
@@ -218,7 +227,7 @@ namespace OfficeMan_1._1
             // SmokerAmountLabel
             // 
             this.SmokerAmountLabel.AutoSize = true;
-            this.SmokerAmountLabel.Location = new System.Drawing.Point(310, 244);
+            this.SmokerAmountLabel.Location = new System.Drawing.Point(310, 219);
             this.SmokerAmountLabel.Name = "SmokerAmountLabel";
             this.SmokerAmountLabel.Size = new System.Drawing.Size(43, 13);
             this.SmokerAmountLabel.TabIndex = 13;
@@ -228,7 +237,7 @@ namespace OfficeMan_1._1
             // TimeAmountLabel
             // 
             this.TimeAmountLabel.AutoSize = true;
-            this.TimeAmountLabel.Location = new System.Drawing.Point(310, 286);
+            this.TimeAmountLabel.Location = new System.Drawing.Point(310, 261);
             this.TimeAmountLabel.Name = "TimeAmountLabel";
             this.TimeAmountLabel.Size = new System.Drawing.Size(43, 13);
             this.TimeAmountLabel.TabIndex = 14;
@@ -245,13 +254,13 @@ namespace OfficeMan_1._1
             this.OKAAAYLabel.Size = new System.Drawing.Size(149, 15);
             this.OKAAAYLabel.TabIndex = 15;
             this.OKAAAYLabel.Visible = false;
-            this.OKAAAYLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OKAAAYLabel_MouseClick);
             this.OKAAAYLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OKAAAYLabel_MouseDown);
+            this.OKAAAYLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OKAAAYLabel_MouseUp);
             // 
             // HighscorePointsLabel
             // 
             this.HighscorePointsLabel.AutoSize = true;
-            this.HighscorePointsLabel.Location = new System.Drawing.Point(310, 329);
+            this.HighscorePointsLabel.Location = new System.Drawing.Point(310, 304);
             this.HighscorePointsLabel.Name = "HighscorePointsLabel";
             this.HighscorePointsLabel.Size = new System.Drawing.Size(43, 13);
             this.HighscorePointsLabel.TabIndex = 16;
@@ -261,63 +270,190 @@ namespace OfficeMan_1._1
             // Menu_StartLabel
             // 
             this.Menu_StartLabel.AutoSize = true;
-            this.Menu_StartLabel.Location = new System.Drawing.Point(162, 263);
-            this.Menu_StartLabel.MinimumSize = new System.Drawing.Size(153, 22);
+            this.Menu_StartLabel.Image = ((System.Drawing.Image)(resources.GetObject("Menu_StartLabel.Image")));
+            this.Menu_StartLabel.Location = new System.Drawing.Point(191, 264);
+            this.Menu_StartLabel.MinimumSize = new System.Drawing.Size(103, 22);
             this.Menu_StartLabel.Name = "Menu_StartLabel";
-            this.Menu_StartLabel.Size = new System.Drawing.Size(153, 22);
+            this.Menu_StartLabel.Size = new System.Drawing.Size(103, 22);
             this.Menu_StartLabel.TabIndex = 17;
-            this.Menu_StartLabel.Text = "Menu_StartLabel";
             this.Menu_StartLabel.Visible = false;
+            this.Menu_StartLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Menu_StartLabel_MouseClick);
+            this.Menu_StartLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_StartLabel_MouseDown);
+            this.Menu_StartLabel.MouseEnter += new System.EventHandler(this.Menu_StartLabel_MouseEnter);
+            this.Menu_StartLabel.MouseLeave += new System.EventHandler(this.Menu_StartLabel_MouseLeave);
             // 
             // Menu_ShopLabel
             // 
             this.Menu_ShopLabel.AutoSize = true;
-            this.Menu_ShopLabel.Location = new System.Drawing.Point(162, 300);
-            this.Menu_ShopLabel.MinimumSize = new System.Drawing.Size(153, 22);
+            this.Menu_ShopLabel.Image = ((System.Drawing.Image)(resources.GetObject("Menu_ShopLabel.Image")));
+            this.Menu_ShopLabel.Location = new System.Drawing.Point(200, 304);
+            this.Menu_ShopLabel.MinimumSize = new System.Drawing.Size(82, 22);
             this.Menu_ShopLabel.Name = "Menu_ShopLabel";
-            this.Menu_ShopLabel.Size = new System.Drawing.Size(153, 22);
+            this.Menu_ShopLabel.Size = new System.Drawing.Size(82, 22);
             this.Menu_ShopLabel.TabIndex = 18;
-            this.Menu_ShopLabel.Text = "Menu_ShopLabel";
             this.Menu_ShopLabel.Visible = false;
+            this.Menu_ShopLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_ShopLabel_MouseDown);
+            this.Menu_ShopLabel.MouseEnter += new System.EventHandler(this.Menu_ShopLabel_MouseEnter);
+            this.Menu_ShopLabel.MouseLeave += new System.EventHandler(this.Menu_ShopLabel_MouseLeave);
             // 
             // Menu_HighscoreLabel
             // 
             this.Menu_HighscoreLabel.AutoSize = true;
-            this.Menu_HighscoreLabel.Location = new System.Drawing.Point(162, 331);
-            this.Menu_HighscoreLabel.MinimumSize = new System.Drawing.Size(153, 22);
+            this.Menu_HighscoreLabel.Image = ((System.Drawing.Image)(resources.GetObject("Menu_HighscoreLabel.Image")));
+            this.Menu_HighscoreLabel.Location = new System.Drawing.Point(154, 333);
+            this.Menu_HighscoreLabel.MinimumSize = new System.Drawing.Size(175, 22);
             this.Menu_HighscoreLabel.Name = "Menu_HighscoreLabel";
-            this.Menu_HighscoreLabel.Size = new System.Drawing.Size(153, 22);
+            this.Menu_HighscoreLabel.Size = new System.Drawing.Size(175, 22);
             this.Menu_HighscoreLabel.TabIndex = 19;
-            this.Menu_HighscoreLabel.Text = "Menu_HighscoreLabel";
             this.Menu_HighscoreLabel.Visible = false;
+            this.Menu_HighscoreLabel.Click += new System.EventHandler(this.Menu_HighscoreLabel_Click);
+            this.Menu_HighscoreLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_HighscoreLabel_MouseDown);
+            this.Menu_HighscoreLabel.MouseEnter += new System.EventHandler(this.Menu_HighscoreLabel_MouseEnter);
+            this.Menu_HighscoreLabel.MouseLeave += new System.EventHandler(this.Menu_HighscoreLabel_MouseLeave);
             // 
             // Menu_TutorialLabel
             // 
             this.Menu_TutorialLabel.AutoSize = true;
-            this.Menu_TutorialLabel.Location = new System.Drawing.Point(162, 362);
+            this.Menu_TutorialLabel.Image = ((System.Drawing.Image)(resources.GetObject("Menu_TutorialLabel.Image")));
+            this.Menu_TutorialLabel.Location = new System.Drawing.Point(165, 362);
             this.Menu_TutorialLabel.MinimumSize = new System.Drawing.Size(153, 22);
             this.Menu_TutorialLabel.Name = "Menu_TutorialLabel";
             this.Menu_TutorialLabel.Size = new System.Drawing.Size(153, 22);
             this.Menu_TutorialLabel.TabIndex = 20;
-            this.Menu_TutorialLabel.Text = "Menu_TutorialLabel";
             this.Menu_TutorialLabel.Visible = false;
+            this.Menu_TutorialLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_TutorialLabel_MouseDown);
+            this.Menu_TutorialLabel.MouseEnter += new System.EventHandler(this.Menu_TutorialLabel_MouseEnter);
+            this.Menu_TutorialLabel.MouseLeave += new System.EventHandler(this.Menu_TutorialLabel_MouseLeave);
             // 
             // Menu_ExitLabel
             // 
             this.Menu_ExitLabel.AutoSize = true;
-            this.Menu_ExitLabel.Location = new System.Drawing.Point(162, 400);
-            this.Menu_ExitLabel.MinimumSize = new System.Drawing.Size(153, 22);
+            this.Menu_ExitLabel.Image = ((System.Drawing.Image)(resources.GetObject("Menu_ExitLabel.Image")));
+            this.Menu_ExitLabel.Location = new System.Drawing.Point(208, 404);
+            this.Menu_ExitLabel.MinimumSize = new System.Drawing.Size(68, 22);
             this.Menu_ExitLabel.Name = "Menu_ExitLabel";
-            this.Menu_ExitLabel.Size = new System.Drawing.Size(153, 22);
+            this.Menu_ExitLabel.Size = new System.Drawing.Size(68, 22);
             this.Menu_ExitLabel.TabIndex = 21;
-            this.Menu_ExitLabel.Text = "Menu_ExitLabel";
             this.Menu_ExitLabel.Visible = false;
+            this.Menu_ExitLabel.Click += new System.EventHandler(this.Menu_ExitLabel_Click);
+            this.Menu_ExitLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Menu_ExitLabel_MouseDown);
+            this.Menu_ExitLabel.MouseEnter += new System.EventHandler(this.Menu_ExitLabel_MouseEnter);
+            this.Menu_ExitLabel.MouseLeave += new System.EventHandler(this.Menu_ExitLabel_MouseLeave);
+            // 
+            // MOOORELabel
+            // 
+            this.MOOORELabel.AutoSize = true;
+            this.MOOORELabel.Image = ((System.Drawing.Image)(resources.GetObject("MOOORELabel.Image")));
+            this.MOOORELabel.Location = new System.Drawing.Point(168, 300);
+            this.MOOORELabel.MinimumSize = new System.Drawing.Size(149, 15);
+            this.MOOORELabel.Name = "MOOORELabel";
+            this.MOOORELabel.Size = new System.Drawing.Size(149, 15);
+            this.MOOORELabel.TabIndex = 22;
+            this.MOOORELabel.Visible = false;
+            this.MOOORELabel.Click += new System.EventHandler(this.MOOORELabel_Click);
+            this.MOOORELabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MOOORELabel_MouseDown);
+            // 
+            // fstNicknameLabel
+            // 
+            this.fstNicknameLabel.AutoSize = true;
+            this.fstNicknameLabel.Location = new System.Drawing.Point(178, 163);
+            this.fstNicknameLabel.Name = "fstNicknameLabel";
+            this.fstNicknameLabel.Size = new System.Drawing.Size(0, 13);
+            this.fstNicknameLabel.TabIndex = 23;
+            this.fstNicknameLabel.Visible = false;
+            // 
+            // secNicknameLabel
+            // 
+            this.secNicknameLabel.AutoSize = true;
+            this.secNicknameLabel.Location = new System.Drawing.Point(178, 204);
+            this.secNicknameLabel.Name = "secNicknameLabel";
+            this.secNicknameLabel.Size = new System.Drawing.Size(0, 13);
+            this.secNicknameLabel.TabIndex = 24;
+            this.secNicknameLabel.Visible = false;
+            // 
+            // thrdNicknameLabel
+            // 
+            this.thrdNicknameLabel.AutoSize = true;
+            this.thrdNicknameLabel.Location = new System.Drawing.Point(178, 245);
+            this.thrdNicknameLabel.Name = "thrdNicknameLabel";
+            this.thrdNicknameLabel.Size = new System.Drawing.Size(0, 13);
+            this.thrdNicknameLabel.TabIndex = 25;
+            this.thrdNicknameLabel.Visible = false;
+            // 
+            // fstRecordLabel
+            // 
+            this.fstRecordLabel.AutoSize = true;
+            this.fstRecordLabel.Location = new System.Drawing.Point(292, 163);
+            this.fstRecordLabel.Name = "fstRecordLabel";
+            this.fstRecordLabel.Size = new System.Drawing.Size(48, 13);
+            this.fstRecordLabel.TabIndex = 26;
+            this.fstRecordLabel.Text = "Record1";
+            this.fstRecordLabel.Visible = false;
+            // 
+            // secRecordLabel
+            // 
+            this.secRecordLabel.AutoSize = true;
+            this.secRecordLabel.Location = new System.Drawing.Point(292, 204);
+            this.secRecordLabel.Name = "secRecordLabel";
+            this.secRecordLabel.Size = new System.Drawing.Size(48, 13);
+            this.secRecordLabel.TabIndex = 27;
+            this.secRecordLabel.Text = "Record2";
+            this.secRecordLabel.Visible = false;
+            // 
+            // thrdRecordLabel
+            // 
+            this.thrdRecordLabel.AutoSize = true;
+            this.thrdRecordLabel.Location = new System.Drawing.Point(292, 245);
+            this.thrdRecordLabel.Name = "thrdRecordLabel";
+            this.thrdRecordLabel.Size = new System.Drawing.Size(48, 13);
+            this.thrdRecordLabel.TabIndex = 28;
+            this.thrdRecordLabel.Text = "Record3";
+            this.thrdRecordLabel.Visible = false;
+            // 
+            // WOOHOOLabel
+            // 
+            this.WOOHOOLabel.AutoSize = true;
+            this.WOOHOOLabel.Image = ((System.Drawing.Image)(resources.GetObject("WOOHOOLabel.Image")));
+            this.WOOHOOLabel.Location = new System.Drawing.Point(123, 296);
+            this.WOOHOOLabel.MinimumSize = new System.Drawing.Size(92, 14);
+            this.WOOHOOLabel.Name = "WOOHOOLabel";
+            this.WOOHOOLabel.Size = new System.Drawing.Size(92, 14);
+            this.WOOHOOLabel.TabIndex = 29;
+            this.WOOHOOLabel.Visible = false;
+            this.WOOHOOLabel.Click += new System.EventHandler(this.WOOHOOLabel_Click);
+            this.WOOHOOLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WOOHOOLabel_MouseDown);
+            this.WOOHOOLabel.MouseEnter += new System.EventHandler(this.WOOHOOLabel_MouseEnter);
+            this.WOOHOOLabel.MouseLeave += new System.EventHandler(this.WOOHOOLabel_MouseLeave);
+            // 
+            // EHLabel
+            // 
+            this.EHLabel.AutoSize = true;
+            this.EHLabel.Image = ((System.Drawing.Image)(resources.GetObject("EHLabel.Image")));
+            this.EHLabel.Location = new System.Drawing.Point(268, 296);
+            this.EHLabel.MinimumSize = new System.Drawing.Size(96, 14);
+            this.EHLabel.Name = "EHLabel";
+            this.EHLabel.Size = new System.Drawing.Size(96, 14);
+            this.EHLabel.TabIndex = 30;
+            this.EHLabel.Visible = false;
+            this.EHLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EHLabel_MouseClick);
+            this.EHLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EHLabel_MouseDown);
+            this.EHLabel.MouseEnter += new System.EventHandler(this.EHLabel_MouseEnter);
+            this.EHLabel.MouseLeave += new System.EventHandler(this.EHLabel_MouseLeave);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 462);
+            this.Controls.Add(this.EHLabel);
+            this.Controls.Add(this.WOOHOOLabel);
+            this.Controls.Add(this.thrdRecordLabel);
+            this.Controls.Add(this.secRecordLabel);
+            this.Controls.Add(this.fstRecordLabel);
+            this.Controls.Add(this.thrdNicknameLabel);
+            this.Controls.Add(this.secNicknameLabel);
+            this.Controls.Add(this.fstNicknameLabel);
+            this.Controls.Add(this.MOOORELabel);
             this.Controls.Add(this.Menu_ExitLabel);
             this.Controls.Add(this.Menu_TutorialLabel);
             this.Controls.Add(this.Menu_HighscoreLabel);
@@ -380,6 +516,15 @@ namespace OfficeMan_1._1
         private System.Windows.Forms.Label Menu_HighscoreLabel;
         private System.Windows.Forms.Label Menu_TutorialLabel;
         private System.Windows.Forms.Label Menu_ExitLabel;
+        private System.Windows.Forms.Label MOOORELabel;
+        private System.Windows.Forms.Label fstNicknameLabel;
+        private System.Windows.Forms.Label secNicknameLabel;
+        private System.Windows.Forms.Label thrdNicknameLabel;
+        private System.Windows.Forms.Label fstRecordLabel;
+        private System.Windows.Forms.Label secRecordLabel;
+        private System.Windows.Forms.Label thrdRecordLabel;
+        private System.Windows.Forms.Label WOOHOOLabel;
+        private System.Windows.Forms.Label EHLabel;
     }
 }
 

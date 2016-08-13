@@ -11,8 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// myLabel.ForeColor = Color.FromArgb(231, 163, 39);
-
 namespace OfficeMan_1._1
 {
     public partial class Form1 : Form
@@ -123,7 +121,7 @@ namespace OfficeMan_1._1
                 
                 if (globalGameTime >= 60) /// ADD HERE NEW GAME STATES!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
-                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totalscore]) & (!mech[Mechanics.game.main_menu]))
+                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totalscore]) & (!mech[Mechanics.game.main_menu]) & (!mech[Mechanics.game.new_record]) & (!mech[Mechanics.game.leaderboard])) // I KNOW THAT THIS LINE IS A FU***NG UGLY CROOKED NAIL IM SORRY
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
@@ -135,6 +133,55 @@ namespace OfficeMan_1._1
                         repaint = false;
                     }
                 }
+                if (mech[Mechanics.game.main_menu])
+                {
+                    timerGame.Interval = 160;                    
+                    Menu_ExitLabel.Visible = true;
+                    Menu_HighscoreLabel.Visible = true;
+                    Menu_ShopLabel.Visible = true;
+                    Menu_StartLabel.Visible = true;
+                    Menu_TutorialLabel.Visible = true;
+                }
+                else
+                    timerGame.Interval = 70;
+                if (mech[Mechanics.game.totalscore])
+                {
+                    if (!PigeonAmountLabel.Visible)
+                        PigeonAmountLabel.Visible = true;
+                    if (!CleanerAmountLabel.Visible)
+                        CleanerAmountLabel.Visible = true;
+                    if (!SmokerAmountLabel.Visible)
+                        SmokerAmountLabel.Visible = true;
+                    if (!TimeAmountLabel.Visible)
+                        TimeAmountLabel.Visible = true;
+                    if (!HighscorePointsLabel.Visible)
+                        HighscorePointsLabel.Visible = true;
+                    if (!OKAAAYLabel.Visible)
+                        OKAAAYLabel.Visible = true;
+                }
+                if(mech[Mechanics.game.leaderboard])
+                {
+                    FormElement.MakeLeaderNicknameVisible_Leaderboard(ref fstNicknameLabel);
+                    FormElement.MakeLeaderNicknameVisible_Leaderboard(ref secNicknameLabel);
+                    FormElement.MakeLeaderNicknameVisible_Leaderboard(ref thrdNicknameLabel);
+                    FormElement.MakeLeaderScoreVisible_Leaderboard(ref fstRecordLabel);
+                    FormElement.MakeLeaderScoreVisible_Leaderboard(ref secRecordLabel);
+                    FormElement.MakeLeaderScoreVisible_Leaderboard(ref thrdRecordLabel);
+                    WOOHOOLabel.Visible = true;
+                    EHLabel.Visible = true;
+                }
+                if (mech[Mechanics.game.new_record])
+                {
+                    //PigeonAmountLabel.Visible = false;
+                    //CleanerAmountLabel.Visible = false;
+                    //SmokerAmountLabel.Visible = false;
+                    //TimeAmountLabel.Visible = false;
+                    //HighscorePointsLabel.Visible = false;
+                    //OKAAAYLabel.Visible = false;
+                    timerGame.Interval = 160;
+                }
+                else
+                    timerGame.Interval = 70; 
                 if (mech[Mechanics.character.falling] | mech[Mechanics.character.landing])
                 {
                     globalGameTime += 0.150;
@@ -160,8 +207,8 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
+                    PegionFlock_Form[0] = new Rectangle(600, 280, 27, 17); // MAKE PIGEONS FLY ASYNC!!!
                     pegion_flock_pic[0] = -1;
-                    PegionFlock_Form[0] = new Rectangle(600, 280, 27, 17);
                     PegionFlock_Form[1] = new Rectangle(470, 250, 27, 17);
                     pegion_flock_pic[1] = -1;
                     PegionFlock_Form[2] = new Rectangle(485, 315, 27, 17);
@@ -177,7 +224,7 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 160;
+            timerGame.Interval = 70;
             timerGame.Start();
         }
 
@@ -188,12 +235,54 @@ namespace OfficeMan_1._1
             {
                 if (OKAAAYLabel.Visible)
                     OKAAAYLabel.Visible = false;
+                if (MOOORELabel.Visible)
+                    MOOORELabel.Visible = false;
+                if (fstNicknameLabel.Visible)
+                    fstNicknameLabel.Visible = false;
+                if (fstRecordLabel.Visible)
+                    fstRecordLabel.Visible = false;
+                if (secNicknameLabel.Visible)
+                    secNicknameLabel.Visible = false;
+                if (secRecordLabel.Visible)
+                    secRecordLabel.Visible = false;
+                if (thrdNicknameLabel.Visible)
+                    thrdNicknameLabel.Visible = false;
+                if (thrdRecordLabel.Visible)
+                    thrdRecordLabel.Visible = false;
+                if (WOOHOOLabel.Visible)
+                    WOOHOOLabel.Visible = false;
+                if (EHLabel.Visible)
+                    EHLabel.Visible = false;
                 ChangeMainMenuBG(e);
+            }
+            if(mech[Mechanics.game.leaderboard])
+            {
+                if (Menu_ExitLabel.Visible)
+                    Menu_ExitLabel.Visible = false;
+                if (Menu_HighscoreLabel.Visible)
+                    Menu_HighscoreLabel.Visible = false;
+                if (Menu_ShopLabel.Visible)
+                    Menu_ShopLabel.Visible = false;
+                if (Menu_StartLabel.Visible)
+                    Menu_StartLabel.Visible = false;
+                if (Menu_TutorialLabel.Visible)
+                    Menu_TutorialLabel.Visible = false;
 
+                ChangeLeaderboardImage(e);
             }
             if (mech[Mechanics.character.stand])
             {
-                timerGame.Interval = 70;
+                if (Menu_ExitLabel.Visible)
+                    Menu_ExitLabel.Visible = false;
+                if (Menu_HighscoreLabel.Visible)
+                    Menu_HighscoreLabel.Visible = false;
+                if (Menu_ShopLabel.Visible)
+                    Menu_ShopLabel.Visible = false;
+                if (Menu_StartLabel.Visible)
+                    Menu_StartLabel.Visible = false;
+                if (Menu_TutorialLabel.Visible)
+                    Menu_TutorialLabel.Visible = false;
+
                 e.Graphics.DrawImage(source.Background_Gradient_B(), BackgroundGradientBForm.X, BackgroundGradientBForm.Y, BackgroundGradientBForm.Width, BackgroundGradientBForm.Height);
                 e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);                    
                
@@ -411,6 +500,13 @@ namespace OfficeMan_1._1
                 ShowTotalScore(e);
                 source.ChangeOKAAAYImage(ref OKAAAYLabel);
             }
+            if(mech[Mechanics.game.new_record])
+            {
+                if (OKAAAYLabel.Visible)
+                    OKAAAYLabel.Visible = false;
+                NewRecordAnimation(e);
+                source.ChangeMOOOREImage(ref MOOORELabel);
+            }
             if (mech[Mechanics.game.pause])
                 DrawPauseMenu(e);
             else
@@ -469,13 +565,7 @@ namespace OfficeMan_1._1
                 FormElement.ChangeFontToChava_Statistics(ref TimeAmountLabel);
                 FormElement.ChangeFontToChava_Statistics(ref HighscorePointsLabel);
 
-                PigeonAmountLabel.Visible = true;
-                CleanerAmountLabel.Visible = true;
-                SmokerAmountLabel.Visible = true;
-                TimeAmountLabel.Visible = true;
-                HighscorePointsLabel.Visible = true;
-
-                OKAAAYLabel.Visible = true;  // DRAW OKKAAAAY BY LABEL!!!!!!!!!!
+                
                 //repaint = true;
             }
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
@@ -485,6 +575,35 @@ namespace OfficeMan_1._1
             //    repaint = true;
             //}
             e.Dispose();
+        }
+        public void NewRecordAnimation(PaintEventArgs e)
+        {
+            if (source.new_record_bg == '1')
+            {
+                e.Graphics.DrawImage(source.NewRecordBG1(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.new_record_bg = '2';
+                return;
+            }
+            if (source.new_record_bg == '2')
+            {
+                e.Graphics.DrawImage(source.NewRecordBG2(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.new_record_bg = '1';
+            }
+        }
+
+        public void ChangeLeaderboardImage(PaintEventArgs e)
+        {
+            if (source.leaderboard_state == '1')
+            {
+                e.Graphics.DrawImage(source.Leaderboard_Next(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.leaderboard_state = '2';
+                return;
+            }
+            if (source.leaderboard_state == '2')
+            {
+                e.Graphics.DrawImage(source.Leaderboard_Init(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.leaderboard_state = '1';
+            }
         }
 
         public void ChangeMainMenuBG(PaintEventArgs e)
@@ -814,16 +933,33 @@ namespace OfficeMan_1._1
                 if (NicknameLabel.Text.Length > 1)
                     NicknameLabel.Text = NicknameLabel.Text.Substring(0, NicknameLabel.Text.Length - 1);
             }
-            if ((e.KeyCode != Keys.Back) & (mech[Mechanics.game.new_highscore]))
+            if ((e.KeyCode != Keys.Back) & (mech[Mechanics.game.new_record]))
             {
-                if (NicknameLabel.Text.Length < 11)
-                    NicknameLabel.Text += e.KeyData.ToString();
+                switch (FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(PointsLabel)))
+                {
+                    case 1:
+                        {
+                            if (fstNicknameLabel.Text.Length < 3)
+                                if (e.KeyData.ToString().Length - 1 < 1)
+                                    fstNicknameLabel.Text += e.KeyData.ToString()[0];
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (secNicknameLabel.Text.Length < 3)
+                                if (e.KeyData.ToString().Length - 1 < 1)
+                                    secNicknameLabel.Text += e.KeyData.ToString()[0];
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (thrdNicknameLabel.Text.Length < 3)
+                                if (e.KeyData.ToString().Length - 1 < 1)
+                                    thrdNicknameLabel.Text += e.KeyData.ToString()[0];
+                            break;
+                        }
+                }
             }     
-            if ((e.KeyCode == Keys.Enter) & (mech[Mechanics.game.new_highscore]))
-            {
-                //FileProcessing.DeleteHighscoreFile();
-                Application.Exit();
-            }
             if (e.KeyCode == Keys.F4)
             {
                 mech[Mechanics.character.falling] = false;  // CORE CONDITION PROBLEM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -929,9 +1065,9 @@ namespace OfficeMan_1._1
                 mech[Mechanics.game.new_highscore] = true;
                 FormElement.ShowNicknameLabel(NicknameLabel);
                 FormElement.ShowNewNicknameLabel(NewNicknameLabel);
-                FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel), NicknameLabel);
+                //FileProcessing.RewriteHighscore(FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(TotalScoreLabel)), FormElement.GetTotalScore(TotalScoreLabel), NicknameLabel);
             }
-            //main menu exit
+            //NO main menu exit
         }
 
         private void OKAAAYLabel_MouseDown(object sender, MouseEventArgs e)
@@ -939,7 +1075,7 @@ namespace OfficeMan_1._1
             OKAAAYLabel.Image = source.OKAAAY_Pressed();
         }
 
-        private void OKAAAYLabel_MouseClick(object sender, MouseEventArgs e)
+        private void OKAAAYLabel_MouseUp(object sender, MouseEventArgs e)
         {
             mech[Mechanics.game.totalscore] = false;
             PigeonAmountLabel.Visible = false;
@@ -947,12 +1083,207 @@ namespace OfficeMan_1._1
             SmokerAmountLabel.Visible = false;
             TimeAmountLabel.Visible = false;
             HighscorePointsLabel.Visible = false;
+            if (FileProcessing.CheckHighscore(FormElement.GetTotalScore(HighscorePointsLabel)))
+            {
+                FormElement.ChangeFontToChava_Statistics(ref fstNicknameLabel);
+                FormElement.ChangeFontToChava_Statistics(ref fstRecordLabel);
+                FormElement.ChangeFontToChava_Statistics(ref secNicknameLabel);
+                FormElement.ChangeFontToChava_Statistics(ref secRecordLabel);
+                FormElement.ChangeFontToChava_Statistics(ref thrdNicknameLabel);
+                FormElement.ChangeFontToChava_Statistics(ref thrdRecordLabel);
 
-            Menu_ExitLabel.Visible = true;
-            Menu_HighscoreLabel.Visible = true;
-            Menu_ShopLabel.Visible = true;
-            Menu_StartLabel.Visible = true;
-            Menu_TutorialLabel.Visible = true;
+                int place = FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(HighscorePointsLabel));
+                FileProcessing.FindYourPlaceInLeadertable(place, FormElement.GetTotalScore(HighscorePointsLabel), ref fstNicknameLabel, ref fstRecordLabel, ref secNicknameLabel, ref secRecordLabel, ref thrdNicknameLabel, ref thrdRecordLabel);
+
+                FormElement.MakeLeaderNicknameVisible(ref  fstNicknameLabel);
+                FormElement.MakeLeaderNicknameVisible(ref  secNicknameLabel);
+                FormElement.MakeLeaderNicknameVisible(ref  thrdNicknameLabel);
+                FormElement.MakeLeaderScoreVisible(ref fstRecordLabel);
+                FormElement.MakeLeaderScoreVisible(ref secRecordLabel);
+                FormElement.MakeLeaderScoreVisible(ref thrdRecordLabel);
+
+                MOOORELabel.Visible = true;
+                mech[Mechanics.game.new_record] = true;
+            }
+            else
+            {
+                Menu_ExitLabel.Visible = true;
+                Menu_HighscoreLabel.Visible = true;
+                Menu_ShopLabel.Visible = true;
+                Menu_StartLabel.Visible = true;
+                Menu_TutorialLabel.Visible = true;
+                mech[Mechanics.game.main_menu] = true;
+            }
+        }
+
+        private void Menu_StartLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu_StartLabel.Image = source.Menu_Start_Press();
+        }
+
+        private void Menu_ShopLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu_ShopLabel.Image = source.Menu_Shop_Press();
+        }
+
+        private void Menu_HighscoreLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu_HighscoreLabel.Image = source.Menu_Highscore_Press();
+        }
+        
+        private void Menu_TutorialLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu_TutorialLabel.Image = source.Menu_Tutorial_Press();
+        }
+
+        private void Menu_ExitLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Menu_ExitLabel.Image = source.Menu_Exit_Press();
+        }
+
+        private void Menu_StartLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Menu_StartLabel.Image = source.Menu_Start_Init();
+        }
+
+        private void Menu_ShopLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Menu_ShopLabel.Image = source.Menu_Shop_Init();
+        }
+        private void Menu_HighscoreLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Menu_HighscoreLabel.Image = source.Menu_Highscore_Init();
+        }
+        private void Menu_TutorialLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Menu_TutorialLabel.Image = source.Menu_Tutorial_Init();
+        }
+        private void Menu_ExitLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Menu_ExitLabel.Image = source.Menu_Exit_Init();
+        }
+
+        private void Menu_StartLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            mech[Mechanics.game.main_menu] = false;
+            mech[Mechanics.character.stand] = true;
+        }
+
+        private void Menu_ExitLabel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Menu_StartLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Menu_StartLabel.Image = source.Menu_Start_Enter();
+        }
+
+        private void Menu_ShopLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Menu_ShopLabel.Image = source.Menu_Shop_Enter();
+        }
+
+        private void Menu_HighscoreLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Menu_HighscoreLabel.Image = source.Menu_Highscore_Enter();
+        }
+
+        private void Menu_TutorialLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Menu_TutorialLabel.Image = source.Menu_Tutorial_Enter();
+        }
+
+        private void Menu_ExitLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Menu_ExitLabel.Image = source.Menu_Exit_Enter();
+        }
+
+        private void MOOORELabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            MOOORELabel.Image = source.MOOORE_Pressed();
+        }
+
+        private void MOOORELabel_Click(object sender, EventArgs e)
+        {
+            mech[Mechanics.game.new_record] = false;
+            int place = FileProcessing.GetPositionInLeaderBoard(FormElement.GetTotalScore(HighscorePointsLabel));
+            int newscore = FormElement.GetTotalScore(PointsLabel);
+            switch(place)
+            {
+                case 1:
+                    {
+                        FileProcessing.RewriteHighscore(place, newscore, FormElement.GetNickname(fstNicknameLabel));
+                        break;
+                    }
+                case 2:
+                    {
+                        FileProcessing.RewriteHighscore(place, newscore, FormElement.GetNickname(secNicknameLabel));
+                        break;
+                    }
+                case 3:
+                    {
+                        FileProcessing.RewriteHighscore(place, newscore, FormElement.GetNickname(thrdNicknameLabel));
+                        break;
+                    }
+            }
+            mech[Mechanics.game.main_menu] = true;
+        }
+
+        private void Menu_HighscoreLabel_Click(object sender, EventArgs e)
+        {
+            mech[Mechanics.game.main_menu] = false;
+            FormElement.ChangeFontToChava_Statistics(ref fstNicknameLabel);
+            FormElement.ChangeFontToChava_Statistics(ref fstRecordLabel);
+            FormElement.ChangeFontToChava_Statistics(ref secNicknameLabel);
+            FormElement.ChangeFontToChava_Statistics(ref secRecordLabel);
+            FormElement.ChangeFontToChava_Statistics(ref thrdNicknameLabel);
+            FormElement.ChangeFontToChava_Statistics(ref thrdRecordLabel);
+
+            FileProcessing.ReadWholeLeadertable(ref fstNicknameLabel, ref fstRecordLabel, ref secNicknameLabel, ref secRecordLabel, ref thrdNicknameLabel, ref thrdRecordLabel);
+            
+            mech[Mechanics.game.leaderboard] = true;
+        }
+
+        private void WOOHOOLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            WOOHOOLabel.Image = source.WOOHOO_Pressed();
+        }
+
+        private void WOOHOOLabel_MouseEnter(object sender, EventArgs e)
+        {
+            WOOHOOLabel.Image = source.WOOHOO_Enter();            
+        }
+
+        private void WOOHOOLabel_MouseLeave(object sender, EventArgs e)
+        {
+            WOOHOOLabel.Image = source.WOOHOO_Init();            
+        }
+
+        private void WOOHOOLabel_Click(object sender, EventArgs e)
+        {
+            mech[Mechanics.game.leaderboard] = false;
+            mech[Mechanics.game.main_menu] = true;
+        }
+
+        private void EHLabel_MouseEnter(object sender, EventArgs e)
+        {
+            EHLabel.Image = source.Eh_Enter();            
+        }
+
+        private void EHLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            EHLabel.Image = source.Eh_Pressed();                        
+        }
+
+        private void EHLabel_MouseLeave(object sender, EventArgs e)
+        {
+            EHLabel.Image = source.Eh_Init();
+        }
+
+        private void EHLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            mech[Mechanics.game.leaderboard] = false;
             mech[Mechanics.game.main_menu] = true;
         }
     }
