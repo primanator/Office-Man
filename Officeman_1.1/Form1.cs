@@ -53,6 +53,7 @@ namespace OfficeMan_1._1
         private Rectangle TotalScoreForm = new Rectangle(0, 0, 484, 462);
         private Rectangle Points100Form = new Rectangle(0, 0, 25, 11);
         private Rectangle Points50and20Form = new Rectangle(0, 0, 18, 11);
+        private Rectangle MainMenuForm = new Rectangle(0, 0, 484, 462);
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -122,7 +123,7 @@ namespace OfficeMan_1._1
                 
                 if (globalGameTime >= 60) /// ADD HERE NEW GAME STATES!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
-                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totascore]))
+                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totalscore]) & (!mech[Mechanics.game.main_menu]))
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
@@ -176,15 +177,23 @@ namespace OfficeMan_1._1
                 }
                 Invalidate();
             };
-            timerGame.Interval = 70;
+            timerGame.Interval = 160;
             timerGame.Start();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(source.Background(), BackgroundForm.X, BackgroundForm.Y, BackgroundForm.Width, BackgroundForm.Height);
+            if(mech[Mechanics.game.main_menu])
+            {
+                if (OKAAAYLabel.Visible)
+                    OKAAAYLabel.Visible = false;
+                ChangeMainMenuBG(e);
+
+            }
             if (mech[Mechanics.character.stand])
             {
+                timerGame.Interval = 70;
                 e.Graphics.DrawImage(source.Background_Gradient_B(), BackgroundGradientBForm.X, BackgroundGradientBForm.Y, BackgroundGradientBForm.Width, BackgroundGradientBForm.Height);
                 e.Graphics.DrawImage(source.Background_Gradient_F(), BackgroundGradientFForm.X, BackgroundGradientFForm.Y, BackgroundGradientFForm.Width, BackgroundGradientFForm.Height);                    
                
@@ -397,7 +406,7 @@ namespace OfficeMan_1._1
                  else
                      repaint = false;
             }
-            if (mech[Mechanics.game.totascore])
+            if (mech[Mechanics.game.totalscore])
             {
                 ShowTotalScore(e);
                 source.ChangeOKAAAYImage(ref OKAAAYLabel);
@@ -453,7 +462,7 @@ namespace OfficeMan_1._1
                 mech[Mechanics.character.landing] = false;
                 mech[Mechanics.character.crashing] = false;
                 mech[Mechanics.game.post_death_animation] = false;
-                mech[Mechanics.game.totascore] = true;
+                mech[Mechanics.game.totalscore] = true;
                 FormElement.ChangeFontToChava_Statistics(ref PigeonAmountLabel);
                 FormElement.ChangeFontToChava_Statistics(ref CleanerAmountLabel);
                 FormElement.ChangeFontToChava_Statistics(ref SmokerAmountLabel);
@@ -476,6 +485,21 @@ namespace OfficeMan_1._1
             //    repaint = true;
             //}
             e.Dispose();
+        }
+
+        public void ChangeMainMenuBG(PaintEventArgs e)
+        {
+            if (source.mainmenu_bg == '1')
+            {
+                e.Graphics.DrawImage(source.MainMenuBG2(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.mainmenu_bg = '2';
+                return;
+            }
+            if (source.mainmenu_bg == '2')
+            {
+                e.Graphics.DrawImage(source.MainMenuBG1(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+                source.mainmenu_bg = '1';
+            }
         }
 
         public void ShowTotalScore(PaintEventArgs e)
@@ -910,9 +934,26 @@ namespace OfficeMan_1._1
             //main menu exit
         }
 
-        private void OKAAAYLabel_Click(object sender, EventArgs e)
+        private void OKAAAYLabel_MouseDown(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            OKAAAYLabel.Image = source.OKAAAY_Pressed();
+        }
+
+        private void OKAAAYLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            mech[Mechanics.game.totalscore] = false;
+            PigeonAmountLabel.Visible = false;
+            CleanerAmountLabel.Visible = false;
+            SmokerAmountLabel.Visible = false;
+            TimeAmountLabel.Visible = false;
+            HighscorePointsLabel.Visible = false;
+
+            Menu_ExitLabel.Visible = true;
+            Menu_HighscoreLabel.Visible = true;
+            Menu_ShopLabel.Visible = true;
+            Menu_StartLabel.Visible = true;
+            Menu_TutorialLabel.Visible = true;
+            mech[Mechanics.game.main_menu] = true;
         }
     }
 }

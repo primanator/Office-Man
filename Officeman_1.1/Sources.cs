@@ -19,6 +19,7 @@ namespace Officeman_1._1
         public char cleaner_way = 'f';
         public char smoker_way = 'f';
         public char highscore = '1';
+        public char mainmenu_bg = '1';
         private char okaaay_state = 'i';
         static int man_stand_size = 4;
         static int man_fall_size = 4;
@@ -43,7 +44,7 @@ namespace Officeman_1._1
         Image buildings_back, buildings_front, background, background_gradient_fst, background_gradient_sec, highscore_init, highscore_next, empty, new_nicknameLabel_bg_init;
         Image new_nicknameLabel_bg_next, tree_init, tree_next, car_one_init, buildings_mid;
         Image points100, points100ht, points100t, points50, points50ht, points50t, points20, points20ht, points20t;
-        Image highscore1, highscore2, car_two_init, okaaay_init, okaaay_next;
+        Image highscore1, highscore2, car_two_init, okaaay_init, okaaay_next, menu_background1, menu_background2, okaaay_pressed;
         public Sources()
         {
             building_init = Image.FromFile("..\\..\\images\\building_prev.png");
@@ -127,6 +128,23 @@ namespace Officeman_1._1
             highscore2 = Image.FromFile("..\\..\\images\\highscore2.png");
             okaaay_init = Image.FromFile("..\\..\\images\\okaaay_init.png");
             okaaay_next = Image.FromFile("..\\..\\images\\okaaay_next.png");
+            okaaay_pressed = Image.FromFile("..\\..\\images\\okaaay_pressed.png");
+            menu_background1 = Image.FromFile("..\\..\\images\\menu_background1.png");
+            menu_background2 = Image.FromFile("..\\..\\images\\menu_background2.png");
+        }
+
+        public Image MainMenuBG2()
+        {
+            return menu_background2;
+        }
+        public Image MainMenuBG1()
+        {
+            return menu_background1;
+        }
+        
+        public Image OKAAAY_Pressed()
+        {
+            return okaaay_pressed;
         }
 
         public void ChangeOKAAAYImage(ref Label OKAAAYLabel)
