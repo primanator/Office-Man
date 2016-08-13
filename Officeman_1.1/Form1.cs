@@ -29,7 +29,7 @@ namespace OfficeMan_1._1
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(150, 102, 40, 75);
         private Rectangle PegionForm = new Rectangle(450, 450, 27, 17);
-        private Rectangle CleanerForm = new Rectangle(0, 200, 143, 86); // 25, 36 prev size
+        private Rectangle CleanerForm = new Rectangle(0, 200, 142, 97); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 484, 462); // 442 462
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 484, 462);
         private Rectangle BuildingEnterForm = new Rectangle(0, 462, 484, 462);
@@ -140,9 +140,20 @@ namespace OfficeMan_1._1
                     Menu_ShopLabel.Visible = true;
                     Menu_StartLabel.Visible = true;
                     Menu_TutorialLabel.Visible = true;
+                    if (mech[Mechanics.game.audio])
+                        AudioIconLabel.Image = source.AudioIcon_Menu_On();
+                    else
+                        AudioIconLabel.Image = source.AudioIcon_Menu_Off();
                 }
                 else
                     timerGame.Interval = 70;
+                if(mech[Mechanics.character.stand] | mech[Mechanics.character.landing] | mech[Mechanics.character.jumping] | mech[Mechanics.character.falling] | mech[Mechanics.character.crashing])
+                {
+                    if (mech[Mechanics.game.audio])
+                        AudioIconLabel.Image = source.AudioIcon_Back_On();
+                    else
+                        AudioIconLabel.Image = source.AudioIcon_Back_Off();
+                }
                 if (mech[Mechanics.game.totalscore])
                 {
                     if (!PigeonAmountLabel.Visible)
@@ -157,6 +168,10 @@ namespace OfficeMan_1._1
                         HighscorePointsLabel.Visible = true;
                     if (!OKAAAYLabel.Visible)
                         OKAAAYLabel.Visible = true;
+                    if (mech[Mechanics.game.audio])
+                        AudioIconLabel.Image = source.AudioIcon_Highscore_On();
+                    else
+                        AudioIconLabel.Image = source.AudioIcon_Highscore_Off();
                 }
                 if(mech[Mechanics.game.leaderboard])
                 {
@@ -166,11 +181,19 @@ namespace OfficeMan_1._1
                     FormElement.MakeLeaderScoreVisible_Leaderboard(ref fstRecordLabel);
                     FormElement.MakeLeaderScoreVisible_Leaderboard(ref secRecordLabel);
                     FormElement.MakeLeaderScoreVisible_Leaderboard(ref thrdRecordLabel);
+                    if (mech[Mechanics.game.audio])
+                        AudioIconLabel.Image = source.AudioIcon_Space_On();
+                    else
+                        AudioIconLabel.Image = source.AudioIcon_Space_Off();
                     WOOHOOLabel.Visible = true;
                     EHLabel.Visible = true;
                 }
                 if (mech[Mechanics.game.new_record])
                 {
+                    if (mech[Mechanics.game.audio])
+                        AudioIconLabel.Image = source.AudioIcon_Space_On();
+                    else
+                        AudioIconLabel.Image = source.AudioIcon_Space_Off();
                     //PigeonAmountLabel.Visible = false;
                     //CleanerAmountLabel.Visible = false;
                     //SmokerAmountLabel.Visible = false;
@@ -272,6 +295,7 @@ namespace OfficeMan_1._1
             }
             if (mech[Mechanics.character.stand])
             {
+
                 if (Menu_ExitLabel.Visible)
                     Menu_ExitLabel.Visible = false;
                 if (Menu_HighscoreLabel.Visible)
@@ -564,9 +588,6 @@ namespace OfficeMan_1._1
                 FormElement.ChangeFontToChava_Statistics(ref SmokerAmountLabel);
                 FormElement.ChangeFontToChava_Statistics(ref TimeAmountLabel);
                 FormElement.ChangeFontToChava_Statistics(ref HighscorePointsLabel);
-
-                
-                //repaint = true;
             }
             //if ((banner_trickle_anim == 5) & (mech[Mechanics.character.crashing]))
             //{
@@ -693,7 +714,7 @@ namespace OfficeMan_1._1
         }
         private void CreateCleaner()
         {
-            CleanerForm.Y = 554;
+            CleanerForm.Y = 462;
             Random place_rand = new Random();
             int s = place_rand.Next(2);
             if (s == 1)

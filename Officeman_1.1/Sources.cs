@@ -51,7 +51,8 @@ namespace Officeman_1._1
         Image menu_start_press, menu_shop_on, menu_shop_press, menu_highscore_on, menu_highscore_press, menu_tutorial_on, menu_tutorial_press;
         Image menu_exit_on, menu_exit_press, menu_start_init, menu_shop_init, menu_highscore_init, menu_tutorial_init, menu_exit_init;
         Image newrecord_bg_init, newrecord_bg_next, mooore_init, mooore_next, mooore_pressed, leaderboard_init, leaderboard_next, woohoo_init, woohoo_next;
-        Image woohoo_pressed, eh_init, eh_next, eh_pressed, audio_on, audio_off;
+        Image woohoo_pressed, eh_init, eh_next, eh_pressed, audio_on, audio_off, audio_on_space, audio_off_space, audio_on_menu, audio_off_menu;
+        Image audio_off_hightscore, audio_on_hightscore, audio_off_back, audio_on_back;
 
         public Sources()
         {
@@ -169,8 +170,53 @@ namespace Officeman_1._1
             eh_pressed = Image.FromFile("..\\..\\images\\eh_pressed.png");
             audio_on = Image.FromFile("..\\..\\images\\audio_on.png");
             audio_off = Image.FromFile("..\\..\\images\\audio_off.png");
+            audio_off_back = Image.FromFile("..\\..\\images\\audio_off_back.png");
+            audio_on_back = Image.FromFile("..\\..\\images\\audio_on_back.png");
+            audio_off_hightscore = Image.FromFile("..\\..\\images\\audio_off_highscore.png");
+            audio_on_hightscore = Image.FromFile("..\\..\\images\\audio_on_highscore.png");
+            audio_off_menu = Image.FromFile("..\\..\\images\\audio_off_menu.png");
+            audio_on_menu = Image.FromFile("..\\..\\images\\audio_on_menu.png");
+            audio_off_space = Image.FromFile("..\\..\\images\\audio_off_space.png");
+            audio_on_space = Image.FromFile("..\\..\\images\\audio_on_space.png");
         }
 
+        public Image AudioIcon_Menu_On()
+        {
+            return audio_on_menu;
+        }
+        public Image AudioIcon_Menu_Off()
+        {
+            return audio_off_menu;
+        }
+
+        public Image AudioIcon_Back_Off()
+        {
+            return audio_off_back;
+        }
+
+        public Image AudioIcon_Back_On()
+        {
+            return audio_on_back;
+        }
+
+        public Image AudioIcon_Highscore_On()
+        {
+            return audio_on_hightscore;
+        }
+        public Image AudioIcon_Highscore_Off()
+        {
+            return audio_off_hightscore;
+        }
+
+        public Image AudioIcon_Space_On()
+        {
+            return audio_on_space;
+        }
+
+        public Image AudioIcon_Space_Off()
+        {
+            return audio_off_space;
+        }
         public Image Audio_On()
         {
             return audio_on;
