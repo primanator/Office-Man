@@ -207,16 +207,17 @@ namespace OfficeMan_1._1
                 }
                 if (!mech[Mechanics.game.birds])
                 {
+                    Random rand = new Random();
                     PegionFlock_Form[0] = new Rectangle(600, 280, 27, 17); // MAKE PIGEONS FLY ASYNC!!!
-                    pegion_flock_pic[0] = -1;
+                    pegion_flock_pic[0] = rand.Next(4);
                     PegionFlock_Form[1] = new Rectangle(470, 250, 27, 17);
-                    pegion_flock_pic[1] = -1;
+                    pegion_flock_pic[1] = rand.Next(4);
                     PegionFlock_Form[2] = new Rectangle(485, 315, 27, 17);
-                    pegion_flock_pic[2] = -1;
+                    pegion_flock_pic[2] = rand.Next(4);
                     PegionFlock_Form[3] = new Rectangle(530, 265, 27, 17);
-                    pegion_flock_pic[3] = -1;
+                    pegion_flock_pic[3] = rand.Next(4);
                     PegionFlock_Form[4] = new Rectangle(560, 330, 27, 17);
-                    pegion_flock_pic[4] = -1;
+                    pegion_flock_pic[4] = rand.Next(4);
                     Random pegion_probability = new Random();
                     int s = pegion_probability.Next(2);
                     if (s == 1)
