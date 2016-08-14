@@ -1,5 +1,6 @@
 ﻿using Officeman_1._1;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +30,7 @@ namespace OfficeMan_1._1
         private Timer timerGame = new Timer();
         private Rectangle CharacterForm = new Rectangle(150, 102, 40, 75);
         private Rectangle PegionForm = new Rectangle(450, 450, 27, 17);
-        private Rectangle CleanerForm = new Rectangle(0, 200, 142, 97); // 25, 36 prev size
+        private Rectangle CleanerForm = new Rectangle(0, 200, 148, 93); // 25, 36 prev size
         private Rectangle BuildingForm1 = new Rectangle(0, 0, 484, 462); // 442 462
         private Rectangle BuildingForm2 = new Rectangle(0, 462, 484, 462);
         private Rectangle BuildingEnterForm = new Rectangle(0, 462, 484, 462);
@@ -42,19 +43,22 @@ namespace OfficeMan_1._1
         private Rectangle BackgroundGradientFForm = new Rectangle(40, 140, 500, 500);
         private Rectangle BackgroundForm = new Rectangle(25, 0, 500, 500);
         private Rectangle HighscoreForm = new Rectangle(0, 0, 500, 500);
-        private Rectangle SmokerForm = new Rectangle(117, 297, 42, 73);
-        private Rectangle Tree1_Form = new Rectangle(195, 785, 94, 143);
-        private Rectangle Tree2_Form = new Rectangle(340, 785, 94, 143);
-        private Rectangle Tree3_Form = new Rectangle(500, 785, 94, 143);
+        private Rectangle SmokerForm = new Rectangle(118, 297, 42, 73);
+        private Rectangle Tree1_Form = new Rectangle(195, 700, 94, 143);
+        private Rectangle Tree2_Form = new Rectangle(297, 700, 94, 143);
+        private Rectangle Tree3_Form = new Rectangle(400, 700, 94, 143);
         private Rectangle CarOneForm = new Rectangle(345, 870, 113, 49);
         private Rectangle CarTwoForm = new Rectangle(205, 870, 105, 49);
         private Rectangle CharacterCrashForm = new Rectangle(400, 200, 122, 56);
-        private Rectangle BannerForm = new Rectangle(20, 700, 177, 56); // 236 75
+        private Rectangle BannerForm = new Rectangle(20, 700, 177, 56); 
         private Rectangle TotalScoreForm = new Rectangle(0, 0, 484, 462);
         private Rectangle Points100Form = new Rectangle(0, 0, 25, 11);
         private Rectangle Points50and20Form = new Rectangle(0, 0, 18, 11);
         private Rectangle MainMenuForm = new Rectangle(0, 0, 484, 462);
         private Rectangle AudioIconForm = new Rectangle(480, 20, 20, 16);
+
+        private Hashtable pigeons = new Hashtable();
+
         private int stand_pic = 0;
         private int jump_anim_pic = -1;
         private int cleaner_anim = -1;
@@ -81,6 +85,7 @@ namespace OfficeMan_1._1
             
             FileProcessing.CreateHighscoreTable();
             Sounds.Audio_Init();
+
 
             timerHighscoreAnimation.Tick += delegate
             {
@@ -126,9 +131,9 @@ namespace OfficeMan_1._1
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
-                        Tree1_Form.Y = BuildingEnterForm.Y + 335;
-                        Tree2_Form.Y = BuildingEnterForm.Y + 335;
-                        Tree3_Form.Y = BuildingEnterForm.Y + 335;
+                        Tree1_Form.Y = BuildingEnterForm.Y + 305;
+                        Tree2_Form.Y = BuildingEnterForm.Y + 305;
+                        Tree3_Form.Y = BuildingEnterForm.Y + 305;
                         CarOneForm.Y = BuildingEnterForm.Y + 410;
                         CarTwoForm.Y = BuildingEnterForm.Y + 410;
                         mech[Mechanics.character.falling] = false;
@@ -234,20 +239,30 @@ namespace OfficeMan_1._1
                 if (!mech[Mechanics.game.birds])
                 {
                     Random rand = new Random();
-                    PegionFlock_Form[0] = new Rectangle(600, 280, 27, 17); // MAKE PIGEONS FLY ASYNC!!!
+                    Random rand_coord = new Random();
+                    PegionFlock_Form[0] = new Rectangle((int)rand_coord.Next(400, 600), (int)rand_coord.Next(200, 300), 27, 17);
                     pegion_flock_pic[0] = rand.Next(4);
-                    PegionFlock_Form[1] = new Rectangle(470, 250, 27, 17);
+                    PegionFlock_Form[1] = new Rectangle((int)rand_coord.Next(430, 500), (int)rand_coord.Next(340, 400), 27, 17);
                     pegion_flock_pic[1] = rand.Next(4);
-                    PegionFlock_Form[2] = new Rectangle(485, 315, 27, 17);
+                    PegionFlock_Form[2] = new Rectangle((int)rand_coord.Next(480, 540), (int)rand_coord.Next(300, 450), 27, 17);
                     pegion_flock_pic[2] = rand.Next(4);
-                    PegionFlock_Form[3] = new Rectangle(530, 265, 27, 17);
+                    PegionFlock_Form[3] = new Rectangle((int)rand_coord.Next(500, 570), (int)rand_coord.Next(240, 400), 27, 17);
                     pegion_flock_pic[3] = rand.Next(4);
-                    PegionFlock_Form[4] = new Rectangle(560, 330, 27, 17);
+                    PegionFlock_Form[4] = new Rectangle((int)rand_coord.Next(520, 600), (int)rand_coord.Next(310, 440), 27, 17);
                     pegion_flock_pic[4] = rand.Next(4);
+       
+
+                    //pigeons.Add(true, PegionFlock_Form[0]);
+                    //pigeons.Add(true, PegionFlock_Form[1]);
+                    //pigeons.Add(true, PegionFlock_Form[2]);
+                    //pigeons.Add(true, PegionFlock_Form[3]);
+                    //pigeons.Add(true, PegionFlock_Form[4]);
+
                     Random pegion_probability = new Random();
                     int s = pegion_probability.Next(2);
                     if (s == 1)
                         mech[Mechanics.game.birds] = true;
+
                 }
                 Invalidate();
             };
@@ -581,12 +596,12 @@ namespace OfficeMan_1._1
                 if (CleanerForm.Y <= -CleanerForm.Height)
                     CreateCleaner();
             }
-            if ((crash_pic == 4) & (mech[Mechanics.character.crashing]))
-            {
-                mech[Mechanics.character.crashing] = false;
-                mech[Mechanics.game.post_death_animation] = true;
-                repaint = true;
-            }
+            //if ((crash_pic == 4) & (mech[Mechanics.character.crashing]))
+            //{
+            //    mech[Mechanics.character.crashing] = false;
+            //    mech[Mechanics.game.post_death_animation] = true;
+            //    repaint = true;
+            //}
             if (banner_trickle_anim == 5 & mech[Mechanics.game.post_death_animation])
             {
                 PointsLabel.Visible = false;
@@ -681,7 +696,8 @@ namespace OfficeMan_1._1
                 case 0:
                     {
                         crash_pic = 1;
-                        CharacterCrashForm.Y -= 20;
+                        CharacterCrashForm.X += 4;
+                        CharacterCrashForm.Y -= 22;
                         CharacterCrashForm.Width = 115;
                         CharacterCrashForm.Height = 77;
                         break;
@@ -689,8 +705,8 @@ namespace OfficeMan_1._1
                     case 1:
                     {
                         crash_pic = 2;
-                        CharacterCrashForm.X -= 9;
-                        CharacterCrashForm.Y -= 19;
+                        CharacterCrashForm.X -= 8;
+                        CharacterCrashForm.Y -= 15;
                         CharacterCrashForm.Width = 147;
                         CharacterCrashForm.Height = 97;
                         break;
@@ -698,8 +714,8 @@ namespace OfficeMan_1._1
                     case 2:
                     {
                         crash_pic = 3;
-                        CharacterCrashForm.X -= 25;
-                        CharacterCrashForm.Y -= 16;
+                        CharacterCrashForm.X -= 26;
+                        CharacterCrashForm.Y -= 18;
                         CharacterCrashForm.Width = 178;
                         CharacterCrashForm.Height = 113;
                         break;
@@ -707,7 +723,8 @@ namespace OfficeMan_1._1
                     case 3:
                     {
                         crash_pic = 4;
-                        CharacterCrashForm.Y += 75;
+                        CharacterCrashForm.X += 22;
+                        CharacterCrashForm.Y += 102;
                         CharacterCrashForm.Width = 161;
                         CharacterCrashForm.Height = 11;
                         break;
@@ -726,13 +743,13 @@ namespace OfficeMan_1._1
         }
         private void CreateCleaner()
         {
-            CleanerForm.Y = 462;
+            CleanerForm.Y = 664;
             Random place_rand = new Random();
             int s = place_rand.Next(2);
             if (s == 1)
                 CleanerForm.X = 15;
             else
-                CleanerForm.X = 80;
+                CleanerForm.X = 67;
             //Random cleaner_rand = new Random();
             //int k = place_rand.Next(2);
             //if (k == 1)
@@ -741,13 +758,13 @@ namespace OfficeMan_1._1
 
         private void CreateSmoker()
         {
-            SmokerForm.Y = 480;
+            SmokerForm.Y = 479;
             Random place_rand = new Random();
             int s = place_rand.Next(2);
             if (s == 1)
-                SmokerForm.X = 20;
+                SmokerForm.X = 21;
             else
-                SmokerForm.X = 117;
+                SmokerForm.X = 120;
             //Random smoker_rand = new Random();
             //int k = place_rand.Next(2);
             //if (k == 1)
