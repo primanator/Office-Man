@@ -52,7 +52,7 @@ namespace Officeman_1._1
         Image menu_exit_on, menu_exit_press, menu_start_init, menu_shop_init, menu_highscore_init, menu_tutorial_init, menu_exit_init;
         Image newrecord_bg_init, newrecord_bg_next, mooore_init, mooore_next, mooore_pressed, leaderboard_init, leaderboard_next, woohoo_init, woohoo_next;
         Image woohoo_pressed, eh_init, eh_next, eh_pressed, audio_on, audio_off, audio_on_space, audio_off_space, audio_on_menu, audio_off_menu;
-        Image audio_off_hightscore, audio_on_hightscore, audio_off_back, audio_on_back, tree1, tree2, tree3;
+        Image audio_off_hightscore, audio_on_hightscore, audio_off_back, audio_on_back, tree1, tree2, tree3, lb_menu_gradient;
 
         public Sources()
         {
@@ -181,6 +181,12 @@ namespace Officeman_1._1
             tree1 = Image.FromFile("..\\..\\images\\tree1.png");
             tree2 = Image.FromFile("..\\..\\images\\tree2.png");
             tree3 = Image.FromFile("..\\..\\images\\tree3.png");
+            lb_menu_gradient = Image.FromFile("..\\..\\images\\leaderboard_menu_anim.png");
+        }
+
+        public Image Lb_Menu_Gradient()
+        {
+            return lb_menu_gradient;
         }
 
         public Image AudioIcon_Menu_On()

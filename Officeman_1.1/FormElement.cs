@@ -16,8 +16,6 @@ namespace Officeman_1._1
     {
         public static void MakeLeaderNicknameVisible_Leaderboard(ref Label NicknameLabel)
         {
-
-
             NicknameLabel.BackColor = Color.FromArgb(241, 220, 254);
             NicknameLabel.ForeColor = Color.FromArgb(255, 255, 255);
             NicknameLabel.Visible = true;

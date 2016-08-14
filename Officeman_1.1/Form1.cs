@@ -56,6 +56,9 @@ namespace OfficeMan_1._1
         private Rectangle Points50and20Form = new Rectangle(0, 0, 18, 11);
         private Rectangle MainMenuForm = new Rectangle(0, 0, 484, 462);
         private Rectangle AudioIconForm = new Rectangle(480, 20, 20, 16);
+        private Rectangle LB_Menu_LBForm = new Rectangle(0, 0, 0, 0);
+        private Rectangle LB_Menu_GradinetForm = new Rectangle(0, 0, 0, 0);
+        private Rectangle LB_Menu_MenuForm = new Rectangle(0, 0, 0, 0);
 
         private Hashtable pigeons = new Hashtable();
 
@@ -127,7 +130,7 @@ namespace OfficeMan_1._1
                 
                 if (globalGameTime >= 60) /// ADD HERE NEW GAME STATES!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
-                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totalscore]) & (!mech[Mechanics.game.main_menu]) & (!mech[Mechanics.game.new_record]) & (!mech[Mechanics.game.leaderboard])) // I KNOW THAT THIS LINE IS A FU***NG UGLY CROOKED NAIL IM SORRY
+                    if ((!mech[Mechanics.character.landing]) & (!mech[Mechanics.character.crashing]) & (!mech[Mechanics.game.post_death_animation]) & (!mech[Mechanics.game.totalscore]) & (!mech[Mechanics.game.main_menu]) & (!mech[Mechanics.game.new_record]) & (!mech[Mechanics.game.leaderboard]) & (!mech[Mechanics.game.change_lb_menu])) // I KNOW THAT THIS LINE IS A FU***NG UGLY CROOKED NAIL IM SORRY
                     {
                         BuildingEnterForm = BuildingForm2;
                         BannerForm.Y = BuildingEnterForm.Y + 220;
@@ -141,6 +144,7 @@ namespace OfficeMan_1._1
                         repaint = false;
                     }
                 }
+         
                 if (mech[Mechanics.game.main_menu])
                 {
                     timerGame.Interval = 160;                    
@@ -262,7 +266,6 @@ namespace OfficeMan_1._1
                     int s = pegion_probability.Next(2);
                     if (s == 1)
                         mech[Mechanics.game.birds] = true;
-
                 }
                 Invalidate();
             };
@@ -297,6 +300,37 @@ namespace OfficeMan_1._1
                     EHLabel.Visible = false;
                 ChangeMainMenuBG(e);
             }
+            if (mech[Mechanics.game.change_lb_menu])
+            {
+                if (LB_Menu_LBForm.Y + LB_Menu_LBForm.Height > 0)
+                {
+                    fstNicknameLabel.Location = new Point(fstNicknameLabel.Location.X, fstNicknameLabel.Location.Y - 14);
+                    secNicknameLabel.Location = new Point(secNicknameLabel.Location.X, secNicknameLabel.Location.Y - 14);
+                    thrdNicknameLabel.Location = new Point(thrdNicknameLabel.Location.X, thrdNicknameLabel.Location.Y - 14);
+                    fstRecordLabel.Location = new Point(fstRecordLabel.Location.X, fstRecordLabel.Location.Y - 14);
+                    secRecordLabel.Location = new Point(secRecordLabel.Location.X, secRecordLabel.Location.Y - 14);
+                    thrdRecordLabel.Location = new Point(thrdRecordLabel.Location.X, thrdRecordLabel.Location.Y - 14);
+                    ChangeLeaderboardImage(e, ref LB_Menu_LBForm);
+                    MoveGradient(e);
+                }
+                else
+                {
+                    fstNicknameLabel.Location = new Point(178, 163);
+                    secNicknameLabel.Location = new Point(178, 204);
+                    thrdNicknameLabel.Location = new Point(178, 245);
+                    fstRecordLabel.Location = new Point(292, 163);
+                    secRecordLabel.Location = new Point(292, 204);
+                    thrdRecordLabel.Location = new Point(292, 245);
+                    MoveGradient(e);
+                    ChangeMainMenuBG(e, ref LB_Menu_MenuForm);
+                }
+                if (LB_Menu_MenuForm.Y <= 0)
+                {
+                    mech[Mechanics.game.change_lb_menu] = false;
+                    AudioIconLabel.Visible = true;
+                    mech[Mechanics.game.main_menu] = true;
+                }
+            }
             if(mech[Mechanics.game.leaderboard])
             {
                 if (Menu_ExitLabel.Visible)
@@ -309,12 +343,10 @@ namespace OfficeMan_1._1
                     Menu_StartLabel.Visible = false;
                 if (Menu_TutorialLabel.Visible)
                     Menu_TutorialLabel.Visible = false;
-
                 ChangeLeaderboardImage(e);
             }
             if (mech[Mechanics.character.stand])
             {
-
                 if (Menu_ExitLabel.Visible)
                     Menu_ExitLabel.Visible = false;
                 if (Menu_HighscoreLabel.Visible)
@@ -596,12 +628,12 @@ namespace OfficeMan_1._1
                 if (CleanerForm.Y <= -CleanerForm.Height)
                     CreateCleaner();
             }
-            //if ((crash_pic == 4) & (mech[Mechanics.character.crashing]))
-            //{
-            //    mech[Mechanics.character.crashing] = false;
-            //    mech[Mechanics.game.post_death_animation] = true;
-            //    repaint = true;
-            //}
+            if ((crash_pic == 4) & (mech[Mechanics.character.crashing]))
+            {
+                mech[Mechanics.character.crashing] = false;
+                mech[Mechanics.game.post_death_animation] = true;
+                repaint = true;
+            }
             if (banner_trickle_anim == 5 & mech[Mechanics.game.post_death_animation])
             {
                 PointsLabel.Visible = false;
@@ -624,6 +656,13 @@ namespace OfficeMan_1._1
             //}
             e.Dispose();
         }
+
+        public void MoveGradient(PaintEventArgs e)
+        {
+            LB_Menu_GradinetForm.Y -= 77;
+            e.Graphics.DrawImage(source.Lb_Menu_Gradient(), LB_Menu_GradinetForm.X, LB_Menu_GradinetForm.Y, LB_Menu_GradinetForm.Width, LB_Menu_GradinetForm.Height);
+        }
+
         public void NewRecordAnimation(PaintEventArgs e)
         {
             if (source.new_record_bg == '1')
@@ -651,6 +690,38 @@ namespace OfficeMan_1._1
             {
                 e.Graphics.DrawImage(source.Leaderboard_Init(), MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
                 source.leaderboard_state = '1';
+            }
+        }
+
+        public void ChangeLeaderboardImage(PaintEventArgs e, ref Rectangle Form)
+        {
+            Form.Y -= 77;
+            if (source.leaderboard_state == '1')
+            {
+                e.Graphics.DrawImage(source.Leaderboard_Next(), Form.X, Form.Y, Form.Width, Form.Height);
+                source.leaderboard_state = '2';
+                return;
+            }
+            if (source.leaderboard_state == '2')
+            {
+                e.Graphics.DrawImage(source.Leaderboard_Init(), Form.X, Form.Y, Form.Width, Form.Height);
+                source.leaderboard_state = '1';
+            }
+        }
+
+        public void ChangeMainMenuBG(PaintEventArgs e, ref Rectangle Form)
+        {
+            Form.Y -= 77;
+            if (source.mainmenu_bg == '1')
+            {
+                e.Graphics.DrawImage(source.MainMenuBG2(), Form.X, Form.Y, Form.Width, Form.Height);
+                source.mainmenu_bg = '2';
+                return;
+            }
+            if (source.mainmenu_bg == '2')
+            {
+                e.Graphics.DrawImage(source.MainMenuBG1(), Form.X, Form.Y, Form.Width, Form.Height);
+                source.mainmenu_bg = '1';
             }
         }
 
@@ -1313,7 +1384,21 @@ namespace OfficeMan_1._1
         private void WOOHOOLabel_Click(object sender, EventArgs e)
         {
             mech[Mechanics.game.leaderboard] = false;
-            mech[Mechanics.game.main_menu] = true;
+
+            fstNicknameLabel.Visible = false;
+            secNicknameLabel.Visible = false;
+            thrdNicknameLabel.Visible = false;
+            fstRecordLabel.Visible = false;
+            secRecordLabel.Visible = false;
+            thrdRecordLabel.Visible = false;
+            WOOHOOLabel.Visible = false;
+            EHLabel.Visible = false;
+            AudioIconLabel.Visible = false;
+
+            LB_Menu_LBForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+            LB_Menu_GradinetForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y + 462, MainMenuForm.Width, MainMenuForm.Height);
+            LB_Menu_MenuForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y + 462, MainMenuForm.Width, MainMenuForm.Height);
+            mech[Mechanics.game.change_lb_menu] = true;
         }
 
         private void EHLabel_MouseEnter(object sender, EventArgs e)
@@ -1334,7 +1419,22 @@ namespace OfficeMan_1._1
         private void EHLabel_MouseClick(object sender, MouseEventArgs e)
         {
             mech[Mechanics.game.leaderboard] = false;
-            mech[Mechanics.game.main_menu] = true;
+
+            fstNicknameLabel.Visible = false;
+            secNicknameLabel.Visible = false;
+            thrdNicknameLabel.Visible = false;
+            fstRecordLabel.Visible = false;
+            secRecordLabel.Visible = false;
+            thrdRecordLabel.Visible = false;
+            WOOHOOLabel.Visible = false;
+            EHLabel.Visible = false;
+            AudioIconLabel.Visible = false;
+
+            LB_Menu_LBForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y, MainMenuForm.Width, MainMenuForm.Height);
+            LB_Menu_GradinetForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y + 462, MainMenuForm.Width, MainMenuForm.Height);
+            LB_Menu_MenuForm = new Rectangle(MainMenuForm.X, MainMenuForm.Y + 462, MainMenuForm.Width, MainMenuForm.Height);
+
+            mech[Mechanics.game.change_lb_menu] = true;
         }
 
         private void AudioIconLabel_Click(object sender, EventArgs e)
