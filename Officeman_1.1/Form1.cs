@@ -92,7 +92,7 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             
             FileProcessing.CreateHighscoreTable();
-            //Sounds.Audio_Init();
+            Sounds.Audio_Init();
 
 
             timerHighscoreAnimation.Tick += delegate
@@ -917,7 +917,7 @@ namespace OfficeMan_1._1
             if (s == 1)
                 SmokerForm.X = 21;
             else
-                SmokerForm.X = 120;
+                SmokerForm.X = 117;
             //Random smoker_rand = new Random();
             //int k = place_rand.Next(2);
             //if (k == 1)
