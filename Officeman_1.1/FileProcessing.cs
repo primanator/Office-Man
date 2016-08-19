@@ -150,6 +150,7 @@ namespace Officeman_1._1
             fstRecordLabel.ResetText();
             secRecordLabel.ResetText();
             thrdRecordLabel.ResetText();
+            
             FileStream fs = new FileStream("..\\..\\highscore.txt", FileMode.Open, FileAccess.Read, FileShare.None);
             BinaryReader br = new BinaryReader(fs);
 

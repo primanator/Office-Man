@@ -75,6 +75,15 @@ namespace Officeman_1._1
             HighscorePointsLabel.Text = PointsLabel.Text;
         }
 
+        public static void ReInitializePointsLabel(ref Label PointsLabel)
+        {
+            PrivateFontCollection newFont = new PrivateFontCollection();
+            newFont.AddFontFile("..\\..\\font\\Chava-Regular.ttf");
+            FontFamily chava = new FontFamily("Chava", newFont);
+            PointsLabel.Font = new System.Drawing.Font(chava, 10, System.Drawing.FontStyle.Regular);
+            PointsLabel.Text = "0";
+        }
+
         public static void DrawPoints(Label PointLabel)
         {
             PrivateFontCollection newFont = new PrivateFontCollection();

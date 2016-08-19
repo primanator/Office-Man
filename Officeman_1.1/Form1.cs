@@ -92,7 +92,7 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             
             FileProcessing.CreateHighscoreTable();
-            Sounds.Audio_Init();
+            //Sounds.Audio_Init();
 
 
             timerHighscoreAnimation.Tick += delegate
@@ -1369,6 +1369,7 @@ namespace OfficeMan_1._1
         private void Menu_StartLabel_MouseClick(object sender, MouseEventArgs e)
         {
             mech[Mechanics.game.main_menu] = false;
+            InitializeAllToStart();
             mech[Mechanics.character.stand] = true;
         }
 
@@ -1559,6 +1560,67 @@ namespace OfficeMan_1._1
                 Sounds.Audio_TurnOn();
                 mech[Mechanics.game.audio] = true;
             }
+        }
+
+        private void InitializeAllToStart()
+        {
+            repaint = false;
+            Hunted_PigeonCounter = 0;
+            Hunted_SmokerCounter = 0;
+            Hunted_CleanerCounter = 0;
+            buildingsMoveCounter = 0;
+            gradientMoveCounter = 0;
+            changeTransparency = 0;
+            globalGameTime = 0;
+            CharacterForm = new Rectangle(150, 102, 40, 75);
+            PegionForm = new Rectangle(450, 450, 27, 17);
+            CleanerForm = new Rectangle(0, 200, 148, 93); // 25, 36 prev size
+            BuildingForm1 = new Rectangle(0, 0, 484, 462); // 442 462
+            BuildingForm2 = new Rectangle(0, 462, 484, 462);
+            BuildingEnterForm = new Rectangle(0, 462, 484, 462);
+            CloudsBackForm = new Rectangle(0, 0, 4200, 4200);
+            CloudsFontForm = new Rectangle(0, 0, 9000, 9000);
+            BuildingsBackForm = new Rectangle(-37, 35, 521, 521);
+            BuildingsMidForm = new Rectangle(-29, 135, 521, 521);
+            BuildingsFrontForm = new Rectangle(-29, 180, 521, 521);
+            BackgroundGradientBForm = new Rectangle(50, -140, 450, 500);
+            BackgroundGradientFForm = new Rectangle(40, 140, 500, 500);
+            BackgroundForm = new Rectangle(25, 0, 500, 500);
+            HighscoreForm = new Rectangle(0, 0, 500, 500);
+            SmokerForm = new Rectangle(118, 297, 42, 73);
+            Tree1_Form = new Rectangle(195, 700, 94, 143);
+            Tree2_Form = new Rectangle(297, 700, 94, 143);
+            Tree3_Form = new Rectangle(400, 700, 94, 143);
+            CarOneForm = new Rectangle(345, 870, 113, 49);
+            CarTwoForm = new Rectangle(205, 870, 105, 49);
+            CharacterCrashForm = new Rectangle(400, 200, 122, 56);
+            BannerForm = new Rectangle(20, 700, 177, 56);
+            TotalScoreForm = new Rectangle(0, 0, 484, 462);
+            Points100Form = new Rectangle(0, 0, 25, 11);
+            Points50and20Form = new Rectangle(0, 0, 18, 11);
+            MainMenuForm = new Rectangle(0, 0, 484, 462);
+            AudioIconForm = new Rectangle(480, 20, 20, 16);
+            Switch_LB_To_Menu_LBForm = new Rectangle(0, 0, 0, 0);
+            Switch_LB_To_Menu_GradinetForm = new Rectangle(0, 0, 0, 0);
+            Switch_LB_To_Menu_MenuForm = new Rectangle(0, 0, 0, 0);
+            Switch_NewR_To_Menu_NewRForm = new Rectangle(0, 0, 0, 0);
+            Switch_NewR_To_Menu_GradinetForm = new Rectangle(0, 0, 0, 0);
+            Switch_NewR_To_Menu_MenuForm = new Rectangle(0, 0, 0, 0);
+            Switch_Menu_To_LB_LBForm = new Rectangle(0, 0, 0, 0);
+            Switch_Menu_To_LB_GradientForm = new Rectangle(0, 0, 0, 0);
+            Switch_Menu_To_LB_MenuForm = new Rectangle(0, 0, 0, 0);
+            stand_pic = 0;
+            jump_anim_pic = -1;
+            cleaner_anim = -1;
+            pegion_pic = -1;
+            fall_pic = 0;
+            points100_anim = 0;
+            points50_anim = 0;
+            points20_anim = 0;
+            smoker_anim_pic = -1;
+            crash_pic = -1;
+            banner_trickle_anim = 0;
+            FormElement.ReInitializePointsLabel(ref PointsLabel);
         }
     }
 }
