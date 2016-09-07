@@ -1144,21 +1144,21 @@ namespace OfficeMan_1._1
                         {
                             if (fstNicknameLabel.Text.Length < 3)
                                 if (e.KeyData.ToString().Length - 1 < 1)
-                                    fstNicknameLabel.Text += e.KeyData.ToString()[0];
+                                    fstNicknameLabel.Text += e.KeyData.ToString();
                             break;
                         }
                     case 2:
                         {
                             if (secNicknameLabel.Text.Length < 3)
                                 if (e.KeyData.ToString().Length - 1 < 1)
-                                    secNicknameLabel.Text += e.KeyData.ToString()[0];
+                                    secNicknameLabel.Text += e.KeyData.ToString();
                             break;
                         }
                     case 3:
                         {
                             if (thrdNicknameLabel.Text.Length < 3)
                                 if (e.KeyData.ToString().Length - 1 < 1)
-                                    thrdNicknameLabel.Text += e.KeyData.ToString()[0];
+                                    thrdNicknameLabel.Text += e.KeyData.ToString();
                             break;
                         }
                 }
