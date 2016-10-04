@@ -12,7 +12,9 @@ using OfficeMan_1._1;
 
 namespace Officeman_1._1
 {
-    
+    /// <summary>
+    /// This class is presenting all pictures and functions which controls the logic of all animation.
+    /// </summary>
     class Sources
     {
         Image building_init, building_fall, building_enter;

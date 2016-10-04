@@ -14,6 +14,10 @@ using System.Collections;
 
 namespace Officeman_1._1
 {
+    /// <summary>
+    /// This class presents processes of saving ingame leaders names and records. 
+    /// </summary>
+
     static class FileProcessing
     {
         public static void FindYourPlaceInLeadertable(int place, int new_record, ref Label fstNicknameLabel, ref Label fstRecordLabel, ref Label secNicknameLabel, ref Label secRecordLabel, ref Label thrdNicknameLabel, ref Label thrdRecordLabel)

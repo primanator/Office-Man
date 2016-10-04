@@ -92,7 +92,7 @@ namespace OfficeMan_1._1
             this.StartPosition = FormStartPosition.CenterScreen;
             
             FileProcessing.CreateHighscoreTable();
-            Sounds.Audio_Init();
+            Sounds.Audio_Init(); // Enables music
 
 
             timerHighscoreAnimation.Tick += delegate

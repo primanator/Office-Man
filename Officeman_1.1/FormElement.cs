@@ -14,6 +14,11 @@ namespace Officeman_1._1
 {
     static class FormElement
     {
+        /// <summary>
+        /// This class is presenting the logic of interraction with any form.
+        /// </summary>
+
+
         public static void MakeLeaderNicknameVisible_Leaderboard(ref Label NicknameLabel)
         {
             NicknameLabel.BackColor = Color.FromArgb(241, 220, 254);
