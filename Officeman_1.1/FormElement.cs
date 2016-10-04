@@ -148,9 +148,9 @@ namespace Officeman_1._1
             Random pegion_probability = new Random();
             what_pic = pegion_probability.Next(2);
             if (what_pic == 1)
-                TotalScoreLabel.Image = e.TotalPointsBlueFrame();
+                TotalScoreLabel.Image = e.TotalPointsBlueFrame;
             if (what_pic == 0)
-                TotalScoreLabel.Image = e.TotalPointsGoldFrame();
+                TotalScoreLabel.Image = e.TotalPointsGoldFrame;
         }
 
         public static void InitTotalScore(Label TotalScoreLabel, Label PointsLabel)
@@ -181,13 +181,13 @@ namespace Officeman_1._1
             what_pic = pegion_probability.Next(2);
             if (what_pic == 1)
             {
-                NewNicknameLabel.Image = source.NicknameLabel_BG_Init();
+                NewNicknameLabel.Image = source.NicknameLabel_BG_Init;
                 HighScoreLabel2.Visible = false;
                 HighScoreLabel1.Visible = true;
             }
             if (what_pic == 0)
             {
-                NewNicknameLabel.Image = source.NicknameLabel_BG_Next();
+                NewNicknameLabel.Image = source.NicknameLabel_BG_Next;
                 HighScoreLabel1.Visible = false;
                 HighScoreLabel2.Visible = true;
             }

@@ -12,6 +12,7 @@ using OfficeMan_1._1;
 
 namespace Officeman_1._1
 {
+    
     class Sources
     {
         Image building_init, building_fall, building_enter;
@@ -184,98 +185,101 @@ namespace Officeman_1._1
             lb_menu_gradient = Image.FromFile("..\\..\\images\\leaderboard_menu_anim.png");
         }
 
-        public Image Lb_Menu_Gradient()
+        public Image Lb_Menu_Gradient
         {
-            return lb_menu_gradient;
+            get { return lb_menu_gradient; }
         }
 
-        public Image AudioIcon_Menu_On()
+        public Image AudioIcon_Menu_On
         {
-            return audio_on_menu;
+            get { return audio_on_menu; }
         }
-        public Image AudioIcon_Menu_Off()
+        public Image AudioIcon_Menu_Off
         {
-            return audio_off_menu;
+            get { return audio_off_menu; }
         }
-
-        public Image AudioIcon_Back_Off()
+    
+        public Image AudioIcon_Back_Off
         {
-            return audio_off_back;
-        }
-
-        public Image AudioIcon_Back_On()
-        {
-            return audio_on_back;
+            get { return audio_off_back; }
         }
 
-        public Image AudioIcon_Highscore_On()
+        public Image  AudioIcon_Back_On
         {
-            return audio_on_hightscore;
-        }
-        public Image AudioIcon_Highscore_Off()
-        {
-            return audio_off_hightscore;
+            get { return audio_on_back; }
         }
 
-        public Image AudioIcon_Space_On()
+        public Image AudioIcon_Highscore_On
         {
-            return audio_on_space;
+            get { return audio_on_hightscore; }
+        }
+        public Image AudioIcon_Highscore_Off
+        {
+            get { return audio_off_hightscore; }
         }
 
-        public Image AudioIcon_Space_Off()
+        public Image AudioIcon_Space_On
         {
-            return audio_off_space;
-        }
-        public Image Audio_On()
-        {
-            return audio_on;
+            get { return audio_on_space; }
         }
 
-        public Image Audio_Off()
+        public Image AudioIcon_Space_Off
         {
-            return audio_off;
+            get
+            { return audio_off_space; }
         }
 
-        public Image WOOHOO_Init()
+        public Image Audio_On
         {
-            return woohoo_init;
+            get { return audio_on; }
         }
 
-        public Image WOOHOO_Enter()
+        public Image Audio_Off
         {
-            return woohoo_next;
-        }
-        public Image WOOHOO_Pressed()
-        {
-            return woohoo_pressed;
+            get { return audio_off; }
         }
 
-        public Image Eh_Init()
+        public Image WOOHOO_Init
         {
-            return eh_init;
+            get { return woohoo_init; }
         }
 
-        public Image Eh_Enter()
+        public Image WOOHOO_Enter
         {
-            return eh_next; ;
-        }
-        public Image Eh_Pressed()
-        {
-            return eh_pressed;
+            get { return woohoo_next; }
         }
 
-        public Image Leaderboard_Init()
+        public Image WOOHOO_Pressed
         {
-            return leaderboard_init;
-        }
-        public Image Leaderboard_Next()
-        {
-            return leaderboard_next;
+            get { return woohoo_pressed; }
         }
 
-        public Image MOOORE_Pressed()
+        public Image Eh_Init
         {
-            return mooore_pressed;
+            get { return eh_init; }
+        }
+
+        public Image Eh_Enter
+        {
+            get { return eh_next; }
+        }
+        public Image Eh_Pressed
+        {
+            get { return eh_pressed; }
+        }
+
+        public Image Leaderboard_Init
+        {
+            get { return leaderboard_init; }
+        }
+        public Image Leaderboard_Next
+        {
+            get { return leaderboard_next; }
+        }
+
+        public Image MOOORE_Pressed
+        {
+            get { return mooore_pressed; }
         }
 
         public void ChangeMOOOREImage(ref Label MOOORELabel)
@@ -293,98 +297,99 @@ namespace Officeman_1._1
             }
         }
 
-        public Image NewRecordBG1()
+        public Image NewRecordBG1
         {
-            return newrecord_bg_init;
+            get { return newrecord_bg_init; }
         }
 
-        public Image NewRecordBG2()
+        public Image NewRecordBG2
         {
-            return newrecord_bg_next;
+            get { return newrecord_bg_next; }
         }
 
-        public Image Menu_Start_Init()
+        public Image Menu_Start_Init
         {
-            return menu_start_init;
+            get { return menu_start_init; }
         }
-        public Image Menu_Start_Enter()
+        public Image Menu_Start_Enter
         {
-            return menu_start_on;
-        }
-
-        public Image Menu_Start_Press()
-        {
-            return menu_start_press;
-        }
-        public Image Menu_Shop_Init()
-        {
-            return menu_shop_init;
+            get { return menu_start_on; }
         }
 
-        public Image Menu_Shop_Enter()
+        public Image Menu_Start_Press
         {
-            return menu_shop_on;
+            get { return menu_start_press; }
+        }
+        public Image Menu_Shop_Init
+        {
+            get { return menu_shop_init; }
         }
 
-        public Image Menu_Shop_Press()
+        public Image Menu_Shop_Enter
         {
-            return menu_shop_press;
-        }
-        public Image Menu_Highscore_Init()
-        {
-            return menu_highscore_init;
+            get { return menu_shop_on; }
         }
 
-        public Image Menu_Highscore_Enter()
+        public Image Menu_Shop_Press
         {
-            return menu_highscore_on;
+            get { return menu_shop_press; }
+        }
+        public Image Menu_Highscore_Init
+        {
+            get { return menu_highscore_init; }
         }
 
-        public Image Menu_Highscore_Press()
+        public Image Menu_Highscore_Enter
         {
-            return menu_highscore_press;
-        }
-        public Image Menu_Tutorial_Init()
-        {
-            return menu_tutorial_init;
+            get { return menu_highscore_on; }
         }
 
-        public Image Menu_Tutorial_Enter()
+        public Image Menu_Highscore_Press
         {
-            return menu_tutorial_on;
+            get { return menu_highscore_press; }
+        }
+        public Image Menu_Tutorial_Init
+        {
+            get { return menu_tutorial_init; }
         }
 
-        public Image Menu_Tutorial_Press()
+        public Image Menu_Tutorial_Enter
         {
-            return menu_tutorial_press;
-        }
-        public Image Menu_Exit_Init()
-        {
-            return menu_exit_init;
+            get { return menu_tutorial_on; }
         }
 
-        public Image Menu_Exit_Enter()
+        public Image Menu_Tutorial_Press
         {
-            return menu_exit_on;
+            get { return menu_tutorial_press; }
+        }
+        public Image Menu_Exit_Init
+        {
+            get { return menu_exit_init; }
         }
 
-        public Image Menu_Exit_Press()
+        public Image Menu_Exit_Enter
         {
-            return menu_exit_press;
+            get { return menu_exit_on; }
         }
 
-        public Image MainMenuBG2()
+        public Image Menu_Exit_Press
         {
-            return menu_background2;
+            get { return menu_exit_press; }
         }
-        public Image MainMenuBG1()
+
+        public Image MainMenuBG2
         {
-            return menu_background1;
+            get { return menu_background2; }
+        }
+
+        public Image MainMenuBG1
+        {
+            get { return menu_background1; }
         }
         
-        public Image OKAAAY_Pressed()
+        public Image OKAAAY_Pressed
         {
-            return okaaay_pressed;
+            get { return okaaay_pressed; }
         }
 
         public void ChangeOKAAAYImage(ref Label OKAAAYLabel)
@@ -402,14 +407,14 @@ namespace Officeman_1._1
             }
         }
 
-        public Image TotalScoreBG1()
+        public Image TotalScoreBG1
         {
-            return highscore1;
+            get { return highscore1; }
         }
 
-        public Image TotalScoreBG2()
+        public Image TotalScoreBG2
         {
-            return highscore2;
+            get { return highscore2; }
         }
         public Image CleanerPic_AnimationForward(ref int index)
         {
@@ -456,6 +461,7 @@ namespace Officeman_1._1
             return cleaner[index];
         }
 
+
         public Image CleanerPic_AnimationBackward(int index)
         {
             if (index == -1)
@@ -468,9 +474,9 @@ namespace Officeman_1._1
             return cleaner[index];
         }
 
-        public Image Banner_Trickled()
+        public Image Banner_Trickled
         {
-            return banner_trickle[5];            
+            get { return banner_trickle[5]; }            
         }
 
         public Image Banner_Trickle(ref int banner_trickle_anim, ref Rectangle BannerForm)
@@ -507,9 +513,9 @@ namespace Officeman_1._1
             return banner_trickle[banner_trickle_anim];
         }
 
-        public Image Banner_Init()
+        public Image Banner_Init
         {
-            return banner_trickle[0];
+            get { return banner_trickle[0]; }
         }
 
         public Image BannerMove(ref Rectangle BannerForm)
@@ -518,9 +524,9 @@ namespace Officeman_1._1
             return banner_trickle[0];
         }
 
-        public Image DrawDead()
+        public Image DrawDead
         {
-            return crashpictures[4];
+            get {return crashpictures[4]; }
         }
 
         public Image CrashPictures(int crash_pic)
@@ -528,14 +534,14 @@ namespace Officeman_1._1
             return crashpictures[crash_pic];
         }
 
-        public Image CarTwoInit()
+        public Image CarTwoInit
         {
-            return car_two_init;
+            get { return car_two_init; }
         }
 
-        public Image CarOneInit()
+        public Image CarOneInit
         {
-            return car_one_init;
+            get { return car_one_init; }
         }
         public Image CarTwoMove(ref Rectangle CarTwoFrom)
         {
@@ -573,34 +579,34 @@ namespace Officeman_1._1
                 e.Graphics.DrawImage(tree_next, TreesForm);
         }
 
-        public Image TreeInit()
+        public Image TreeInit
         {
-            return tree_init;
+            get { return tree_init; }
         }
 
-        public Image TreeNext()
+        public Image TreeNext
         {
-            return tree_next;
+            get { return tree_next; }
         }
 
-        public Image NicknameLabel_BG_Init()
+        public Image NicknameLabel_BG_Init
         {
-            return new_nicknameLabel_bg_init;
+            get { return new_nicknameLabel_bg_init; }
         }
 
-        public Image NicknameLabel_BG_Next()
+        public Image NicknameLabel_BG_Next
         {
-            return new_nicknameLabel_bg_next;
+            get { return new_nicknameLabel_bg_next; }
         }
 
-        public Image HighScoreInit()
+        public Image HighScoreInit
         {
-            return highscore_init;
+            get { return highscore_init; }
         }
 
-        public Image HighScoreNext()
+        public Image HighScoreNext
         {
-            return highscore_next;
+            get { return highscore_next; }
         }
 
         public void Background_GradientF_Move(ref Rectangle BackgroundGradientForm)
@@ -623,29 +629,29 @@ namespace Officeman_1._1
             BuildingsMidForm.Y -= 2;
         }
 
-        public Image Background_Gradient_B()
+        public Image Background_Gradient_B
         {
-            return background_gradient_fst;
+            get { return background_gradient_fst; }
         }
 
-        public Image Background_Gradient_F()
+        public Image Background_Gradient_F
         {
-            return background_gradient_sec;
+            get { return background_gradient_sec; }
         }
 
-        public Image Buildings_Front()
+        public Image Buildings_Front
         {
-            return buildings_front;
+            get { return buildings_front; }
         }
 
-        public Image Buildings_Mid()
+        public Image Buildings_Mid
         {
-            return buildings_mid;
+            get { return buildings_mid; }
         }
 
-        public Image Background()
+        public Image Background
         {
-            return background;
+            get { return background; }
         }
 
         public void MakeFrontCloudsMoreTransparent()
@@ -668,9 +674,9 @@ namespace Officeman_1._1
             transparent_clouds = Image.FromFile("..\\..\\images\\transparent_clouds4.png");
         }
 
-        public Image Buildings_Back()
+        public Image Buildings_Back
         {
-            return buildings_back;
+            get { return buildings_back; }
         }
 
         public void Buildings_Back_Move(ref Rectangle BuildingsBackForm)
@@ -684,74 +690,74 @@ namespace Officeman_1._1
             return building_enter;
         }
 
-        public Image BuildingEnter()
+        public Image BuildingEnter
         {
-            return building_enter;
+            get { return building_enter; }
         }
 
-        public Image PressedButtonOK()
+        public Image PressedButtonOK
         {
-            return button_ok;
+            get { return button_ok; }
         }
 
-        public Image TotalPointsBlueFrame()
+        public Image TotalPointsBlueFrame
         {
-            return totalscore_blue;
+            get { return totalscore_blue; }
         }
 
-        public Image TotalPointsGoldFrame()
+        public Image TotalPointsGoldFrame
         {
-            return totalscore_gold;
+            get { return totalscore_gold; }
         }
 
-        public Image GetMenuFont()
+        public Image GetMenuFont
         {
-            return menufont;
+            get { return menufont; }
         }
 
-        public Image Get100Points()
+        public Image Get100Points
         {
-            return points100;
+            get { return points100; }
         }
 
-        public Image Get100PointsHalfTransparent()
+        public Image Get100PointsHalfTransparent
         {
-            return points100ht;
+            get { return points100ht; }
         }
 
-        public Image Get100PointsTransparent()
+        public Image Get100PointsTransparent
         {
-            return points100t;
+            get { return points100t; }
         }
 
-        public Image Get50Points()
+        public Image Get50Points
         {
-            return points50;
+            get { return points50; }
         }
 
-        public Image Get50PointsHalfTransparent()
+        public Image Get50PointsHalfTransparent
         {
-            return points50ht;
+            get { return points50ht; }
         }
 
-        public Image Get50PointsTransparent()
+        public Image Get50PointsTransparent
         {
-            return points50t;
+            get { return points50t; }
         }
         
-        public Image Get20Points()
+        public Image Get20Points
         {
-            return points20;
+            get { return points20; }
         }
 
-        public Image Get20PointsHalfTransparent()
+        public Image Get20PointsHalfTransparent
         {
-            return points20ht;
+            get { return points20ht; }
         }
 
-        public Image Get20PointsTransparent()
+        public Image Get20PointsTransparent
         {
-            return points20t;
+            get { return points20t; }
         }
         public Image PauseMenu_Regular(int index)
         {
@@ -792,14 +798,14 @@ namespace Officeman_1._1
             return sky_clouds;
         }
 
-        public Image Clouds_Front()
+        public Image Clouds_Front
         {
-            return transparent_clouds;
+            get { return transparent_clouds; }
         }
 
-        public Image Clouds_Back()
+        public Image Clouds_Back
         {
-            return sky_clouds;
+            get { return sky_clouds; }
         }
         public Image Transparent_Clouds_When_Stand(ref Rectangle CloudsFont)
         {
@@ -814,9 +820,9 @@ namespace Officeman_1._1
             return transparent_clouds;
         }
 
-        public Image DrawBuilding()
+        public Image DrawBuilding
         {
-            return building_init;
+            get { return building_init; }
         }
 
         public Image DrawBuilding_Fall(ref Rectangle BuildingForm)
